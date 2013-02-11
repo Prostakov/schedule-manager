@@ -1,6 +1,11 @@
 ScheduleManager::Application.routes.draw do
 
-    root    to: 'application#home'
+    root    to: 'app#home'
+
+    resources :sessions, only: [:new,:create,:destroy]
+    resources :users, only: [:new,:create]
+    resources :schedules
+    resources :items, only: [:show,:create,:destroy]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
