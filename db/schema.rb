@@ -11,7 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130211203222) do
+ActiveRecord::Schema.define(:version => 20130211203441) do
+
+  create_table "items", :force => true do |t|
+    t.string   "name"
+    t.string   "teacher"
+    t.string   "location"
+    t.string   "position"
+    t.string   "day"
+    t.integer  "schedule_id"
+    t.boolean  "week1"
+    t.boolean  "week2"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "schedules", :force => true do |t|
     t.string   "name"
