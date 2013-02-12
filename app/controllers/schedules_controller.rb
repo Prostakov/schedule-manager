@@ -7,11 +7,13 @@ class SchedulesController < ApplicationController
 	end 
 
 	def destroy
-	end 
+	end
 
 	def index
 	end 
 
 	def show
+		@schedule = Schedule.find(params[:id])
+		@items = @schedule.items
 	end
 end
