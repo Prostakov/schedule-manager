@@ -6,6 +6,8 @@ ScheduleManager::Application.routes.draw do
     resources :users, only: [:new,:create]
     resources :schedules
     resources :items, only: [:show,:create,:destroy]
+
+    match '/signout', to: 'sessions#destroy', via: :delete
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
