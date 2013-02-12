@@ -1,6 +1,9 @@
 class AppController < ApplicationController
-include SessionsHelper
 
 	def home
+		if signed_in?
+			@user = current_user
+			@schedules = @user.schedules
+		end
 	end
 end

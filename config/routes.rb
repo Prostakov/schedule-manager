@@ -4,8 +4,8 @@ ScheduleManager::Application.routes.draw do
 
     resources :sessions, only: [:new,:create,:destroy]
     resources :users, only: [:new,:create]
-    resources :schedules
-    resources :items, only: [:show,:create,:destroy]
+    resources :schedules, only: [:new,:create,:destroy,:index,:show,:update]
+    resources :items, only: [:show,:create,:destroy,:update]
 
     match '/signout', to: 'sessions#destroy', via: :delete
   # The priority is based upon order of creation:
