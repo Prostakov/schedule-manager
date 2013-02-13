@@ -17,13 +17,13 @@ ActiveRecord::Schema.define(:version => 20130213141410) do
     t.string   "name"
     t.string   "teacher"
     t.string   "location"
-    t.string   "position"
-    t.string   "day"
+    t.integer  "position"
+    t.integer  "day"
     t.integer  "schedule_id"
-    t.boolean  "week1"
-    t.boolean  "week2"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.boolean  "week1",       :default => false
+    t.boolean  "week2",       :default => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
   create_table "schedules", :force => true do |t|
