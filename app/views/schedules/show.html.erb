@@ -1,12 +1,24 @@
 <table>
-	<tr>
-		<%  %>
-		<td>
-			<div class='week1'>
-				<p></p>
-			</div>
-			<div class='week2 hidden'>
-			</div>
-		</td>
-	</tr>
+	<% (1..6).each do |k| %>
+		<tr>
+			<% (1..6).each do |l| %>
+				<td>
+					<div class='week1'>
+						<% if @items[k][l][0] %>
+							<h3><%= @items[k][l][0].name %></h3>
+							<p><%= @items[k][l][0].teacher %></p>
+							<p><%= @items[k][l][0].location %></p>
+						<% end %>
+					</div>
+					<div class='week2 hidden'>
+						<% if @items[k][l][1] %>
+							<h3><%= @items[k][l][1].name %></h3>
+							<p><%= @items[k][l][1].teacher %></p>
+							<p><%= @items[k][l][1].location %></p>
+						<% end %>
+					</div>
+				</td>
+			<% end %>
+		</tr>
+	<% end %>
 </table>
