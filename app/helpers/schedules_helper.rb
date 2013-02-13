@@ -41,17 +41,4 @@ module SchedulesHelper
 		end
 		return @result
 	end
-
-	def sort_weeks items
-		(1..6).each do |k|
-			(1..6).each do |l|
-				if items[k][l][0] && items[k][l][0].week2
-					t = items[k][l][0]
-					items[k][l][0] = items[k][l][1]
-					items[k][l][1] = t
-				end
-			end
-		end
-		return items
-	end
 end
