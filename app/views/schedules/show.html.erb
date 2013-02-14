@@ -79,7 +79,7 @@
 		week2.removeClass('red');
 		$('table.schedule').removeClass('small_font');
 	});
-	switch3.on('click', function(){
+	function gogo() {
 		switch1.removeClass('switch_clicked');
 		switch2.removeClass('switch_clicked');
 		switch3.addClass('switch_clicked');
@@ -112,6 +112,10 @@
 			}
 		});
 		$('table.schedule').addClass('small_font');
+	};
+	switch3.on('click', function(){
+		gogo();
 	});
 	$('.schedule>*>tr').last().css('display','none');
+	gogo();
 </script>
