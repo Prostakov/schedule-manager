@@ -24,14 +24,14 @@
 				<td class='first_column'><p><%= @positions[k-1] %></p></td>
 			<% (1..6).each do |l| %>
 				<td>
-					<div class='week1'>
+					<div class='week1' data-id="<%= @items[k][l][0].id if @items[k][l][0] %>">
 						<% if @items[k][l][0] %>
 							<h3><%= @items[k][l][0].name %></h3>
 							<p><%= @items[k][l][0].teacher %></p>
 							<p class='loc'><%= @items[k][l][0].location %></p>
 						<% end %>
 					</div>
-					<div class='week2 hidden'>
+					<div class='week2 hidden' data-id="<%= @items[k][l][1].id if @items[k][l][1] %>">
 						<% if @items[k][l][1] %>
 							<h3><%= @items[k][l][1].name %></h3>
 							<p><%= @items[k][l][1].teacher %></p>

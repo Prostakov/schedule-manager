@@ -12,6 +12,9 @@ th {
 	width: 70%;
 	margin: auto;
 }
+.hidden {
+	display: none;
+}
 .header {
 	background: url(leather.jpg);
 	width: 100%;
@@ -103,9 +106,6 @@ th {
 .schedule th>p {
 	padding: 3px 3px 0 0;
 }
-.hidden {
-	display: none;
-}
 td.first_column {
 	width: 2%;
 	border-left: 1px solid #ACACAC;	
@@ -113,9 +113,6 @@ td.first_column {
 .schedule td h3 {
 	color: #A37373;
 	font-size: 14px;
-}
-.schedule td p {
-	
 }
 p.loc {
 	color: #E49393;	
