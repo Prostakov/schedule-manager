@@ -66,6 +66,7 @@
 		$('table.cell td').removeClass('padding10');
 		week1.removeClass('grey');
 		week2.removeClass('red');
+		$('table.schedule').removeClass('small_font');
 	});
 	switch2.on('click', function(){
 		switch1.removeClass('switch_clicked');
@@ -76,6 +77,7 @@
 		$('table.cell td').removeClass('padding10');
 		week1.removeClass('grey');
 		week2.removeClass('red');
+		$('table.schedule').removeClass('small_font');
 	});
 	switch3.on('click', function(){
 		switch1.removeClass('switch_clicked');
@@ -109,6 +111,7 @@
 				}
 			}
 		});
+		$('table.schedule').addClass('small_font');
 	});
 	$('.schedule>*>tr').last().css('display','none');
 </script>
