@@ -11,29 +11,31 @@
 <div class="container">
 <table class='schedule'>
 		<tr>
-			<th><p>Mon</p></th>
-			<th><p>Tue</p></th>
-			<th><p>Wed</p></th>
-			<th><p>Thu</p></th>
-			<th><p>Fri</p></th>
-			<th><p>Sat</p></th>
+			<th></th>
+			<th><p>Monday</p></th>
+			<th><p>Tuesday</p></th>
+			<th><p>Wednesday</p></th>
+			<th><p>Thursday</p></th>
+			<th><p>Friday</p></th>
+			<th><p>Saturday</p></th>
 		</tr>
 	<% (1..6).each do |k| %>
 		<tr>
+				<td class='first_column'><p><%= @positions[k-1] %></p></td>
 			<% (1..6).each do |l| %>
 				<td>
 					<div class='week1'>
 						<% if @items[k][l][0] %>
 							<h3><%= @items[k][l][0].name %></h3>
 							<p><%= @items[k][l][0].teacher %></p>
-							<p><%= @items[k][l][0].location %></p>
+							<p class='loc'><%= @items[k][l][0].location %></p>
 						<% end %>
 					</div>
 					<div class='week2 hidden'>
 						<% if @items[k][l][1] %>
 							<h3><%= @items[k][l][1].name %></h3>
 							<p><%= @items[k][l][1].teacher %></p>
-							<p><%= @items[k][l][1].location %></p>
+							<p class='loc'><%= @items[k][l][1].location %></p>
 						<% end %>
 					</div>
 				</td>
@@ -59,4 +61,5 @@
 		week1.addClass('hidden');
 		week2.removeClass('hidden');
 	});
+	$('tr').last().css('display','none');
 </script>

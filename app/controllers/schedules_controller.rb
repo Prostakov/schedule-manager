@@ -19,5 +19,6 @@ include SchedulesHelper
 		@items = sort_positions @items
 		@items = sort_days @items
 		@items = sort_weeks @items
+		@positions = ['I','II','III','IV','V','VI']
 	end
 end
