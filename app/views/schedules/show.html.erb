@@ -4,6 +4,7 @@
 		<div class="switcher_container">
 			<div id="switch1" class="switch switch_clicked">Week 1</div>
 			<div id="switch2" class="switch">Week 2</div>
+			<div id="switch3" class="switch">All</div>
 		</div>
 		<div class="h1_container"><h1><%= @schedule.name %></h1></div>
 	</div>
@@ -24,20 +25,26 @@
 				<td class='first_column'><p><%= @positions[k-1] %></p></td>
 			<% (1..6).each do |l| %>
 				<td>
-					<div class='week1' data-id="<%= @items[k][l][0].id if @items[k][l][0] %>">
-						<% if @items[k][l][0] %>
-							<h3><%= @items[k][l][0].name %></h3>
-							<p><%= @items[k][l][0].teacher %></p>
-							<p class='loc'><%= @items[k][l][0].location %></p>
-						<% end %>
-					</div>
-					<div class='week2 hidden' data-id="<%= @items[k][l][1].id if @items[k][l][1] %>">
-						<% if @items[k][l][1] %>
-							<h3><%= @items[k][l][1].name %></h3>
-							<p><%= @items[k][l][1].teacher %></p>
-							<p class='loc'><%= @items[k][l][1].location %></p>
-						<% end %>
-					</div>
+					<table class="cell">
+						<tr>
+						<td class='week1' data-id="<%= @items[k][l][0].id if @items[k][l][0] %>">
+							<% if @items[k][l][0] %>
+								<h3><%= @items[k][l][0].name %></h3>
+								<p><%= @items[k][l][0].teacher %></p>
+								<p class='loc'><%= @items[k][l][0].location %></p>
+							<% end %>
+						</td>
+						</tr>
+						<tr>
+							<td class='week2 hidden' data-id="<%= @items[k][l][1].id if @items[k][l][1] %>">
+								<% if @items[k][l][1] %>
+									<h3><%= @items[k][l][1].name %></h3>
+									<p><%= @items[k][l][1].teacher %></p>
+									<p class='loc'><%= @items[k][l][1].location %></p>
+								<% end %>
+							</td>
+						</tr>
+					</table>
 				</td>
 			<% end %>
 		</tr>
@@ -47,19 +54,61 @@
 <script type="text/javascript">
 	var switch1 = $('#switch1'),
 	    switch2 = $('#switch2'),
-	    week1 = $('div.week1'),
-	    week2 = $('div.week2');
+	    switch3 = $('#switch3'),
+	    week1 = $('td.week1'),
+	    week2 = $('td.week2');
 	switch1.on('click', function(){
 		switch1.addClass('switch_clicked');
 		switch2.removeClass('switch_clicked');
+		switch3.removeClass('switch_clicked');
 		week1.removeClass('hidden');
 		week2.addClass('hidden');
+		$('table.cell td').removeClass('padding10');
+		week1.removeClass('grey');
+		week2.removeClass('red');
 	});
 	switch2.on('click', function(){
 		switch1.removeClass('switch_clicked');
+		switch3.removeClass('switch_clicked');
 		switch2.addClass('switch_clicked');
 		week1.addClass('hidden');
 		week2.removeClass('hidden');
+		$('table.cell td').removeClass('padding10');
+		week1.removeClass('grey');
+		week2.removeClass('red');
 	});
-	$('tr').last().css('display','none');
+	switch3.on('click', function(){
+		switch1.removeClass('switch_clicked');
+		switch2.removeClass('switch_clicked');
+		switch3.addClass('switch_clicked');
+		week1.removeClass('hidden');
+		week2.removeClass('hidden');
+		$('table.cell td').addClass('padding10');
+		week1.addClass('grey');
+		week2.addClass('red');
+		week2.each(function(){
+			var week2i = $(this),
+				table = week2i.closest('table.cell'),
+				week1i = table.find('td.week1'),
+				data1 = week1i.attr('data-id'),
+				data2 = week2i.attr('data-id');
+			if ( data1 == data2 ) {
+				week2i.addClass('hidden');
+				week1i.removeClass('grey');
+			}
+			else {
+				if (week1i.attr('data-id').length==0) {
+					var height = week2i.height();
+					week1i.css('height',height);
+				}
+				else {
+					if (week2i.attr('data-id').length==0) {
+						var height = week1i.height();
+						week2i.css('height',height);
+					}
+				}
+			}
+		});
+	});
+	$('.schedule>*>tr').last().css('display','none');
 </script>

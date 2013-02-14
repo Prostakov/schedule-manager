@@ -37,8 +37,8 @@ th {
 }
 .switcher_container {
 	height: 50px;
-	margin: auto;
-	width: 250px;
+	margin: 2px auto;
+	width: 275px;
 	float: left;
 }
 .switch {
@@ -65,6 +65,9 @@ th {
 	border-bottom-left-radius: 5px;
 }
 #switch2 {
+	margin-left: -1px;
+}
+#switch3 {
 	-webkit-border-top-right-radius: 5px;
 	-webkit-border-bottom-right-radius: 5px;
 	-moz-border-radius-topright: 5px;
@@ -91,11 +94,10 @@ th {
 	color: #ACACAC;
 	text-align: center;
 }
-.schedule td {
+.schedule>*>*>td {
 	width: 17%;
 	border-right: 1px solid #D8D8D8;
 	border-bottom: 1px solid #D8D8D8;
-	padding: 25px 10px 25px 10px;
 	font-size: 13px;
 }
 .schedule th {
@@ -110,10 +112,25 @@ td.first_column {
 	width: 2%;
 	border-left: 1px solid #ACACAC;	
 }
-.schedule td h3 {
+.schedule h3 {
 	color: #A37373;
 	font-size: 14px;
 }
 p.loc {
 	color: #E49393;	
+}
+table.cell {
+	width: 100%;
+}
+table.cell td {
+	padding: 25px 10px 25px 10px;
+}
+table.cell td.padding10 {
+	padding: 10px;
+}
+.red {
+	background: #F3E2E2;
+}
+.grey {
+	background: #F7F7F7;
 }
