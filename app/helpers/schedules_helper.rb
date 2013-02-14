@@ -41,4 +41,28 @@ module SchedulesHelper
 		end
 		return @result
 	end
+
+	def sort_weeks items
+		(1..6).each do |k|
+			(1..6).each do |l|
+				if items[k][l][0].nil? && items[k][l][1] &&
+				items[k][l][1].week1 && items[k][l][1].week2
+					items[k][l][0] = items[k][l][1]
+				elsif items[k][l][1].nil? && items[k][l][0] &&
+				items[k][l][0].week1 && items[k][l][0].week2
+					items[k][l][1] = items[k][l][0]
+				elsif items[k][l][0] && items[k][l][1] &&
+				items[k][l][0].week2 && !items[k][l][1].week1
+					l = items[k][l][0]
+					items[k][l][0] = items[k][l][1]
+					items[k][l][1] = l
+				elsif items[k][l][0] && items[k][l][0].week2 &&
+				items[k][l][1].nil?
+					items[k][l][1] = items[k][l][0]
+					items[k][l][0] = nil
+				end
+			end
+		end
+		return items
+	end
 end

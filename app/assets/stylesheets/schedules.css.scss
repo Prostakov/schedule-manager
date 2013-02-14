@@ -8,6 +8,10 @@ body {
 th {
 	font-weight: normal;
 }
+.container {
+	width: 70%;
+	margin: auto;
+}
 .header {
 	background: url(leather.jpg);
 	width: 100%;
@@ -16,7 +20,7 @@ th {
 }
 .h1_container {
 	height: 50px;
-	width: 300px;
+	width: 275px;
 	float: left;
 	margin-left: 20px;
 }
@@ -32,6 +36,7 @@ th {
 	height: 50px;
 	margin: auto;
 	width: 250px;
+	float: left;
 }
 .switch {
 	float: left;
@@ -85,6 +90,7 @@ th {
 	text-align: left;
 }
 .schedule td {
+	width: 17%;
 	border-right: 1px solid #ACACAC;
 	border-bottom: 1px solid #ACACAC;
 	padding-bottom: 75px;
@@ -97,9 +103,6 @@ th {
 }
 .schedule th>p {
 	padding: 3px 3px 0 0;
-}
-th.sunday {
-	border-right: 0;
 }
 .hidden {
 	display: none;
