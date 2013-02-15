@@ -11,6 +11,29 @@
 			<div class="switch" id="add_item">Add Item</div>
 		</div>
 		<div id="add_item_container" class="hidden">
+			<%= form_for @item, remote: true do |f| %>
+				<%= f.label :name %>
+				<%= f.text_field :name %>
+				<%= f.label :teacher %>
+				<%= f.text_field :teacher %>
+				<%= f.label :location %>
+				<%= f.text_field :location %>
+				<%= f.label :position, 'Lesson #' %>
+				<%= f.select :position, (1..5) %>
+				<%= f.label :day %>
+				<%= f.select :day, [['Monday',1],['Tuesday',2],['Wednesday',3],['Thursday',4],['Friday',5],['Saturday',6]] %>
+				<% if @schedule.weeks %>
+					<div class='weeks'>
+						<%= f.label :week1, 'Week 1:' %>
+						<%= f.check_box :week1 %>
+					</div>
+					<div class="weeks">
+						<%= f.label :week2, 'Week 2:' %>
+						<%= f.check_box :week2 %>
+					</div>
+				<% end %>
+				<%= f.submit 'Create lesson' %>
+			<% end %>
 		</div>
 	</div>
 </div>

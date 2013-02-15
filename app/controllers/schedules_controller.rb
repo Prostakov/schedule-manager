@@ -15,6 +15,7 @@ include SchedulesHelper
 
 	def show
 		@schedule = Schedule.find(params[:id])
+		@item = @schedule.items.new
 		@items = @schedule.items
 		@items = sort_positions @items
 		@items = sort_days @items

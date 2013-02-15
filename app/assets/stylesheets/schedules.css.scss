@@ -148,10 +148,46 @@ table.small_font p {
 }
 #add_item_container {
 	width: 300px;
-	height: 100px;
 	border: 1px solid #666;
 	border-bottom: 2px solid #666;
 	background: #FFF;
 	position: absolute;
 	top: 50px;
+	overflow: hidden;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+#add_item_container label {
+	font-size: 11px;
+	color: #777;
+	margin-left: 25px;
+}
+#add_item_container input {
+	width: 250px;
+	margin: 0 25px 15px;
+	padding: 2px 0;
+	font-size: 18px;
+}
+.weeks {
+	padding: 18px 0 0;
+	float: left;
+	width: 150px;
+}
+#add_item_container .weeks label {
+	font-size: 12px;	
+	display: block;
+	float: left;
+	padding: 3px 7px 0 0;
+}
+#add_item_container .weeks input {
+	margin: 0;
+	width: 20px;
+	height: 20px;
+}
+#add_item_container input[type="submit"] {
+	width: 98px;
+	padding: 5px 0;
+	margin: 30px 10px;
+	font-size: 13px;
 }
