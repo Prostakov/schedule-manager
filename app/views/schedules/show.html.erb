@@ -7,11 +7,13 @@
 			<div id="switch3" class="switch">All</div>
 		</div>
 		<div class="h1_container"><h1><%= @schedule.name %></h1></div>
+	<% unless current_user == @schedule.user %>
 		<div class="control_container">
 			<div class="switch" id="add_item">Add Item</div>
 		</div>
 		<div id="add_item_container" class="hidden">
-			<%= form_for @item, remote: true do |f| %>
+			<%= form_for @item, format: :json, remote: true do |f| %>
+				<%= hidden_field_tag :schedule, @schedule.id %>
 				<%= f.label :name %>
 				<%= f.text_field :name %>
 				<%= f.label :teacher %>
@@ -35,6 +37,7 @@
 				<%= f.submit 'Create lesson' %>
 			<% end %>
 		</div>
+	<% end %>
 	</div>
 </div>
 <div class="container">
@@ -86,7 +89,8 @@
 	    add_item = $('#add_item'),
 	    add_item_container = $('#add_item_container'),
 	    week1 = $('td.week1'),
-	    week2 = $('td.week2');
+	    week2 = $('td.week2'),
+	    new_item = $('#new_item');
 	add_item.on('click', function(){
 		add_item.toggleClass('switch_clicked');
 		add_item_container.toggleClass('hidden');
@@ -155,4 +159,22 @@
 	});
 	$('.schedule>*>tr').last().css('display','none');
 	gogo();
+
+	//bind items create ajax
+	new_item.bind('ajax:before', function() {
+    	console.log("ajax:before");
+	});
+	new_item.bind('ajax:beforeSend', function() {
+    	console.log("ajax:beforeSend");
+	});
+	new_item.bind('ajax:error', function() {
+    	console.log("Error");
+	});
+	new_item.bind('ajax:success', function(evt, data, status, xhr) {
+    	console.log("ajax:success");
+    	console.log(data);
+	});
+	new_item.bind('ajax:complete', function() {
+    	console.log("ajax:complete");
+	});
 </script>
