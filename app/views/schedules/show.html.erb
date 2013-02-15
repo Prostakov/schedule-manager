@@ -100,12 +100,12 @@
 			}
 			else {
 				if (week1i.attr('data-id').length==0) {
-					var height = week2i.height();
+					var height = week2i.height()-10;
 					week1i.css('height',height);
 				}
 				else {
 					if (week2i.attr('data-id').length==0) {
-						var height = week1i.height();
+						var height = week1i.height()-10;
 						week2i.css('height',height);
 					}
 				}
