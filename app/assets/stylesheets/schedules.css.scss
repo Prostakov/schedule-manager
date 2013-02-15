@@ -10,6 +10,7 @@ th {
 }
 .container {
 	width: 70%;
+	min-width: 1000px;
 	margin: auto;
 }
 .hidden {
@@ -140,4 +141,17 @@ table.small_font h3 {
 table.small_font p {
 	font-size: 11px;
 	color: #858383;
+}
+.control_container {
+	float: right;
+	margin-right: 15px;
+}
+#add_item_container {
+	width: 300px;
+	height: 100px;
+	border: 1px solid #666;
+	border-bottom: 2px solid #666;
+	background: #FFF;
+	position: absolute;
+	top: 50px;
 }
