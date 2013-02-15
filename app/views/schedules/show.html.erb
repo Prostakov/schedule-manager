@@ -7,7 +7,7 @@
 			<div id="switch3" class="switch">All</div>
 		</div>
 		<div class="h1_container"><h1><%= @schedule.name %></h1></div>
-	<% unless current_user == @schedule.user %>
+	<% if current_user == @schedule.user %>
 		<div class="control_container">
 			<div class="switch" id="add_item">Add Item</div>
 		</div>
