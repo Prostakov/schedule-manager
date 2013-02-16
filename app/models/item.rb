@@ -8,11 +8,9 @@ class Item < ActiveRecord::Base
   	@schedule = self.schedule
   	@items = @schedule.items
   	@items = filter_items @items, self.day, self.position
-  	if @items.length > 1 || 
-  	@items[0] && @items[0].week1 && @items[0].week2 || 
+  	if @items.length > 1 ||
   	@items[0] && @items[0].week1 && self.week1 ||
-  	@items[1] && @items[1].week2 && self.week2 ||
-  	self.week1 && self.week2 && !@items.empty?
+  	@items[0] && @items[0].week2 && self.week2
   		return false
   	end
   	true

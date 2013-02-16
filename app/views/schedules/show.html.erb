@@ -161,20 +161,8 @@
 	gogo();
 
 	//bind items create ajax
-	new_item.bind('ajax:before', function() {
-    	console.log("ajax:before");
-	});
-	new_item.bind('ajax:beforeSend', function() {
-    	console.log("ajax:beforeSend");
-	});
-	new_item.bind('ajax:error', function() {
-    	console.log("Error");
-	});
 	new_item.bind('ajax:success', function(evt, data, status, xhr) {
     	console.log("ajax:success");
     	console.log(data);
-	});
-	new_item.bind('ajax:complete', function() {
-    	console.log("ajax:complete");
 	});
 </script>

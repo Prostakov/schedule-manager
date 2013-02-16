@@ -2,10 +2,17 @@ class ItemsController < ApplicationController
 	before_filter :correct_user_create, only: :create
 
 	def create
-		@item = @schedule.items.create(params[:item])
-		respond_to do |format|
-			format.html { redirect_to @schedule }
-			format.json { render json: @item.to_json }
+		@item = @schedule.items.new(params[:item])
+		if @item.save
+			respond_to do |format|
+				format.html { redirect_to @schedule }
+				format.json { render json: @item.to_json }
+			end
+		else
+			respond_to do |format|
+				format.html { redirect_to @schedule }
+				format.json { render json: 'Error'.to_json }
+			end
 		end
 	end
 

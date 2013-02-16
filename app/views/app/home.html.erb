@@ -37,21 +37,9 @@
 	</div>
 	<script type="text/javascript">
 		var new_schedule = $('#new_schedule');
-		new_schedule.bind('ajax:before', function() {
-    		console.log("ajax:before");
-		});
-		new_schedule.bind('ajax:beforeSend', function() {
-    		console.log("ajax:beforeSend");
-		});
-		new_schedule.bind('ajax:error', function() {
-    		console.log("Error");
-		});
 		new_schedule.bind('ajax:success', function(evt, data, status, xhr) {
     		console.log("ajax:success");
     		console.log(data);
-		});
-		new_schedule.bind('ajax:complete', function() {
-    		console.log("ajax:complete");
 		});
 	</script>
 <% end %>
