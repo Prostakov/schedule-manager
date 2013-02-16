@@ -5,12 +5,14 @@ class Item < ActiveRecord::Base
   validates :name, presence: true
 
   before_save do
-  	@day = self.day
-  	@position = self.position
   	@schedule = self.schedule
   	@items = @schedule.items
-  	@items = filter_items @items, @day, @position
-  	if @items.length > 1 || @items[0].week1 && @items[0].week2
+  	@items = filter_items @items, self.day, self.position
+  	if @items.length > 1 || 
+  	@items[0] && @items[0].week1 && @items[0].week2 || 
+  	@items[0] && @items[0].week1 && self.week1 ||
+  	@items[1] && @items[1].week2 && self.week2 ||
+  	self.week1 && self.week2 && !@items.empty?
   		return false
   	end
   	true
