@@ -1,11 +1,13 @@
 <div class="header">
 	<div class="container">
 		<div class="h1_container"><h1>Schedule-Manager</h1></div>
-		<div class="switcher_container">
-			<div id="switch1" class="switch switch_clicked">Week 1</div>
-			<div id="switch2" class="switch">Week 2</div>
-			<div id="switch3" class="switch">All</div>
-		</div>
+		<% if @schedule.weeks %>
+			<div class="switcher_container">
+				<div id="switch1" class="switch switch_clicked">Week 1</div>
+				<div id="switch2" class="switch">Week 2</div>
+				<div id="switch3" class="switch">All</div>
+			</div>
+		<% end %>
 		<div class="h1_container"><h1><%= @schedule.name %></h1></div>
 	<% if current_user == @schedule.user %>
 		<div class="control_container">
