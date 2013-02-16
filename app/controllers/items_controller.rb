@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
 	def create
 		@item = @schedule.items.create(params[:item])
 		respond_to do |format|
-			format.hmtl {redirect_to @schedule}
+			format.html { redirect_to @schedule }
 			format.json { render json: @item.to_json }
 		end
 	end
