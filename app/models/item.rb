@@ -2,7 +2,9 @@ class Item < ActiveRecord::Base
   attr_accessible :day, :location, :name, :position, :schedule_id, :teacher, :week1, :week2
   belongs_to :schedule
 
-  validates :name, presence: true
+  validates :name, presence: true, length: {minimum: 3}
+  validates :position, presence: true, numericality: { greater_than: 0, less_than: 7}
+  validates :day, presence: true, numericality: { greater_than: 0, less_than: 7}
 
   before_save do
   	@schedule = self.schedule
