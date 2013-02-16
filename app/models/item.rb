@@ -1,5 +1,5 @@
 class Item < ActiveRecord::Base
-  attr_accessible :day, :location, :name, :position, :schedule_id, :teacher, :week1, :week2
+  attr_accessible :day, :location, :name, :position, :teacher, :week1, :week2
   belongs_to :schedule
 
   validates :name, presence: true, length: {minimum: 3}

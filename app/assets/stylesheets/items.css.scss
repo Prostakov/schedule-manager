@@ -1,3 +1,50 @@
-// Place all the styles related to the items controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.form_container {
+	width: 450px;
+	margin: 25px auto;
+	overflow: hidden;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+.form_container>h1 {
+	margin-bottom: 20px;
+	font-size: 24px;
+}
+.form_container label {
+	font-size: 11px;
+	color: #777;
+	margin-left: 25px;
+}
+.form_container input {
+	width: 400px;
+	margin: 0 25px 15px;
+	padding: 2px 0;
+	font-size: 18px;
+}
+.form_container .weeks {
+	padding-top: 5px;
+	float: left;
+	width: 230px;
+	margin-top: 10px;
+}
+.form_container .weeks label {
+	font-size: 12px;	
+	display: block;
+	float: left;
+	padding: 3px 7px 0 0;
+}
+.form_container .weeks input {
+	margin: 0;
+	width: 20px;
+	height: 20px;
+}
+.form_container input[type="submit"] {
+	width: 170px;
+	padding: 5px 0;
+	margin: 30px 10px 30px 0;
+	font-size: 13px;
+}
+.form_container #item_day {
+	margin: 0 50px 0 3px;
+	width: 115px;
+}

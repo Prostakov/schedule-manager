@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
 	before_filter :correct_user_create, only: :create
+	before_filter :correct_user, only: [:update, :edit, :destroy]
 
 	def create
 		@item = @schedule.items.new(params[:item])
@@ -19,6 +20,19 @@ class ItemsController < ApplicationController
 	def show
 	end
 
+	def update
+		if @item.update_attributes(params[:item])
+			redirect_to @schedule
+		else
+			render 'edit'
+		end
+	end
+
+	def edit
+		@item = Item.find(params[:id])
+		@schedule = @item.schedule
+	end
+
 	def destroy
 	end
 
@@ -28,6 +42,15 @@ class ItemsController < ApplicationController
 		@schedule = Schedule.find(params[:schedule])
 		@user = @schedule.user
 		unless  @user == current_user
+			redirect_to root_path
+		end
+	end
+
+	def correct_user
+		@item = Item.find(params[:id])
+		@schedule = @item.schedule
+		@user = @schedule.user
+		unless @user == current_user
 			redirect_to root_path
 		end
 	end
