@@ -52,12 +52,12 @@ module SchedulesHelper
 				items[k][l][0].week1 && items[k][l][0].week2
 					items[k][l][1] = items[k][l][0]
 				elsif items[k][l][0] && items[k][l][1] &&
-				items[k][l][0].week2 && !items[k][l][1].week1
-					l = items[k][l][0]
+				items[k][l][0].week2 && items[k][l][1].week1
+					@l = items[k][l][0]
 					items[k][l][0] = items[k][l][1]
-					items[k][l][1] = l
+					items[k][l][1] = @l
 				elsif items[k][l][0] && items[k][l][0].week2 &&
-				items[k][l][1].nil?
+				!items[k][l][1]
 					items[k][l][1] = items[k][l][0]
 					items[k][l][0] = nil
 				end
