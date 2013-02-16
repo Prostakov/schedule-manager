@@ -7,9 +7,13 @@ class Item < ActiveRecord::Base
   validates :day, presence: true, numericality: { greater_than: 0, less_than: 7}
 
   before_save do
-  	@schedule = self.schedule
+  	@object = self
+  	@schedule = @object.schedule
   	@items = @schedule.items
   	@items = filter_items @items, self.day, self.position
+  	unless @object.id.nil?
+  		@items = clear_items @items, @object.id
+  	end
   	if @items.length > 1 ||
   	@items[0] && @items[0].week1 && self.week1 ||
   	@items[0] && @items[0].week2 && self.week2 ||
@@ -29,6 +33,11 @@ class Item < ActiveRecord::Base
   		end
   	end
   	return @result
+  end
+
+  def clear_items items, id
+  	@items.delete_if {|x| x.id==id }
+  	return @items
   end
 
 end
