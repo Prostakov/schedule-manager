@@ -1,3 +1,49 @@
-// Place all the styles related to the app controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+h1 {
+	font-size: 20px;
+	color: #B94B5D;
+	text-align: center;
+}
+.user_info {
+	float: left;
+}
+.schedules_container {
+	float: right;
+	width: 500px;
+	margin-top: 40px;
+	background: #EEE;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	padding: 0 30px 25px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+.schedules {
+	list-style: none;
+}
+.schedules li>a {
+	padding: 5px 10px;
+	background: #D5D5D5;
+	border: 1px solid #D1AFAF;
+	border-top-color: #EEE;
+	border-bottom-color: #333;
+	width: 100%;
+	display: block;
+	color: #8A3232;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	font-size: 20px;
+	font-family: Arial;
+}
+.schedules li>a:hover {
+	color: #92297D;
+}
+.schedules li.top {
+	padding: 10px 0;
+	color: #723E3E;
+	font-family: Arial;
+	font-weight: bold;
+	font-size: 15px;
+}
