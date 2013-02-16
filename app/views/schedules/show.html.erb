@@ -9,6 +9,7 @@
 		<div class="h1_container"><h1><%= @schedule.name %></h1></div>
 	<% if current_user == @schedule.user %>
 		<div class="control_container">
+			<div class="switch" id="schedule_editing">Edit Lessons</div>
 			<div class="switch" id="add_item">Add Lesson</div>
 		</div>
 		<div id="add_item_container" class="hidden">
@@ -90,21 +91,49 @@
 	<% end %>
 </table>
 </div>
+<a class="edit_icon editing_icon"></a>
+<a class="edit_icon delete_icon"></a>
 <script type="text/javascript">
 	var switch1 = $('#switch1'),
 	    switch2 = $('#switch2'),
 	    switch3 = $('#switch3'),
 	    add_item = $('#add_item'),
 	    add_item_container = $('#add_item_container'),
+	    schedule_editing = $('#schedule_editing'),
 	    week1 = $('td.week1'),
 	    week2 = $('td.week2'),
-	    new_item = $('#new_item');
+	    new_item = $('#new_item'),
+	    schedule_editing_clicked = false;
 	add_item.on('click', function(){
 		add_item.toggleClass('switch_clicked');
 		add_item_container.toggleClass('hidden');
 		var right = $(document).width()-add_item.width()-add_item.offset().left-46;
 		right = right.toFixed()+'px'
 		add_item_container.css('right',right);
+	});
+	schedule_editing.on('click', function(){
+		schedule_editing.toggleClass('switch_clicked');
+		if (schedule_editing_clicked) {
+			$('.edit_icon').remove();
+			schedule_editing_clicked = false;
+		}
+		else {
+			$.each($('table.schedule table.cell>*>*>td'), function(index, value){
+				elem = $(value)
+				if (elem.attr('data-id')!='') {
+					if (!elem.hasClass('hidden')) {
+						var top = elem.offset().top,
+							left = elem.offset().left,
+							id = elem.attr('data-id'),
+							edit = $('<a class="edit_icon editing_icon" href="/items/'+id+'/edit"></a>').appendTo('body'),
+							del = $('<a class="edit_icon delete_icon" href="/items/'+id+'/edit"></a>').appendTo('body');
+							edit.offset({top: top+25, left: left});
+							del.offset({top: top+25, left: left+20});
+					}
+				}
+			});
+			schedule_editing_clicked = true;
+		}
 	});
 	switch1.on('click', function(){
 		switch1.addClass('switch_clicked');
