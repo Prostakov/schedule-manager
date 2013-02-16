@@ -10,7 +10,8 @@ class Item < ActiveRecord::Base
   	@items = filter_items @items, self.day, self.position
   	if @items.length > 1 ||
   	@items[0] && @items[0].week1 && self.week1 ||
-  	@items[0] && @items[0].week2 && self.week2
+  	@items[0] && @items[0].week2 && self.week2 ||
+  	!self.week1 && !self.week2
   		return false
   	end
   	true

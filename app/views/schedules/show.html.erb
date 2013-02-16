@@ -63,6 +63,10 @@
 								<h3><%= @items[k][l][0].name %></h3>
 								<p><%= @items[k][l][0].teacher %></p>
 								<p class='loc'><%= @items[k][l][0].location %></p>
+							<% else %>
+								<h3></h3>
+								<p></p>
+								<p class='loc'></p>
 							<% end %>
 						</td>
 						</tr>
@@ -72,6 +76,10 @@
 									<h3><%= @items[k][l][1].name %></h3>
 									<p><%= @items[k][l][1].teacher %></p>
 									<p class='loc'><%= @items[k][l][1].location %></p>
+								<% else %>
+									<h3></h3>
+									<p></p>
+									<p class='loc'></p>
 								<% end %>
 							</td>
 						</tr>
@@ -164,5 +172,49 @@
 	new_item.bind('ajax:success', function(evt, data, status, xhr) {
     	console.log("ajax:success");
     	console.log(data);
+    	if (data != 'Error') {
+    		var td = $($('table.schedule>*>*>td')[(data.position-1)*7+data.day]);
+    		if (data.week1) {
+    			var tr = td.find('tr').first();
+    			tr.find('td').attr('data-id',data.id);
+    			tr.find('h3').append(data.name);
+    			tr.find('p').first().append(data.teacher);
+    			tr.find('p.loc').append(data.location);
+    		};
+    		if (data.week2) {
+    			var tr = td.find('tr').last();
+    			tr.find('td').attr('data-id',data.id);
+    			tr.find('h3').append(data.name);
+    			tr.find('p').first().append(data.teacher);
+    			tr.find('p.loc').append(data.location);
+    		};
+    		gogo();
+    		$('#item_name').val('');
+    		$('#item_teacher').val('');
+    		$('#item_location').val('');
+    		$('#item_week1').prop('checked',false);
+    		$('#item_week2').prop('checked',false);
+    		$('#new_item input[type="submit"]').removeAttr('disabled','disabled');
+			add_item.removeClass('switch_clicked');
+			add_item_container.addClass('hidden');
+    	};
+	});
+	new_item.submit( function(){
+		var weeks = $('.weeks'),
+			name = $('#item_name');
+		name.removeClass('red');
+		weeks.removeClass('red');
+		if (!$('#item_week1').is(':checked') && !$('#item_week2').is(':checked')){
+			weeks.addClass('red');
+			return false;
+		};
+		if (name.val().length < 3) {
+			name.addClass('red');
+			return false;
+		}
+		else {
+			true;
+			$('#new_item input[type="submit"]').attr('disabled','disabled');
+		}
 	});
 </script>
