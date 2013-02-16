@@ -1,6 +1,6 @@
 <div class="container">
 	<img src="assets/logo.png" />
-<h1>Schedule-manager - solution for universities or schools, where they can keep their schedule.</h1>
+<h1>Schedule-Manager - solution for universities or schools, where you can keep your schedule.</h1>
 <% unless signed_in? %>
 	<%= form_for :session, url: sessions_path do |f| %>
 		<%= f.text_field :name, placeholder: 'Username' %>
@@ -10,14 +10,48 @@
 	<%= link_to 'Sign Up', new_user_path %>
 <% else %>
 	<div class="user_info">
+		<p class="user">Signed in as<i> <%= @user.name %></i></p>
 		<%= link_to 'Sign Out', signout_path, method: "delete" %>
 	</div>
-	<div class="schedules_container">
-		<ul class="schedules">
-			<li class="top">My Schedules:</li>
-			<% @schedules.each do |schedule| %>
-				<li><%= link_to schedule.name, schedule %></li>
+	<div class="content">
+		<div class="content_box schedules_container">
+			<ul class="schedules">
+				<li class="top">My Schedules:</li>
+				<% @schedules.each do |schedule| %>
+					<% if schedule.name %>
+						<li><%= link_to schedule.name, schedule %></li>
+					<% end %>
+				<% end %>
+			</ul>
+		</div>
+		<div class="content_box schedule_new">
+			<%= form_for @schedule, format: :json, remote: true do |f| %>
+				<p class="top">Create new schedule:</p>
+				<%= f.label :name %>
+				<%= f.text_field :name %>
+				<%= f.label :weeks, 'Multiple weeks' %>
+				<%= f.check_box :weeks %>
+				<%= f.submit %>
 			<% end %>
-		</ul>
+		</div>
 	</div>
+	<script type="text/javascript">
+		var new_schedule = $('#new_schedule');
+		new_schedule.bind('ajax:before', function() {
+    		console.log("ajax:before");
+		});
+		new_schedule.bind('ajax:beforeSend', function() {
+    		console.log("ajax:beforeSend");
+		});
+		new_schedule.bind('ajax:error', function() {
+    		console.log("Error");
+		});
+		new_schedule.bind('ajax:success', function(evt, data, status, xhr) {
+    		console.log("ajax:success");
+    		console.log(data);
+		});
+		new_schedule.bind('ajax:complete', function() {
+    		console.log("ajax:complete");
+		});
+	</script>
 <% end %>

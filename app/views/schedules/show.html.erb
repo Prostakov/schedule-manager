@@ -9,7 +9,7 @@
 		<div class="h1_container"><h1><%= @schedule.name %></h1></div>
 	<% if current_user == @schedule.user %>
 		<div class="control_container">
-			<div class="switch" id="add_item">Add Item</div>
+			<div class="switch" id="add_item">Add Lesson</div>
 		</div>
 		<div id="add_item_container" class="hidden">
 			<%= form_for @item, format: :json, remote: true do |f| %>
