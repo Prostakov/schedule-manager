@@ -12,7 +12,7 @@ h1 {
 	font-size: 20px;
 	color: #6A6F63;
 	text-align: center;
-	padding-top: 35px;
+	padding-top: 20px;
 }
 .content {
 	width: 1000px;
@@ -50,14 +50,20 @@ h1 {
 	padding: 5px 10px;
 	background: #D5D5D5;
 	border-top: 1px solid #EEE;
-	width: 100%;
+	border-left: 1px solid #EEE;
+	width: 70%;
 	display: block;
 	color: #8A3232;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	font-size: 16px;
+	float: left;
 	font-family: Arial;
+}
+.schedules li >a.schedule_control_links {
+	width: 15%;
+	text-align: center;
 }
 .schedules li>a:hover {
 	background: #BAD3B9;
@@ -72,6 +78,7 @@ h1 {
 .schedule_new {
 	float: right;
 	width: 400px;
+	background: #EEEEC1;
 }
 .schedule_new input {
 	width: 100%;

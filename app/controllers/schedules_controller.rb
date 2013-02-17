@@ -1,9 +1,11 @@
 class SchedulesController < ApplicationController
 	include SchedulesHelper
-	before_filter :correct_user, only: [:update, :destroy]
+	before_filter :correct_user, only: [:update, :destroy, :edit]
 	before_filter :correct_user_create, only: :create
 
 	def update
+		@schedule.update_attributes(params[:schedule])
+		redirect_to root_path
 	end
 
 	def create
@@ -21,7 +23,12 @@ class SchedulesController < ApplicationController
 		end
 	end 
 
+	def edit
+	end
+
 	def destroy
+		@schedule.destroy
+		redirect_to root_path
 	end 
 
 	def show

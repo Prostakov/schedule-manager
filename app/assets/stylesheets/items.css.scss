@@ -60,3 +60,16 @@ a.editing_icon {
 a.delete_icon {
 	background: url(delete.gif) 2px 2px no-repeat;
 }
+.form_container #schedule_weeks {
+	width: 20px;
+	height: 20px;
+	display: block;
+	float: left;
+	margin-right: 100px;
+}
+.form_container #label_schedule_weeks {
+	font-size: 14px;
+	margin: 0px -15px 0 25px;
+	float: left;
+	padding-top: 2px;
+}

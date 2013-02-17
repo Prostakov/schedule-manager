@@ -4,7 +4,7 @@ ScheduleManager::Application.routes.draw do
 
     resources :sessions, only: [:new,:create,:destroy]
     resources :users, only: [:new,:create]
-    resources :schedules, only: [:new,:create,:destroy,:index,:show,:update]
+    resources :schedules, only: [:new,:create,:destroy,:index,:show,:update,:edit]
     resources :items, only: [:show,:create,:edit,:destroy,:update]
 
     match '/signout', to: 'sessions#destroy', via: :delete

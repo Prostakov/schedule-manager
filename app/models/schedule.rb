@@ -3,5 +3,5 @@ class Schedule < ActiveRecord::Base
   belongs_to :user
   has_many :items, dependent: :destroy
 
-  validates :name, presence: true, length: {minimum: 3}
+  validates :name, presence: true, length: {minimum: 3, maximum: 20}
 end

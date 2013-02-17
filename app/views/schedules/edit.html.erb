@@ -1,0 +1,15 @@
+<div class="header">
+	<div class="container">
+		<div class="h1_container"><h1>Schedule-Manager</h1></div>
+	</div>
+</div>
+<div class="form_container">
+	<h1>Edit Schedule</h1>
+	<%= form_for @schedule do |f| %>
+		<%= f.label :name %>
+		<%= f.text_field :name %>
+		<%= f.label :weeks, 'Weeks:', id: 'label_schedule_weeks' %>
+		<%= f.check_box :weeks %>
+		<%= f.submit 'Update schedule' %>
+	<% end %>
+</div>

@@ -23,7 +23,11 @@
 				<li class="top">My Schedules:</li>
 				<% @schedules.each do |schedule| %>
 					<% if schedule.name %>
-						<li><%= link_to schedule.name, schedule %></li>
+						<li>
+							<%= link_to schedule.name, schedule %>
+							<%= link_to 'Edit', edit_schedule_path(schedule), class: 'schedule_control_links' %>
+							<%= link_to 'Delete', schedule, data: {confirm: 'Are you sure?'}, method: :delete, class: 'schedule_control_links' %>
+						</li>
 					<% end %>
 				<% end %>
 			</ul>
@@ -46,14 +50,14 @@
     		console.log("ajax:success");
     		console.log(data);
     		if (data != "Error") {
-    			$('ul.schedules').append('<li><a href="/schedules/'+data.id+'">'+data.name+'</a></li>');
+    			$('ul.schedules').append('<li><a href="/schedules/'+data.id+'">'+data.name+'</a><a href="/schedules/'+data.id+'/edit" class="schedule_control_links">Edit</a><a href="/schedules/'+data.id+'" class="schedule_control_links" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a></li>');
     			$('#new_schedule input[type="submit"]').removeAttr('disabled','disabled');
     		}
 		});
 		new_schedule.submit( function() {
 			var name = $('#schedule_name');
 			name.removeClass('red');
-			if (name.val().length < 3) {
+			if ((name.val().length < 3) || (name.val().length > 20)) {
 				name.addClass('red');
 				return false;
 			}
