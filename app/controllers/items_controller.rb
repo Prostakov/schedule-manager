@@ -34,6 +34,8 @@ class ItemsController < ApplicationController
 	end
 
 	def destroy
+		@item.destroy
+		redirect_to @schedule
 	end
 
 	private

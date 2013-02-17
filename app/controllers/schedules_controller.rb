@@ -14,6 +14,7 @@ include SchedulesHelper
 	end 
 
 	def show
+		@last_item = Item.last
 		@schedule = Schedule.find(params[:id])
 		@item = @schedule.items.new
 		@items = @schedule.items
