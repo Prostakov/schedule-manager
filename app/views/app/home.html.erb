@@ -44,9 +44,23 @@
 		var new_schedule = $('#new_schedule');
 		new_schedule.bind('ajax:success', function(evt, data, status, xhr) {
     		console.log("ajax:success");
+    		console.log(data);
     		if (data != "Error") {
     			$('ul.schedules').append('<li><a href="/schedules/'+data.id+'">'+data.name+'</a></li>');
+    			$('#new_schedule input[type="submit"]').removeAttr('disabled','disabled');
     		}
+		});
+		new_schedule.submit( function() {
+			var name = $('#schedule_name');
+			name.removeClass('red');
+			if (name.val().length < 3) {
+				name.addClass('red');
+				return false;
+			}
+			else {
+				$('#new_schedule input[type="submit"]').attr('disabled','disabled');
+				return true
+			}
 		});
 	</script>
 <% end %>

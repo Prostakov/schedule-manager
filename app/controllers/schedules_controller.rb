@@ -7,10 +7,17 @@ class SchedulesController < ApplicationController
 	end
 
 	def create
-		@schedule = @user.schedules.create(params[:schedule]);
-		respond_to do |format|
-			format.html { redirect_to @schedule }
-			format.json { render json: @schedule.to_json }
+		@schedule = @user.schedules.new(params[:schedule]);
+		if @schedule.save
+			respond_to do |format|
+				format.html { redirect_to @schedule }
+				format.json { render json: @schedule.to_json }
+			end
+		else
+			respond_to do |format|
+				format.html { redirect_to @schedule }
+				format.json { render json: 'Error'.to_json }
+			end			
 		end
 	end 
 
