@@ -1,6 +1,6 @@
 <div class="header">
 	<div class="container">
-		<div class="h1_container"><h1>Schedule-Manager</h1></div>
+		<div class="h1_container"><a class="root" href="<%= root_path %>"><h1>Schedule-Manager</h1></a></div>
 		<% if @schedule.weeks %>
 			<div class="switcher_container">
 				<div id="switch1" class="switch switch_clicked">Week 1</div>
@@ -8,7 +8,7 @@
 				<div id="switch3" class="switch">All</div>
 			</div>
 		<% end %>
-		<div class="h1_container"><h1><%= @schedule.name %></h1></div>
+		<div class="h1_container h1_name_container"><h1><%= @schedule.name %></h1></div>
 	<% if current_user == @schedule.user %>
 		<div class="control_container">
 			<div class="switch" id="schedule_editing">Edit Lessons</div>

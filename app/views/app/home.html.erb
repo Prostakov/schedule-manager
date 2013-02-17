@@ -1,17 +1,20 @@
 <div class="header">
 	<div class="container">
-		<div class="h1_container"><h1>Schedule-Manager</h1></div>
+		<div class="h1_container"><a class="root" href="<%= root_path %>"><h1>Schedule-Manager</h1></a></div>
 	</div>
 </div>
 <div class="container">
 <h1>Schedule-Manager - solution for universities or schools, where you can keep your schedule.</h1>
 <% unless signed_in? %>
-	<%= form_for :session, url: sessions_path do |f| %>
-		<%= f.text_field :name, placeholder: 'Username' %>
-		<%= f.password_field :password, placeholder: 'Password' %>
-		<%= f.submit 'Sign In' %>
-	<% end %>
-	<%= link_to 'Sign Up', new_user_path %>
+	<div class="sign_form">
+		<h2>Sign In</h2>
+		<%= form_for :session, url: sessions_path do |f| %>
+			<%= f.text_field :name, placeholder: 'Username' %>
+			<%= f.password_field :password, placeholder: 'Password' %>
+			<%= f.submit 'Sign In' %>
+			<%= link_to 'Sign Up', new_user_path %>
+		<% end %>
+	</div>
 <% else %>
 	<div class="user_info">
 		<p class="user">Signed in as<i> <%= @user.name %></i></p>
@@ -57,7 +60,7 @@
 		new_schedule.submit( function() {
 			var name = $('#schedule_name');
 			name.removeClass('red');
-			if ((name.val().length < 3) || (name.val().length > 20)) {
+			if ((name.val().length < 2) || (name.val().length > 6)) {
 				name.addClass('red');
 				return false;
 			}
