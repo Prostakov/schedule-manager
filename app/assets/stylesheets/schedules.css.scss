@@ -157,6 +157,7 @@ table.small_font p {
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
+	z-index: 2;
 }
 #add_item_container label {
 	font-size: 11px;
