@@ -10,8 +10,9 @@ i {
 }
 h1 {
 	font-size: 20px;
-	color: #B94B5D;
+	color: #6A6F63;
 	text-align: center;
+	padding-top: 35px;
 }
 .content {
 	width: 1000px;
@@ -48,9 +49,7 @@ h1 {
 .schedules li>a {
 	padding: 5px 10px;
 	background: #D5D5D5;
-	border: 1px solid #D1AFAF;
-	border-top-color: #EEE;
-	border-bottom-color: #333;
+	border-top: 1px solid #EEE;
 	width: 100%;
 	display: block;
 	color: #8A3232;
@@ -93,7 +92,7 @@ h1 {
 .schedule_new input[type="submit"] {
 	width: 125px;
 	height: 30px;
-	margin: 15px 100px 0 0;
+	margin: 10px 100px 0 0;
 }
 .schedule_new label {
 	font-size: 13px;

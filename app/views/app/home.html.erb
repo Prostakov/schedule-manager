@@ -1,5 +1,9 @@
+<div class="header">
+	<div class="container">
+		<div class="h1_container"><h1>Schedule-Manager</h1></div>
+	</div>
+</div>
 <div class="container">
-	<img src="assets/logo.png" />
 <h1>Schedule-Manager - solution for universities or schools, where you can keep your schedule.</h1>
 <% unless signed_in? %>
 	<%= form_for :session, url: sessions_path do |f| %>
@@ -27,6 +31,7 @@
 		<div class="content_box schedule_new">
 			<%= form_for @schedule, format: :json, remote: true do |f| %>
 				<p class="top">Create new schedule:</p>
+				<%= hidden_field_tag :user, @user.id %>
 				<%= f.label :name %>
 				<%= f.text_field :name %>
 				<%= f.label :weeks, 'Multiple weeks' %>
@@ -39,7 +44,9 @@
 		var new_schedule = $('#new_schedule');
 		new_schedule.bind('ajax:success', function(evt, data, status, xhr) {
     		console.log("ajax:success");
-    		console.log(data);
+    		if (data != "Error") {
+    			$('ul.schedules').append('<li><a href="/schedules/'+data.id+'">'+data.name+'</a></li>');
+    		}
 		});
 	</script>
 <% end %>
