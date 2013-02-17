@@ -111,12 +111,19 @@
 			if (elem.attr('data-id')!='') {
 				if (!elem.hasClass('hidden')) {
 					var top = elem.offset().top,
+						height = elem.height();
 						left = elem.offset().left,
 						id = elem.attr('data-id'),
 						edit = $('<a class="edit_icon editing_icon" href="/items/'+id+'/edit"></a>').appendTo('body'),
 						del = $('<a class="edit_icon delete_icon" href="/items/'+id+'/edit"></a>').appendTo('body');
-					edit.offset({top: top+25, left: left});
-					del.offset({top: top+25, left: left+20});
+					if ((elem.find('p').first().text() == '') && (elem.find('p').last().text() == '')) {
+						edit.offset({top: top+height+15, left: left});
+						del.offset({top: top+height+15, left: left+20});
+					}
+					else {
+						edit.offset({top: top+height, left: left});
+						del.offset({top: top+height, left: left+20});	
+					}
 				}
 			}
 		});
