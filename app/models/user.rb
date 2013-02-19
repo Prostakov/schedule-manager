@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
 
   has_many :schedules, dependent: :destroy
 
+  validates :name, presence: true, length: { within: 3..10 }
+
   before_save :create_remember_token
 
   private
