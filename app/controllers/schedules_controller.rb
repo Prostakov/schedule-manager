@@ -32,7 +32,7 @@ class SchedulesController < ApplicationController
 	end 
 
 	def show
-		@schedule = Schedule.find(params[:id])
+		@schedule = Schedule.find_by_slug(params[:id])
 		@item = @schedule.items.new
 		@items = @schedule.items
 		@items = sort_positions @items
@@ -44,7 +44,7 @@ class SchedulesController < ApplicationController
 	private
 
 	def correct_user
-		@schedule = Schedule.find(params[:id])
+		@schedule = Schedule.find_by_slug(params[:id])
 		@user = @schedule.user
 		unless @user == current_user
 			redirect_to root_path

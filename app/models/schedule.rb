@@ -4,4 +4,16 @@ class Schedule < ActiveRecord::Base
   has_many :items, dependent: :destroy
 
   validates :name, presence: true, length: {minimum: 2, maximum: 6}
+
+  before_save :create_slug
+
+  def to_param
+    name.downcase
+  end
+
+  private
+
+  def create_slug
+  	self.slug = self.name.parameterize
+  end
 end
