@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20130222183513) do
     t.boolean  "weeks",         :default => false
     t.string   "slug"
     t.boolean  "weeks_counter", :default => false
-    t.string   "local_time"
+    t.integer  "local_time"
   end
 
   create_table "users", :force => true do |t|
