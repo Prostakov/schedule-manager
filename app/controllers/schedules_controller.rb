@@ -4,8 +4,14 @@ class SchedulesController < ApplicationController
 	before_filter :correct_user_create, only: :create
 
 	def update
-		@schedule.update_attributes(params[:schedule])
-		redirect_to root_path
+		if params[:counter]
+			if params[:counter] == 'start_counter'
+				@schedule.update_attributes(params[:schedule]) ? respond_schedule(@schedule) : respond_error(@schedule)
+			end
+		else
+			@schedule.update_attributes(params[:schedule])
+			redirect_to root_path
+		end
 	end
 
 	def create

@@ -23,14 +23,20 @@
 			<%= form_for @schedule, remote: true, format: :json do |f| %>
 				<%= hidden_field_tag :counter, 'start_counter' %>
 				<%= f.check_box :weeks_counter, value: true %>
-				<%= f.submit 'Start Counter', class: 'green' %>
+				<%= f.submit 'Start Counter', class: 'green', id:'start_counter' %>
 			<% end %>
 		</div>
 	</div>
 	<script type="text/javascript">
 		$('#schedule_weeks_counter').attr('checked','checked');
-		$('.edit_schedule').last().bind('ajax:success', function(evt, data,status, xhr) {
+		var start_counter = $('.edit_schedule').last(),
+			start_counter_submit = $('#start_counter');
+		start_counter.bind('ajax:success', function(evt, data,status, xhr) {
     		console.log("ajax:success");
+    		start_counter_submit.removeAttr('disabled','disabled');
+    	});
+    	start_counter.submit( function(){
+    		start_counter_submit.attr('disabled','disabled');
     	});
 	</script>
 <% end %>
