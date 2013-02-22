@@ -53,7 +53,7 @@
     		console.log("ajax:success");
     		console.log(data);
     		if (data != "Error") {
-    			$('ul.schedules').append('<li><a href="/schedules/'+data.id+'">'+data.name+'</a><a href="/schedules/'+data.id+'/edit" class="schedule_control_links">Edit</a><a href="/schedules/'+data.id+'" class="schedule_control_links" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a></li>');
+    			$('ul.schedules').append('<li><a href="/schedules/'+data.name.toLowerCase()+'">'+data.name+'</a><a href="/schedules/'+data.name.toLowerCase()+'/edit" class="schedule_control_links">Edit</a><a href="/schedules/'+data.name.toLowerCase()+'" class="schedule_control_links" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a></li>');
     			$('#new_schedule input[type="submit"]').removeAttr('disabled','disabled');
     		}
 		});

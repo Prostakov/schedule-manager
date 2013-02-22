@@ -13,6 +13,24 @@
 		<%= f.submit 'Update schedule' %>
 	<% end %>
 </div>
-<div class="weeks_timer">
-	<p>Week timer is an instrument for tracking your weeks. You just have to input what current week is and it will keep track whether current week is Week1 or Week2. Attention! This timer will be available only for one month. At the end of the month period or at the end of calendar yeah it will automatically turn off.</p>
-</div>
+<% if @schedule.weeks %>
+	<div class="container">
+		<h1 class="left">Weeks counter</h1>
+	</div>
+	<div class="weeks_timer">
+		<p>Week counter is an instrument for tracking your weeks. You just have to input what current week is and it will keep track whether current week is Week1, or Week2. Attention! This counter will be available only for one month. At the end of the month period or at the end of calendar yeah it will automatically turn off.</p>
+		<div class="run_timer">
+			<%= form_for @schedule, remote: true, format: :json do |f| %>
+				<%= hidden_field_tag :counter, 'start_counter' %>
+				<%= f.check_box :weeks_counter, value: true %>
+				<%= f.submit 'Start Counter', class: 'green' %>
+			<% end %>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$('#schedule_weeks_counter').attr('checked','checked');
+		$('.edit_schedule').last().bind('ajax:success', function(evt, data,status, xhr) {
+    		console.log("ajax:success");
+    	});
+	</script>
+<% end %>

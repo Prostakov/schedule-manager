@@ -10,17 +10,7 @@ class SchedulesController < ApplicationController
 
 	def create
 		@schedule = @user.schedules.new(params[:schedule]);
-		if @schedule.save
-			respond_to do |format|
-				format.html { redirect_to @schedule }
-				format.json { render json: @schedule.to_json }
-			end
-		else
-			respond_to do |format|
-				format.html { redirect_to @schedule }
-				format.json { render json: 'Error'.to_json }
-			end			
-		end
+		@schedule.save ? respond_schedule(@schedule) : respond_error(@schedule)
 	end 
 
 	def edit
@@ -56,5 +46,19 @@ class SchedulesController < ApplicationController
 		unless @user == current_user
 			redirect_to root_path
 		end
+	end
+
+	def respond_schedule schedule
+		respond_to do |format|
+			format.html { redirect_to schedule }
+			format.json { render json: schedule.to_json }
+		end
+	end
+
+	def respond_error schedule
+		respond_to do |format|
+			format.html { redirect_to schedule }
+			format.json { render json: 'Error'.to_json }
+		end		
 	end
 end
