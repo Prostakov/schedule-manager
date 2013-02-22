@@ -1,5 +1,5 @@
 class Schedule < ActiveRecord::Base
-  attr_accessible :name, :weeks
+  attr_accessible :name, :weeks, :weeks_counter, :local_time
   belongs_to :user
   has_many :items, dependent: :destroy
 
