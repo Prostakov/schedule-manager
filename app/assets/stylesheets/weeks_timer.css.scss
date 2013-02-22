@@ -1,10 +1,16 @@
+@mixin box_sizing {
+  -moz-box-sizing: border-box; 
+  -webkit-box-sizing: border-box; 
+  box-sizing: border-box;
+}
+
 .weeks_timer {
-  width: 100%;
-  float: left;
+  margin: 50px auto;
+  width: 1000px;
   margin-bottom: 30px;
   background: url(circles.jpg);
   border: 1px solid #333;
-  padding: 20px 38px;
+  padding: 20px 20px;
   @include box_sizing;
 }
 .weeks_timer input, .weeks_timer select, .weeks_timer textarea {
@@ -32,7 +38,7 @@
   background: -webkit-linear-gradient(top, #1F3B08 0%, #627D4D 6%, #627D4D 100%);
   height: 100px;
 }
-.weeks_timer label {
+.weeks_timer label, .weeks_timer p {
   margin: 0 0 0 2px;
   font-size: 14px;
   text-shadow: 0 1px -1px #9ED88D;
@@ -55,7 +61,7 @@
 }
 
 
-/buttons
+/* buttons */
 
 input.green {
   background: #57B43D;
