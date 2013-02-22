@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130222151206) do
+ActiveRecord::Schema.define(:version => 20130222183513) do
 
   create_table "items", :force => true do |t|
     t.string   "name"
@@ -29,10 +29,12 @@ ActiveRecord::Schema.define(:version => 20130222151206) do
   create_table "schedules", :force => true do |t|
     t.string   "name"
     t.integer  "user_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.boolean  "weeks",      :default => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.boolean  "weeks",         :default => false
     t.string   "slug"
+    t.boolean  "weeks_counter", :default => false
+    t.string   "local_time"
   end
 
   create_table "users", :force => true do |t|
