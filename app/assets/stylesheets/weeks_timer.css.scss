@@ -21,16 +21,16 @@
   float: right;
   margin: -45px -175px 0 0;
 }
-.run_timer input[type="submit"] {
+.run_timer input[type="checkbox"] {
+  color: #FFF;
+  display: none;
+}
+.weeks_timer input[type="submit"] {
   color: #FFF;
   width: 150px;
   font-size: 18px;
   height: 40px;
   cursor: pointer;
-}
-.run_timer input[type="checkbox"] {
-  color: #FFF;
-  display: none;
 }
 .weeks_timer input, .weeks_timer select, .weeks_timer textarea {
   margin: 3px 0 10px 0;
@@ -67,6 +67,28 @@
   color: #E4F8DA;
 }
 
+/* form_element */
+
+.form_element {
+  width: 100%;
+  padding: 2px 15px;
+  @include box_sizing;
+}
+.form_element h3 {
+  font-size: 17px;
+  color: #BCFCAC;
+  padding: 20px 0 15px;
+}
+.form_element input[type="radio"] {
+  width: 20px;
+  height: 20px;
+}
+.form_element .radio_label {
+  font-weight: bold;
+  margin: -28px 10px 10px 30px;
+  display: block;
+  color: #263612;
+}
 /* buttons */
 
 input.green {

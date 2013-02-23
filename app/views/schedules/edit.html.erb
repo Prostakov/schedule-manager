@@ -31,12 +31,29 @@
 			<% unless @schedule.weeks_counter %>
 				<%= form_for @schedule, html: {id: 'edit_schedule_counter_1'}, remote: true, format: :json do |f| %>
 					<%= hidden_field_tag :counter, 'start_counter' %>
-					<%= label_tag :current_week_Week1, 'Week 1' %>
-					<%= radio_button_tag :current_week, 'Week1' %>
-					<%= label_tag :current_week_Week2, 'Week 2' %>
-					<%= radio_button_tag :current_week, 'Week2' %>
-					<%= f.check_box :weeks_counter, id: 'schedule_weeks_counter_1', value: true %>
-					<%= f.submit 'Start Counter', class: 'green'%>
+					<div class="form_element">
+						<h3>Choose what current week is:</h3>
+					</div>
+					<div class="form_element">
+						<%= radio_button_tag :current_week, 'Week1' %>
+						<%= label_tag :current_week_Week1, 'Week 1', class:'radio_label' %>
+					</div>
+					<div class="form_element">
+						<%= radio_button_tag :current_week, 'Week2' %>
+						<%= label_tag :current_week_Week2, 'Week 2', class:'radio_label' %>
+					</div>
+					<div class="form_element">
+						<h3>Choose the local time of the schedule</h3>
+					</div>
+					<div class="form_element">
+						<%= f.select :local_time %>
+					</div>
+					<div class="form_element">
+						<%= f.check_box :weeks_counter, id: 'schedule_weeks_counter_1', value: true %>
+					</div>
+					<div class="form_element">
+						<%= f.submit 'Start Counter', class: 'green'%>
+					</div>
 				<% end %>
 			<% else %>
 			<% end %>
@@ -58,6 +75,7 @@
     		start_counter.hide();
     		stop_counter.show();
     		counter_content.slideDown(200);
+    		stop_counter_submit.attr('disabled','disabled');
     	});
     	stop_counter.bind('ajax:success', function(evt, data,status, xhr) {
     		console.log("ajax:success");

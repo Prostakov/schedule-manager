@@ -29,12 +29,12 @@ ActiveRecord::Schema.define(:version => 20130222183513) do
   create_table "schedules", :force => true do |t|
     t.string   "name"
     t.integer  "user_id"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.boolean  "weeks",         :default => false
     t.string   "slug"
     t.boolean  "weeks_counter", :default => false
-    t.integer  "local_time"
+    t.string   "local_time",    :default => "+00:00"
   end
 
   create_table "users", :force => true do |t|
