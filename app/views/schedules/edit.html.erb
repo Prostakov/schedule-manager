@@ -46,7 +46,7 @@
 						<h3>Choose the local time of the schedule</h3>
 					</div>
 					<div class="form_element">
-						<%= f.select :local_time %>
+						<%= f.select :local_time, options_for_select([['UTC-12','-12:00'],['UTC-11','-11:00'],['UTC-10','-10:00'],['UTC-9','-09:00'],['UTC-8','-08:00'],['UTC-7','-07:00'],['UTC-6','-06:00'],['UTC-5','-05:00'],['UTC-4','-04:00'],['UTC-3','-03:00'],['UTC-2','-02:00'],['UTC-1','-01:00'],['UTC+0','+00:00'],['UTC+1','+01:00'],['UTC+2','+02:00'],['UTC+3','+03:00'],['UTC+4','+04:00'],['UTC+5','+05:00'],['UTC+6','+06:00'],['UTC+7','+07:00'],['UTC+8','+08:00'],['UTC+9','+09:00'],['UTC+10','+10:00'],['UTC+11','+11:00'],['UTC+12','+12:00'],['UTC+13','+13:00'],['UTC+14','+14:00'],], ['UTC+0','+00:00']) %>
 					</div>
 					<div class="form_element">
 						<%= f.check_box :weeks_counter, id: 'schedule_weeks_counter_1', value: true %>
