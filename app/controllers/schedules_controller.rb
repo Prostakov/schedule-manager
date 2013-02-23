@@ -7,6 +7,8 @@ class SchedulesController < ApplicationController
 		if params[:counter]
 			if params[:counter] == 'start_counter'
 				@schedule.update_attributes(params[:schedule]) ? respond_schedule(@schedule) : respond_error(@schedule)
+			elsif params[:counter] == 'stop_counter'
+				@schedule.update_attributes(params[:schedule]) ? respond_schedule(@schedule) : respond_error(@schedule)
 			end
 		else
 			@schedule.update_attributes(params[:schedule])
