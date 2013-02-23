@@ -20,22 +20,31 @@
 	<div class="weeks_timer">
 		<p>Week counter is an instrument for tracking your weeks. You just have to input what current week is and it will keep track whether current week is Week1, or Week2. Attention! This counter will be available only for one month. At the end of the month period or at the end of calendar yeah it will automatically turn off.</p>
 		<div class="run_timer">
-			<%= form_for @schedule, html: {id: 'edit_schedule_counter_1'}, remote: true, format: :json do |f| %>
-				<%= hidden_field_tag :counter, 'start_counter' %>
-				<%= f.check_box :weeks_counter, id: 'schedule_weeks_counter_1', value: true %>
-				<%= f.submit 'Start Counter', class: 'green'%>
-			<% end %>
+			<input value="Start Counter" id="start_counter" class="green" type="submit">
 			<%= form_for @schedule, html: {id: 'edit_schedule_counter_2'}, remote: true, format: :json do |f| %>
 				<%= hidden_field_tag :counter, 'stop_counter' %>
 				<%= f.check_box :weeks_counter, id: 'schedule_weeks_counter_2', value: true %>
 				<%= f.submit 'Stop Counter', class: 'redd' %>
 			<% end %>
 		</div>
+		<div class="counter_content">
+			<% unless @schedule.weeks_counter %>
+				<%= form_for @schedule, html: {id: 'edit_schedule_counter_1'}, remote: true, format: :json do |f| %>
+					<%= hidden_field_tag :counter, 'start_counter' %>
+					<%= label_tag :current_week_Week1, 'Week 1' %>
+					<%= radio_button_tag :current_week, 'Week1' %>
+					<%= label_tag :current_week_Week2, 'Week 2' %>
+					<%= radio_button_tag :current_week, 'Week2' %>
+					<%= f.check_box :weeks_counter, id: 'schedule_weeks_counter_1', value: true %>
+					<%= f.submit 'Start Counter', class: 'green'%>
+				<% end %>
+			<% else %>
+			<% end %>
+		</div>
 	</div>
 	<script type="text/javascript">
-		var start_counter = $('#edit_schedule_counter_1'),
-			start_counter_submit = $('#edit_schedule_counter_1 input[type="submit"]'),
-			start_counter_check = $('#schedule_weeks_counter_1').attr('checked','checked'),
+		var start_counter = $('#start_counter'),
+			counter_content = $('.counter_content').hide(),
 			stop_counter = $('#edit_schedule_counter_2'),
 			stop_counter_submit = $('#edit_schedule_counter_2 input[type="submit"]'),
 			stop_counter_check = $('#schedule_weeks_counter_2');
@@ -45,21 +54,17 @@
 		<% else %>
 			stop_counter.hide();
 		<% end %>
-		start_counter.bind('ajax:success', function(evt, data,status, xhr) {
-    		console.log("ajax:success");
-    		start_counter_submit.removeAttr('disabled','disabled');
+		start_counter.on('click', function() {
     		start_counter.hide();
     		stop_counter.show();
-    		stop_counter.removeAttr('checked','checked');
-    	});
-    	start_counter.submit( function(){
-    		start_counter_submit.attr('disabled','disabled');
+    		counter_content.slideDown(200);
     	});
     	stop_counter.bind('ajax:success', function(evt, data,status, xhr) {
     		console.log("ajax:success");
     		stop_counter_submit.removeAttr('disabled','disabled');
     		start_counter.show();
     		stop_counter.hide();
+    		counter_content.slideUp(200);
     	});
     	stop_counter.submit( function(){
     		stop_counter_submit.attr('disabled','disabled');
