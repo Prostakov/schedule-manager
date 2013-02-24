@@ -1,6 +1,4 @@
-<% if @schedule.weeks_counter %>
-	<pre id="def_week" class="hidden"><%= define_week(@schedule) %></pre>
-<% end %>
+<pre id="def_week" class="hidden"><%= define_week(@schedule) if @schedule.weeks_counter %></pre>
 <div class="header">
 	<div class="container">
 		<div class="h1_container"><a class="root" href="<%= root_path %>"><h1>Schedule-Manager</h1></a></div>
@@ -147,7 +145,7 @@
 		}
 		else SetIcons();
 	});
-	switch1.on('click', function(){
+	function gogo1(){
 		switch1.addClass('switch_clicked');
 		switch2.removeClass('switch_clicked');
 		switch3.removeClass('switch_clicked');
@@ -158,8 +156,8 @@
 		week2.removeClass('red');
 		$('table.schedule').removeClass('small_font');
 		if (schedule_editing_clicked) SetIcons();
-	});
-	switch2.on('click', function(){
+	};
+	function gogo2(){
 		switch1.removeClass('switch_clicked');
 		switch3.removeClass('switch_clicked');
 		switch2.addClass('switch_clicked');
@@ -170,6 +168,12 @@
 		week2.removeClass('red');
 		$('table.schedule').removeClass('small_font');
 		if (schedule_editing_clicked) SetIcons();
+	};
+	switch1.on('click', function(){
+		gogo1();
+	});
+	switch2.on('click', function(){
+		gogo2();
 	});
 	function gogo() {
 		switch1.removeClass('switch_clicked');
@@ -261,4 +265,7 @@
 			$('#new_item input[type="submit"]').attr('disabled','disabled');
 		}
 	});
+	var def_week = $('#def_week').text();
+	if (def_week == 'Week 1') gogo1();
+	if (def_week == 'Week 2') gogo2();
 </script>
