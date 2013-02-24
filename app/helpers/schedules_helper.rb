@@ -69,6 +69,9 @@ module SchedulesHelper
 
 
 	def define_week schedule
+		if schedule.weeks_count.nil?
+			return ''
+		end
 		now = Time.now.getlocal(schedule.local_time).to_date
 		current_week = now.strftime("%W").to_i
 		counter_week = schedule.weeks_count
@@ -76,6 +79,9 @@ module SchedulesHelper
 	end
 
 	def define_wrong_week schedule
+		if schedule.weeks_count.nil?
+			return ''
+		end
 		now = Time.now.getlocal(schedule.local_time).to_date
 		current_week = now.strftime("%W").to_i
 		counter_week = schedule.weeks_count
