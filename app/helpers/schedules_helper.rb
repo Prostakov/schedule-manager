@@ -74,4 +74,34 @@ module SchedulesHelper
 		counter_week = schedule.weeks_count
 		current_week%2 == counter_week%2 ? 'Week 1' : 'Week 2'
 	end
+
+	def define_wrong_week schedule
+		now = Time.now.getlocal(schedule.local_time).to_date
+		current_week = now.strftime("%W").to_i
+		counter_week = schedule.weeks_count
+		current_week%2 == counter_week%2 ? 'Week 2' : 'Week 1'
+	end
+
+	def weeks_count_flash_message schedule
+		now = Time.now.getlocal(schedule.local_time).to_date
+		unless now.wday == 0 || now.wday == 6
+			return ''
+		else
+			if now.wday == 6
+				return 'Today is Saturday, the end of '+define_week(schedule)+'. Starting from Monday it will be '+define_wrong_week(schedule)+'.'
+			elsif now.wday == 0
+				return 'Today is Sunday, the end of '+define_week(schedule)+'. Starting from tomorrow it will be '+define_wrong_week(schedule)+'.'
+			end		
+		end
+	end
+
+	def weeks_count_red_flash_message schedule
+		now = Time.now.getlocal(schedule.local_time).to_date
+		current_week = now.strftime("%W").to_i
+		counter_week = schedule.weeks_count
+		if current_week - counter_week == 5
+			return 'This is the last week weeks counter is working. Please update the counter in nearest possible time.'
+		end
+		''
+	end
 end
