@@ -41,9 +41,11 @@ class SchedulesController < ApplicationController
 		if @schedule.weeks_counter
 			now = Time.now.getlocal(@schedule.local_time).to_date
 			week = now.strftime("%W").to_i
-			if week - @schedule.weeks_count > 5 || week - @schedule.weeks_count < 0
-				@schedule.weeks_counter = false
-				@schedule.save
+			unless @schedule.weeks_count.nil?
+				if week - @schedule.weeks_count > 5 || week - @schedule.weeks_count < 0
+					@schedule.weeks_counter = false
+					@schedule.save
+				end
 			end
 		end
 		@item = @schedule.items.new
