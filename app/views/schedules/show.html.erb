@@ -1,3 +1,6 @@
+<% if @schedule.weeks_counter %>
+	<pre id="def_week" class="hidden"><%= define_week(@schedule) %></pre>
+<% end %>
 <div class="header">
 	<div class="container">
 		<div class="h1_container"><a class="root" href="<%= root_path %>"><h1>Schedule-Manager</h1></a></div>

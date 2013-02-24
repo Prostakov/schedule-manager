@@ -1,4 +1,5 @@
 class SchedulesController < ApplicationController
+	require 'date'
 	include SchedulesHelper
 	before_filter :correct_user, only: [:update, :destroy, :edit]
 	before_filter :correct_user_create, only: :create
@@ -6,6 +7,12 @@ class SchedulesController < ApplicationController
 	def update
 		if params[:counter]
 			if params[:counter] == 'start_counter'
+				now = Time.now.getlocal(params[:schedule][:local_time]).to_date
+				if params[:current_week] == 'Week1'
+					@schedule.weeks_count = now.strftime("%W").to_i
+				elsif params[:current_week] == 'Week2'
+					@schedule.weeks_count = now.strftime("%W").to_i - 1
+				end					
 				@schedule.update_attributes(params[:schedule]) ? respond_schedule(@schedule) : respond_error(@schedule)
 			elsif params[:counter] == 'stop_counter'
 				@schedule.update_attributes(params[:schedule]) ? respond_schedule(@schedule) : respond_error(@schedule)

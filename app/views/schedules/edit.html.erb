@@ -55,7 +55,7 @@
 				<% end %>
 			</div>
 			<div class="counter_content_info">
-				<h1>Counter is running. The current week is <b>Week 1</b></h1>
+				<h1>Counter is running. The current week is <b><%= define_week(@schedule) %></b></h1>
 				<h2>UTC<p><%= @schedule.local_time %></p>. Your local time is <p>12:05</p></h2>
 			</div>
 		</div>

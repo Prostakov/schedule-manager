@@ -1,4 +1,5 @@
 module SchedulesHelper
+	require 'date'
 
 	def sort_positions items
 		@result = [nil, [], [], [], [], [], []]
@@ -64,5 +65,13 @@ module SchedulesHelper
 			end
 		end
 		return items
+	end
+
+
+	def define_week schedule
+		now = Time.now.getlocal(schedule.local_time).to_date
+		current_week = now.strftime("%W").to_i
+		counter_week = schedule.weeks_count
+		current_week%2 == counter_week%2 ? 'Week 1' : 'Week 2'
 	end
 end
