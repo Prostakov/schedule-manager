@@ -102,6 +102,9 @@ module SchedulesHelper
 	end
 
 	def weeks_count_red_flash_message schedule
+		if schedule.weeks_count.nil?
+			return ''
+		end
 		now = Time.now.getlocal(schedule.local_time).to_date
 		current_week = now.strftime("%W").to_i
 		counter_week = schedule.weeks_count
