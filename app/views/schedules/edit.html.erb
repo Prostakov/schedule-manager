@@ -18,7 +18,7 @@
 		<h1 class="left">Weeks Counter</h1>
 	</div>
 	<div class="weeks_timer">
-		<p>Week counter is an instrument for tracking your weeks. You just have to input what current week is and it will keep track whether current week is Week1, or Week2. Attention! This counter will be available only for one month. At the end of the month period or at the end of calendar yeah it will automatically turn off.</p>
+		<p>Week counter is an instrument for tracking your weeks. You just have to input what current week is and it will keep track whether current week is Week1, or Week2. Attention! This counter will be available only for 5-6 weeks. At the end of the 5-6 weeks period or at the end of calendar yeah it will automatically turn off.</p>
 		<div class="run_timer">
 			<input value="Start Counter" id="start_counter" class="green" type="submit">
 			<%= form_for @schedule, html: {id: 'edit_schedule_counter_2'}, remote: true, format: :json do |f| %>
@@ -62,8 +62,8 @@
 	</div>
 	<script type="text/javascript">
 		function UpdateInfo(p) {
-			if (p=='run') $('.weeks_timer>p').text('Weeks counter is running. Please, make sure to update the weeks counter at the end of the month period. The owner of the schedule takes all responsibilities for the weeks rendering in the schedule. The weeks counter will stop at the end of month period.');
-			if (p=='info') $('.weeks_timer>p').text('Week counter is an instrument for tracking your weeks. You just have to input what current week is and it will keep track whether current week is Week1, or Week2. Attention! This counter will be available only for one month. At the end of the month period or at the end of calendar yeah it will automatically turn off.');
+			if (p=='run') $('.weeks_timer>p').text('Weeks counter is running. Please, make sure to update the weeks counter at the end of the 5-6 weeks period. The owner of the schedule takes all responsibilities for the weeks rendering in the schedule. The weeks counter will stop at the end of 5-6 weeks period.');
+			if (p=='info') $('.weeks_timer>p').text('Week counter is an instrument for tracking your weeks. You just have to input what current week is and it will keep track whether current week is Week1, or Week2. Attention! This counter will be available only for 5-6 weeks. At the end of the 5-6 weeks period or at the end of calendar yeah it will automatically turn off.');
 		};
 		var start = $('#start_counter'),
 			counter_content = $('.counter_content').hide(),

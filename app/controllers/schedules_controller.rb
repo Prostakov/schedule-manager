@@ -38,6 +38,14 @@ class SchedulesController < ApplicationController
 
 	def show
 		@schedule = Schedule.find_by_slug(params[:id])
+		if @schedule.weeks_counter
+			now = Time.now.getlocal(@schedule.local_time).to_date
+			week = now.strftime("%W").to_i
+			if week - @schedule.weeks_count > 5 || week - @schedule.weeks_count < 0
+				@schedule.weeks_counter = false
+				@schedule.save
+			end
+		end
 		@item = @schedule.items.new
 		@items = @schedule.items
 		@items = sort_positions @items
