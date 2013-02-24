@@ -271,23 +271,25 @@
 			$('#new_item input[type="submit"]').attr('disabled','disabled');
 		}
 	});
-	var def_week = $('#def_week').text(),
-		flash = $('#flash'),
-		flash_red = $('#flash_red');
-	if (def_week == 'Week 1') gogo1();
-	if (def_week == 'Week 2') gogo2();
-	if (flash.find('h1').text() != '') {
-		flash.delay(1500).slideDown(800 ,function() {flash.addClass('shadow')});
-	};
-	flash.on('click', function(){
-		flash.removeClass('shadow');
-		flash.slideUp(800);
-		if (flash_red.find('h1').text() != '') {
-			flash_red.delay(3000).slideDown(800 ,function() {flash.addClass('shadow')});
+	<% if @schedule.weeks_counter %>
+		var def_week = $('#def_week').text(),
+			flash = $('#flash'),
+			flash_red = $('#flash_red');
+		if (def_week == 'Week 1') gogo1();
+		if (def_week == 'Week 2') gogo2();
+		if (flash.find('h1').text() != '') {
+			flash.delay(1500).slideDown(800 ,function() {flash.addClass('shadow')});
 		};
-	});
-	flash_red.on('click', function(){
-		flash_red.removeClass('shadow');
-		flash_red.slideUp(800);
-	});
+		flash.on('click', function(){
+			flash.removeClass('shadow');
+			flash.slideUp(800);
+			if (flash_red.find('h1').text() != '') {
+				flash_red.delay(3000).slideDown(800 ,function() {flash.addClass('shadow')});
+			};
+		});
+		flash_red.on('click', function(){
+			flash_red.removeClass('shadow');
+			flash_red.slideUp(800);
+		});
+	<% end %>
 </script>
