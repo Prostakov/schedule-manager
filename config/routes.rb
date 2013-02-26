@@ -3,7 +3,7 @@ ScheduleManager::Application.routes.draw do
     root    to: 'app#home'
 
     resources :sessions, only: [:new,:create,:destroy]
-    resources :users, only: [:new,:create]
+    resources :users, only: [:new,:create,:edit,:update]
     resources :schedules, only: [:new,:create,:destroy,:index,:show,:update,:edit]
     resources :items, only: [:show,:create,:edit,:destroy,:update]
 

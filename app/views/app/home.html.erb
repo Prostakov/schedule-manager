@@ -18,6 +18,7 @@
 <% else %>
 	<div class="user_info">
 		<p class="user">Signed in as<i> <%= @user.name %></i></p>
+		<%= link_to 'Change Password', edit_user_path(@user) %><br/>
 		<%= link_to 'Sign Out', signout_path, method: "delete" %>
 	</div>
 	<div class="content">
