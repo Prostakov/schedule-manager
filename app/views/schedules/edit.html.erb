@@ -13,6 +13,24 @@
 		<%= f.submit 'Update schedule' %>
 	<% end %>
 </div>
+<div class="container">
+	<h1>Set lessons hours</h1>
+	<%= form_for @schedule do |f| %>
+		<%= f.label :lesson1 %>
+		<%= f.text_field :lesson1 %>
+		<%= f.label :lesson2 %>
+		<%= f.text_field :lesson2 %>
+		<%= f.label :lesson3 %>
+		<%= f.text_field :lesson3 %>
+		<%= f.label :lesson4 %>
+		<%= f.text_field :lesson4 %>
+		<%= f.label :lesson5 %>
+		<%= f.text_field :lesson5 %>
+		<%= f.label :lesson6 %>
+		<%= f.text_field :lesson6 %>
+		<%= f.submit %>
+	<% end %>
+</div>
 <% if @schedule.weeks %>
 	<div class="container">
 		<h1 class="left">Weeks Counter</h1>
