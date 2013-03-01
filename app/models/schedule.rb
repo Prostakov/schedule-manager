@@ -3,9 +3,17 @@ class Schedule < ActiveRecord::Base
   belongs_to :user
   has_many :items, dependent: :destroy
 
-  validates :name, presence: true, length: {minimum: 2, maximum: 6}, uniqueness: {case_sensitive: false}
-
   before_save :create_slug
+
+  VALID_LESSON_REGEX = /\A\d{2}:\d{2}\s-\s\d{2}:\d{2}\z/
+
+  validates :name, presence: true, length: {minimum: 2, maximum: 6}, uniqueness: {case_sensitive: false}
+  validates :lesson1, format: { with: VALID_LESSON_REGEX }
+  validates :lesson2, format: { with: VALID_LESSON_REGEX }
+  validates :lesson3, format: { with: VALID_LESSON_REGEX }
+  validates :lesson4, format: { with: VALID_LESSON_REGEX }
+  validates :lesson5, format: { with: VALID_LESSON_REGEX }
+  validates :lesson6, format: { with: VALID_LESSON_REGEX }
 
   def to_param
     name.downcase
