@@ -5,9 +5,15 @@ class Schedule < ActiveRecord::Base
 
   before_save :create_slug
 
-  VALID_LESSON_REGEX1 = /\A\d{2}:\d{2}\s-\s\d{2}:\d{2}\z/
+  VALID_LESSON_REGEX = /\A\d{2}:\d{2}\s-\s\d{2}:\d{2}\z/
 
   validates :name, presence: true, length: {minimum: 2, maximum: 6}, uniqueness: {case_sensitive: false}
+  validates_format_of :lesson1, with: VALID_LESSON_REGEX, allow_blank: true
+  validates_format_of :lesson2, with: VALID_LESSON_REGEX, allow_blank: true
+  validates_format_of :lesson3, with: VALID_LESSON_REGEX, allow_blank: true
+  validates_format_of :lesson4, with: VALID_LESSON_REGEX, allow_blank: true
+  validates_format_of :lesson5, with: VALID_LESSON_REGEX, allow_blank: true
+  validates_format_of :lesson6, with: VALID_LESSON_REGEX, allow_blank: true
 
   def to_param
     name.downcase
