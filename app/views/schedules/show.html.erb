@@ -224,7 +224,6 @@
 		gogo();
 		if (schedule_editing_clicked) SetIcons();
 	});
-	$('.schedule>*>tr').last().css('display','none');
 	gogo();
 
 	//bind items create ajax
@@ -276,6 +275,7 @@
 			$('#new_item input[type="submit"]').attr('disabled','disabled');
 		}
 	});
+	$('.schedule>*>tr').last().css('display','none');
 	<% if @schedule.weeks_counter %>
 		var def_week = $('#def_week').text(),
 			flash = $('#flash'),
