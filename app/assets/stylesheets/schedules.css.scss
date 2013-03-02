@@ -123,6 +123,7 @@ th {
 td.first_column {
 	width: 2%;
 	border-left: 1px solid #ACACAC;	
+	padding: 0 4px;
 }
 .schedule h3 {
 	color: #915050;
@@ -280,4 +281,20 @@ div.shadow {
 }
 #edit_lessons {
 	margin-top: 10px;
+}
+
+.rotate {
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+
+  /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  width: 100px;
 }

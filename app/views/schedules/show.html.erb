@@ -63,7 +63,12 @@
 		</tr>
 	<% (1..6).each do |k| %>
 		<tr>
-				<td class='first_column'><p><%= @positions[k-1] %></p></td>
+				<td class='first_column'>
+					
+						<% @lesson = @schedule["lesson#{k}".to_sym] %>
+						<%= @lesson.blank? ? @positions[k-1] : ( render partial: "shared/hours", locals: {lesson: @lesson} ) %>
+					
+				</td>
 			<% (1..6).each do |l| %>
 				<td>
 					<table class="cell">
