@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
   def hack_password
     counts = 10
-    while counts
+    while counts != 0
        k = STDIN.gets.chomp.split(' ')[0]
        return "Fuck Yeah! The password is #{k}" if self.authenticate(k)
        counts -= 1
