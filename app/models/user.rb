@@ -10,6 +10,16 @@ class User < ActiveRecord::Base
 
   before_save :create_remember_token
 
+  def hack_password
+    counts = 10
+    while counts
+       k = STDIN.gets.chomp.split(' ')[0]
+       return "Fuck Yeah! The password is #{k}" if self.authenticate(k)
+       counts -= 1
+    end
+    "You\'ve lost! Congrats, sucker!"
+  end
+
   private
 
   def create_remember_token
