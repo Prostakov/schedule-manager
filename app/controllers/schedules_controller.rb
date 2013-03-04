@@ -37,14 +37,7 @@ class SchedulesController < ApplicationController
 	end 
 
 	def show
-		if Schedule.find_by_slug(params[:id])
-			@schedule = Schedule.find_by_slug(params[:id])
-		elsif Schedule.find_by_id(params[:id])
-		 	@schedule = Schedule.find_by_id(params[:id])
-		 	redirect_to @schedule
-		else
-			render_404
-		end
+		@schedule = Schedule.find_by_slug(params[:id])
 		if @schedule.weeks_counter
 			now = Time.now.getlocal(@schedule.local_time).to_date
 			week = now.strftime("%W").to_i
