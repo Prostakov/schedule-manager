@@ -115,6 +115,7 @@
 	    week1 = $('td.week1'),
 	    week2 = $('td.week2'),
 	    new_item = $('#new_item'),
+	    first_column = $('.first_column');
 	    schedule_editing_clicked = false;
 	function SetIcons() {
 		$('.edit_icon').remove();
@@ -166,6 +167,7 @@
 		week1.removeClass('grey');
 		week2.removeClass('red');
 		$('table.schedule').removeClass('small_font');
+		first_column.addClass('whiteSmoke');
 		if (schedule_editing_clicked) SetIcons();
 	};
 	function gogo2(){
@@ -178,6 +180,7 @@
 		week1.removeClass('grey');
 		week2.removeClass('red');
 		$('table.schedule').removeClass('small_font');
+		first_column.addClass('whiteSmoke');
 		if (schedule_editing_clicked) SetIcons();
 	};
 	switch1.on('click', function(){
@@ -187,6 +190,7 @@
 		gogo2();
 	});
 	function gogo() {
+		first_column.removeClass('whiteSmoke');
 		switch1.removeClass('switch_clicked');
 		switch2.removeClass('switch_clicked');
 		switch3.addClass('switch_clicked');
