@@ -1,49 +1,4 @@
 <pre id="def_week" class="hidden"><%= define_week(@schedule) if @schedule.weeks_counter %></pre>
-<div class="header">
-	<div class="container">
-		<div class="h1_container"><a class="root" href="<%= root_path %>"><h1>Schedule-Manager</h1></a></div>
-		<% if @schedule.weeks %>
-			<div class="switcher_container">
-				<div id="switch1" class="switch switch_clicked"><p>Week 1</p></div>
-				<div id="switch2" class="switch"><p>Week 2</p></div>
-				<div id="switch3" class="switch"><p>All</p></div>
-			</div>
-		<% end %>
-		<div class="h1_container h1_name_container"><h1><%= @schedule.name %></h1></div>
-	<% if current_user == @schedule.user %>
-		<div class="control_container">
-			<div class="switch" id="schedule_editing">Edit Lessons</div>
-			<div class="switch" id="add_item">Add Lesson</div>
-		</div>
-		<div id="add_item_container" class="hidden">
-			<%= form_for @item, format: :json, remote: true do |f| %>
-				<%= hidden_field_tag :schedule, @schedule.id %>
-				<%= f.label :name %>
-				<%= f.text_field :name %>
-				<%= f.label :teacher %>
-				<%= f.text_field :teacher %>
-				<%= f.label :location %>
-				<%= f.text_field :location %>
-				<%= f.label :position, 'Lesson #' %>
-				<%= f.select :position, (1..5) %>
-				<%= f.label :day %>
-				<%= f.select :day, [['Monday',1],['Tuesday',2],['Wednesday',3],['Thursday',4],['Friday',5],['Saturday',6]] %>
-				<% if @schedule.weeks %>
-					<div class='weeks'>
-						<%= f.label :week1, 'Week 1:' %>
-						<%= f.check_box :week1 %>
-					</div>
-					<div class="weeks">
-						<%= f.label :week2, 'Week 2:' %>
-						<%= f.check_box :week2 %>
-					</div>
-				<% end %>
-				<%= f.submit 'Create lesson' %>
-			<% end %>
-		</div>
-	<% end %>
-	</div>
-</div>
 <div class="flash_message", id="flash">
 	<h1><%= weeks_count_flash_message(@schedule) %></h1>
 </div>
