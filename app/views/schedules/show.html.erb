@@ -5,6 +5,37 @@
 <div class="flash_message", id="flash_red">
 	<h1><%= weeks_count_red_flash_message(@schedule) if @schedule.user == current_user %></h1>
 </div>
+<% if current_user == @schedule.user %>
+<div id="add_item_container" class="hidden">
+	<div class="container">
+	<h1 class="red_h1">Add Lesson:</h1>
+	<%= form_for @item, format: :json, remote: true do |f| %>
+		<%= hidden_field_tag :schedule, @schedule.id %>
+		<%= f.label :name %>
+		<%= f.text_field :name %>
+		<%= f.label :teacher %>
+		<%= f.text_field :teacher %>
+		<%= f.label :location %>
+		<%= f.text_field :location %>
+		<%= f.label :position, 'Lesson #' %>
+		<%= f.select :position, (1..5) %>
+		<%= f.label :day %>
+		<%= f.select :day, [['Monday',1],['Tuesday',2],['Wednesday',3],['Thursday',4],['Friday',5],['Saturday',6]] %>
+		<% if @schedule.weeks %>
+			<div class='weeks'>
+				<%= f.label :week1, 'Week 1:' %>
+				<%= f.check_box :week1 %>
+			</div>
+			<div class="weeks">
+				<%= f.label :week2, 'Week 2:' %>
+				<%= f.check_box :week2 %>
+			</div>
+		<% end %>
+		<%= f.submit 'Create lesson' %>
+	<% end %>
+	</div>
+</div>
+<% end %>
 <div class="container">
 <table class='schedule'>
 		<tr>
@@ -99,10 +130,7 @@
 	};
 	add_item.on('click', function(){
 		add_item.toggleClass('switch_clicked');
-		add_item_container.toggleClass('hidden');
-		var right = $(document).width()-add_item.width()-add_item.offset().left-46;
-		right = right.toFixed()+'px'
-		add_item_container.css('right',right);
+		add_item_container.slideToggle(200);
 	});
 	schedule_editing.on('click', function(){
 		schedule_editing.toggleClass('switch_clicked');

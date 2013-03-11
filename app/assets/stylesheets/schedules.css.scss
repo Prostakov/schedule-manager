@@ -4,6 +4,7 @@
 }
 body {
 	min-width: 1000px;
+	overflow-y: scroll;
 }
 .left {
 	text-align: left;
@@ -170,17 +171,15 @@ table.small_font p {
 	margin-right: 15px;
 }
 #add_item_container {
-	width: 300px;
-	border: 1px solid #666;
-	border-bottom: 2px solid #666;
-	background: #FFF;
-	position: absolute;
-	top: 50px;
+	width: 100%;
+	margin: 30px 0;
+	border-top: 1px solid #AAA;
+	border-bottom: 1px solid #CCC;
+	background: url(brillant.png);
 	overflow: hidden;
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
-	z-index: 2;
 }
 #add_item_container label {
 	font-size: 11px;
@@ -292,4 +291,13 @@ div.shadow {
 }
 #edit_lessons {
 	margin-top: 10px;
+}
+h1.red_h1 {
+	color: #C75959;
+	text-align: left;
+	text-shadow: #000 1px 1px 1px;
+	font-weight: initial;
+	font-size: 22px;
+	margin-left: 20px;
+	padding: 15px 0;
 }
