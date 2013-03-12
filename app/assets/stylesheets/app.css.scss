@@ -125,7 +125,6 @@ h2 {
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	font-size: 20px;
-
 }
 .sign_form input[type="submit"] {
 	width: 100px;
@@ -136,4 +135,27 @@ h2 {
 	float: right;
 	margin-top: 5px;
 	margin-right: 7px;
+}
+#error_message {
+	padding: 15px;
+	position: absolute;
+	display: block;
+	border: 2px solid #915454;
+	background: #FFECEC;
+	margin-top: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	top: 0;
+	text-align: center;
+	width: 500px;
+	cursor: pointer;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+#error_message>p{
+	font-size: 20px;
+	color: #B44848;
 }
