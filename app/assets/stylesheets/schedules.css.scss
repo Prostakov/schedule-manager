@@ -181,38 +181,54 @@ table.small_font p {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 }
+#add_item_container .front_row_item {
+	width: 33%;
+	float: left;
+}
+#add_item_container .bottom_row_item {
+	width: 200px;
+	float: left;
+	margin-top: 35px;
+}
 #add_item_container label {
-	font-size: 11px;
+	font-size: 16px;
 	color: #777;
 	margin-left: 25px;
 }
 #add_item_container input {
 	width: 250px;
-	margin: 0 25px 15px;
+	margin: 0 20px 15px;
 	padding: 2px 0;
 	font-size: 18px;
 }
 .weeks {
 	padding-top: 5px;
 	float: left;
-	width: 150px;
-	margin-top: 10px;
+	width: 125px;
+	margin-top: 30px;
+}
+.weeks_container {
+	margin: 0 75px;
+	float: left;
+}
+#add_item_container select {
+	padding: 5px 2px;
+	margin-left: 10px;
 }
 #add_item_container .weeks label {
-	font-size: 12px;	
 	display: block;
 	float: left;
 	padding: 3px 7px 0 0;
 }
 #add_item_container .weeks input {
 	margin: 0;
-	width: 20px;
-	height: 20px;
+	width: 25px;
+	height: 25px;
 }
 #add_item_container input[type="submit"] {
-	width: 98px;
+	width: 140px;
 	padding: 5px 0;
-	margin: 30px 10px 30px 25px;
+	margin: 30px 10px 30px -5px;
 	font-size: 13px;
 }
 #item_day {
@@ -293,9 +309,8 @@ div.shadow {
 	margin-top: 10px;
 }
 h1.red_h1 {
-	color: #C75959;
+	color: #CE9494;
 	text-align: left;
-	text-shadow: #000 1px 1px 1px;
 	font-weight: initial;
 	font-size: 22px;
 	margin-left: 20px;
