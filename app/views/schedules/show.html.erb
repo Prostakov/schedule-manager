@@ -115,6 +115,10 @@
 	    new_item = $('#new_item'),
 	    first_column = $('.first_column');
 	    schedule_editing_clicked = false;
+	function RenderError(msg) {
+		$('#error_message>p').text(msg);
+		$('#error_message').fadeIn(200);
+	};
 	function SetIcons() {
 		$('.edit_icon').remove();
 		$.each($('table.schedule table.cell>*>*>td'), function(index, value){
@@ -254,7 +258,13 @@
     		$('#new_item input[type="submit"]').removeAttr('disabled','disabled');
 			add_item.removeClass('switch_clicked');
 			add_item_container.addClass('hidden');
-    	};
+    	}
+    	else {
+    		if (data == 'Error') {
+    			RenderError('ERROR! Something went wrong!');
+    			$('#new_item input[type="submit"]').removeAttr('disabled','disabled');
+    		}
+    	}
 	});
 	new_item.submit( function(){
 		var weeks = $('.weeks'),

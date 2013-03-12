@@ -33,5 +33,11 @@
 <div id="error_message" style="display: none">
   <p></p>
 </div>
+<script type="text/javascript">
+  var error_message = $('#error_message');
+  error_message.on('click', function(){
+    error_message.fadeOut(200);
+  });
+</script>
 </body>
 </html>
