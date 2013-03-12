@@ -43,7 +43,8 @@
 				</div>
 			</div>
 		<% end %>
-		<%= f.submit 'Create lesson' %>
+		<%= f.submit 'Create lesson', class: 'lesson_form_button' %>
+		<input type="button" id="close" value="Close" />
 	<% end %>
 	</div>
 </div>
@@ -145,9 +146,11 @@
 		schedule_editing_clicked = true;
 	};
 	add_item.on('click', function(){
-		add_item.toggleClass('switch_clicked');
-		add_item_container.slideToggle(200);
+		add_item_container.slideDown(200);
 	});
+	$('#close').on('click', function(){
+		add_item_container.slideUp(200);
+	})
 	schedule_editing.on('click', function(){
 		schedule_editing.toggleClass('switch_clicked');
 		if (schedule_editing_clicked) {
