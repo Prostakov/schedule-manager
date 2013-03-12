@@ -159,3 +159,14 @@ h2 {
 	font-size: 20px;
 	color: #B44848;
 }
+#settings {
+	float: right;
+	background: url(setup.png);
+	cursor: pointer;
+	width: 29px;
+	height: 31px;
+	margin: 8px 25px 0 0;
+}
+#settings:hover {
+	background: url(setup_hover.png);
+}
