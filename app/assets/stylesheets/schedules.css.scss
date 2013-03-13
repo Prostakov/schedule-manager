@@ -1,11 +1,3 @@
-* {
-	margin: 0;
-	padding: 0;
-}
-body {
-	min-width: 1000px;
-	overflow-y: scroll;
-}
 .left {
 	text-align: left;
 }
@@ -161,6 +153,7 @@ table.cell td.padding10 {
 table.small_font h3 {
 	font-size: 12px;
 	font-weight: initial;
+	color: #720C0C;
 }
 table.small_font p {
 	font-size: 11px;
