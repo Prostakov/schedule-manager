@@ -58,14 +58,14 @@
     //sunday feature
       var sunf_control = $('#sunf_control'),
           sunf_control_check = document.getElementById("sunf_control_check");
-      if ($.cookie('sunf') == "true") sunf_control_check.prop("checked", "checked");
+      if ($.cookie('sunf') == "true") sunf_control_check.checked=true;
       function sunf_set(){
         if ($.cookie('sunf') == "true") {
-          $.cookie('sunf','false');
+          $.cookie('sunf','false', { expires: 360 });
           sunf_control_check.checked=false;
         }
         else {
-          $.cookie('sunf','true');
+          $.cookie('sunf','true', { expires: 360 });
           sunf_control_check.checked=true;
         }
       };
