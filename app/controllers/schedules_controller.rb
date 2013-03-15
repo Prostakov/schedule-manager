@@ -53,6 +53,7 @@ class SchedulesController < ApplicationController
 		@items = sort_positions @items
 		@items = sort_days @items
 		@items = sort_weeks @items
+		@day = Time.now.getlocal(@schedule.local_time).wday
 		@positions = ['I','II','III','IV','V','VI']
 	end
 

@@ -1,8 +1,9 @@
 <pre id="def_week" class="hidden"><%= define_week(@schedule) if @schedule.weeks_counter %></pre>
-<div class="flash_message", id="flash">
+<pre id="def_day" class="hidden"><%= @day %></pre>
+<div class="flash_message" id="flash">
 	<h1><%= weeks_count_flash_message(@schedule) %></h1>
 </div>
-<div class="flash_message", id="flash_red">
+<div class="flash_message" id="flash_red">
 	<h1><%= weeks_count_red_flash_message(@schedule) if @schedule.user == current_user %></h1>
 </div>
 <% if current_user == @schedule.user %>

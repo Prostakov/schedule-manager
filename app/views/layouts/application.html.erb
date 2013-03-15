@@ -30,10 +30,11 @@
     <div id="settings_container" style="display: none;">
       <div class="blip"></div>
       <ul id="settings_nav">
-        <li>Start week from Sunday<input type="checkbox" disabled="disabled"/></li>
+        <li id="sunf_control">Start week from Sunday<input id="sunf_control_check" type="checkbox"/></li>
       </ul>
     </div>
     <script type="text/javascript">
+    //settings container switch
       var settings = $('#settings'),
           settings_container = $('#settings_container'),
           on_flag = false;
@@ -51,6 +52,25 @@
         }
         settings_container.hide();
       });
+    //end
+    //sunday feature
+      var sunf_control = $('#sunf_control'),
+          sunf_control_check = $('#sunf_control_check');
+      if ($.cookie('sunf') == "true") sunf_control_check.attr('checked', 'checked');
+      function sunf_set(){
+        if ($.cookie('sunf') == "true") {
+          $.cookie('sunf','false');
+          sunf_control_check.removeAttr('checked');
+        }
+        else {
+          $.cookie('sunf','true');
+          sunf_control_check.attr('checked', 'checked');
+        }
+      };
+      sunf_control.on('click', function(){
+        sunf_set();
+      });
+    //end
     </script>
     <%= render partial: "shared/header_schedule" if params[:controller]=='schedules' && params[:action]=='show' %>
   </div>
