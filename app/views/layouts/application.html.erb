@@ -55,16 +55,16 @@
     //end
     //sunday feature
       var sunf_control = $('#sunf_control'),
-          sunf_control_check = $('#sunf_control_check');
-      if ($.cookie('sunf') == "true") sunf_control_check.attr('checked', 'checked');
+          sunf_control_check = document.getElementById("sunf_control_check");
+      if ($.cookie('sunf') == "true") sunf_control_check.prop("checked", "checked");
       function sunf_set(){
         if ($.cookie('sunf') == "true") {
           $.cookie('sunf','false');
-          sunf_control_check.removeAttr('checked');
+          sunf_control_check.checked=false;
         }
         else {
           $.cookie('sunf','true');
-          sunf_control_check.attr('checked', 'checked');
+          sunf_control_check.checked=true;
         }
       };
       sunf_control.on('click', function(){
