@@ -297,3 +297,10 @@ h1.red_h1 {
 	margin-left: 20px;
 	padding: 15px 0;
 }
+.absolute_container {
+	position: absolute;
+	width: 80%;
+	min-width: 1000px;
+	right: auto;
+	left: auto;
+}
