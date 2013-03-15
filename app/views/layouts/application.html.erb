@@ -27,9 +27,10 @@
   <div class="container">
     <div class="h1_container"><a class="root" href="<%= root_path %>"></a></div>
     <div id="settings"></div>
-    <div class="settings_container">
+    <div id="settings_container">
       <div class="blip"></div>
       <ul id="settings_nav">
+        <li>Start week from Sunday<input type="checkbox" /></li>
       </ul>
     </div>
     <%= render partial: "shared/header_schedule" if params[:controller]=='schedules' && params[:action]=='show' %>

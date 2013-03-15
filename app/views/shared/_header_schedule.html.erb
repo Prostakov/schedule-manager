@@ -6,8 +6,9 @@
 	</div>
 <% end %>
 <% if current_user == @schedule.user %>
-	<div class="control_container">
-		<div class="switch" id="schedule_editing"><p>Edit Lessons</p></div>
-		<div class="switch" id="add_item"><p>Add Lesson</p></div>
-	</div>
+	<script type="text/javascript">
+		var settings_nav = $('#settings_nav');
+		settings_nav.append('<li id="schedule_editing">Edit Lessons</li>');
+		settings_nav.append('<li id="add_item">Add Lesson</li>');
+	</script>
 <% end %>
