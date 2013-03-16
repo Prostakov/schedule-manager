@@ -49,7 +49,7 @@
 	<% end %>
 	</div>
 </div>
-<div id="edit_item_container">
+<div id="edit_item_container" class="form_container">
 </div>
 <% end %>
 <div class="container" id="main_container">
@@ -135,7 +135,11 @@
 				if (!elem.hasClass('hidden')) {
 					var cell = elem.closest('table.cell').parent(),
 						id = elem.attr('data-id'),
-						edit_lesson = $('<div style="display: none;" class="edit_lessons"><div class="edit_lessons_wrapper"><div class="edit_lessons_inner"><div class="edit_icon" onclick="RenderLessonEdit('+id+')"></div><a class="delete_icon" href="/items/'+id+'" data-confirm="Are you sure?" data-method="delete" rel="nofollow"></a></div></div></div>').appendTo('#main_container');
+						edit_lesson = $('<div style="display: none;" class="edit_lessons"><div class="edit_lessons_wrapper"><div class="edit_lessons_inner"><a class="edit_icon" href="/items/'+id+'/edit.js" data-remote="true"></a><a class="delete_icon" href="/items/'+id+'" data-confirm="Are you sure?" data-method="delete" rel="nofollow"></a></div></div></div>').appendTo('#main_container'),
+						edit_icon = edit_lesson.find('a.edit_icon');
+					edit_icon.bind('ajax:success', function(evt, data, status, xhr) {
+						console.log('data');
+					});
 					if (switch3.hasClass('switch_clicked')) {
 						edit_lesson.offset({top: elem.offset().top-ctop, left:elem.offset().left-cleft });
 						edit_lesson.height(elem.height()+20);
@@ -293,7 +297,6 @@
 			return false;
 		}
 		else {
-			true;
 			$('#new_item input[type="submit"]').attr('disabled','disabled');
 		}
 	});

@@ -29,11 +29,10 @@ class ItemsController < ApplicationController
 	end
 
 	def edit
+	  @item = Item.find(params[:id])
+	  @schedule = @item.schedule
 	  respond_to do |format|
-	  	format.html do
-	      @item = Item.find(params[:id])
-	      @schedule = @item.schedule
-	    end
+	  	format.html
 	    format.js
 	  end
 	end
