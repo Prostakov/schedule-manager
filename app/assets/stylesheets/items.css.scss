@@ -50,15 +50,33 @@
 }
 .edit_lessons {
 	position: absolute;
-	display: block;
-	width: 20px;
-	height: 20px;
+	width: 100px;
+	height: 100px;
+	background: rgba(221, 221, 221, 0.5);
+	display: table;
+}
+.edit_lessons_wrapper {
+	display: table-cell;
+	vertical-align: middle;
+}
+.edit_lessons_inner {
+	width: 80px;
+	height: 40px;
+	margin: auto;
 }
 .edit_icon {
-	background: url(edit.png) 2px 0 no-repeat;
+	width: 40px;
+	height: 40px;
+	float: left;
+	background-color: aqua;
+/*	background-image: url(edit.png) 2px 0 no-repeat;*/
 }
 .delete_icon {
-	background: url(delete.gif) 2px 2px no-repeat;
+	width: 40px;
+	height: 40px;
+	float: left;
+	background-color: yellow;
+/*	background-image: url(delete.gif) 2px 2px no-repeat;*/
 }
 .form_container #schedule_weeks {
 	width: 20px;

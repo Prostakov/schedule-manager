@@ -115,6 +115,7 @@
 	    week1 = $('td.week1'),
 	    week2 = $('td.week2'),
 	    new_item = $('#new_item'),
+	    settings_container = $('#settings_container'),
 	    first_column = $('.first_column');
 	    schedule_editing_clicked = false;
 	function RenderError(msg) {
@@ -127,21 +128,20 @@
 			elem = $(value);
 			if (elem.attr('data-id')!='') {
 				if (!elem.hasClass('hidden')) {
-					var top = elem.offset().top,
-						left = elem.offset().left,
-						height = elem.height(),
-						width = elem.width(),
+					var cell = elem.closest('table.cell').parent(),
 						id = elem.attr('data-id'),
-						edit = $('<a class="edit_lessons edit_icon" href="/items/'+id+'/edit"></a>').appendTo('body'),
-						del = $('<a class="edit_lessons delete_icon" href="/items/'+id+'" data-confirm="Are you sure?" data-method="delete" rel="nofollow"></a>').appendTo('body');
-					if ((elem.find('p').first().text() == '') && (elem.find('p').last().text() == '')) {
-						edit.offset({top: top+height+15, left: left});
-						del.offset({top: top+height+15, left: left+20});
+						edit_lesson = $('<div style="display: none;" class="edit_lessons"><div class="edit_lessons_wrapper"><div class="edit_lessons_inner"><a class="edit_icon" href="/items/'+id+'/edit"></a><a class="delete_icon" href="/items/'+id+'" data-confirm="Are you sure?" data-method="delete" rel="nofollow"></a></div></div></div>').appendTo('body');
+					if (switch3.hasClass('switch_clicked')) {
+						edit_lesson.offset({top: elem.offset().top, left:elem.offset().left });
+						edit_lesson.height(elem.height()+20);
+						edit_lesson.width(elem.width()+20);
 					}
 					else {
-						edit.offset({top: top+height, left: left});
-						del.offset({top: top+height, left: left+20});	
+						edit_lesson.offset({top: cell.offset().top, left:cell.offset().left });
+						edit_lesson.height(cell.height());
+						edit_lesson.width(cell.width());
 					}
+					edit_lesson.fadeIn(300);
 				}
 			}
 		});
@@ -156,9 +156,13 @@
 	schedule_editing.on('click', function(){
 		if (schedule_editing_clicked) {
 			$('.edit_lessons').remove();
+			settings_container.hide();
 			schedule_editing_clicked = false;
 		}
-		else SetIcons();
+		else { 
+			settings_container.hide();
+			SetIcons();
+		}
 	});
 	function gogo1(){
 		switch1.addClass('switch_clicked');
