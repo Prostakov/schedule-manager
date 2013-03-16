@@ -50,7 +50,7 @@
 	</div>
 </div>
 <% end %>
-<div class="container">
+<div class="container" id="main_container">
 <table class='schedule'>
 		<tr>
 			<th></th>
@@ -124,20 +124,22 @@
 	};
 	function SetIcons() {
 		$('.edit_lessons').remove();
+		var cleft = $('#main_container').offset().left,
+			ctop = $('#main_container').offset().top;
 		$.each($('table.schedule table.cell>*>*>td'), function(index, value){
 			elem = $(value);
 			if (elem.attr('data-id')!='') {
 				if (!elem.hasClass('hidden')) {
 					var cell = elem.closest('table.cell').parent(),
 						id = elem.attr('data-id'),
-						edit_lesson = $('<div style="display: none;" class="edit_lessons"><div class="edit_lessons_wrapper"><div class="edit_lessons_inner"><a class="edit_icon" href="/items/'+id+'/edit"></a><a class="delete_icon" href="/items/'+id+'" data-confirm="Are you sure?" data-method="delete" rel="nofollow"></a></div></div></div>').appendTo('body');
+						edit_lesson = $('<div style="display: none;" class="edit_lessons"><div class="edit_lessons_wrapper"><div class="edit_lessons_inner"><a class="edit_icon" href="/items/'+id+'/edit"></a><a class="delete_icon" href="/items/'+id+'" data-confirm="Are you sure?" data-method="delete" rel="nofollow"></a></div></div></div>').appendTo('#main_container');
 					if (switch3.hasClass('switch_clicked')) {
-						edit_lesson.offset({top: elem.offset().top, left:elem.offset().left });
+						edit_lesson.offset({top: elem.offset().top-ctop, left:elem.offset().left-cleft });
 						edit_lesson.height(elem.height()+20);
 						edit_lesson.width(elem.width()+20);
 					}
 					else {
-						edit_lesson.offset({top: cell.offset().top, left:cell.offset().left });
+						edit_lesson.offset({top: cell.offset().top-ctop, left:cell.offset().left-cleft });
 						edit_lesson.height(cell.height());
 						edit_lesson.width(cell.width());
 					}
