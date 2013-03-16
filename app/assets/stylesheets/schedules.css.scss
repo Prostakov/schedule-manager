@@ -227,6 +227,13 @@ table.small_font p {
 	margin: 30px 10px 30px -5px;
 	font-size: 13px;
 }
+#edit_item_container {
+	position: absolute;
+	left: 50%;
+	margin-left: -225px;
+	top: 100px;
+	z-index: 3;
+}
 input#close {
 	font-size: 13px;
 	padding: 5px 0;
