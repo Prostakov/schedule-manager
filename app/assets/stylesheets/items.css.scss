@@ -64,17 +64,17 @@
 	height: 40px;
 	margin: auto;
 }
-.edit_icon {
+.edit_lessons_inner>* {
+	cursor: pointer;
 	width: 40px;
 	height: 40px;
 	float: left;
+}
+.edit_icon {
 	background-color: aqua;
 /*	background-image: url(edit.png) 2px 0 no-repeat;*/
 }
 .delete_icon {
-	width: 40px;
-	height: 40px;
-	float: left;
 	background-color: yellow;
 /*	background-image: url(delete.gif) 2px 2px no-repeat;*/
 }
