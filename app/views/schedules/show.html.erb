@@ -122,17 +122,18 @@
 		$('#error_message').fadeIn(200);
 	};
 	function SetIcons() {
-		$('.edit_icon').remove();
+		$('.edit_lessons').remove();
 		$.each($('table.schedule table.cell>*>*>td'), function(index, value){
-			elem = $(value)
+			elem = $(value);
 			if (elem.attr('data-id')!='') {
 				if (!elem.hasClass('hidden')) {
 					var top = elem.offset().top,
-						height = elem.height();
 						left = elem.offset().left,
+						height = elem.height(),
+						width = elem.width(),
 						id = elem.attr('data-id'),
-						edit = $('<a class="edit_icon editing_icon" href="/items/'+id+'/edit"></a>').appendTo('body'),
-						del = $('<a class="edit_icon delete_icon" href="/items/'+id+'" data-confirm="Are you sure?" data-method="delete" rel="nofollow"></a>').appendTo('body');
+						edit = $('<a class="edit_lessons edit_icon" href="/items/'+id+'/edit"></a>').appendTo('body'),
+						del = $('<a class="edit_lessons delete_icon" href="/items/'+id+'" data-confirm="Are you sure?" data-method="delete" rel="nofollow"></a>').appendTo('body');
 					if ((elem.find('p').first().text() == '') && (elem.find('p').last().text() == '')) {
 						edit.offset({top: top+height+15, left: left});
 						del.offset({top: top+height+15, left: left+20});
@@ -153,9 +154,8 @@
 		add_item_container.slideUp(200);
 	})
 	schedule_editing.on('click', function(){
-		schedule_editing.toggleClass('switch_clicked');
 		if (schedule_editing_clicked) {
-			$('.edit_icon').remove();
+			$('.edit_lessons').remove();
 			schedule_editing_clicked = false;
 		}
 		else SetIcons();

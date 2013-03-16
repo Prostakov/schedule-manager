@@ -48,16 +48,16 @@
 	margin: 0 50px 0 3px;
 	width: 115px;
 }
-a.edit_icon {
+.edit_lessons {
 	position: absolute;
 	display: block;
 	width: 20px;
 	height: 20px;
 }
-a.editing_icon {
+.edit_icon {
 	background: url(edit.png) 2px 0 no-repeat;
 }
-a.delete_icon {
+.delete_icon {
 	background: url(delete.gif) 2px 2px no-repeat;
 }
 .form_container #schedule_weeks {
