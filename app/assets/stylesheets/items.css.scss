@@ -60,7 +60,7 @@
 	vertical-align: middle;
 }
 .edit_lessons_inner {
-	width: 80px;
+	width: 90px;
 	height: 40px;
 	margin: auto;
 }
@@ -71,12 +71,18 @@
 	float: left;
 }
 .edit_icon {
-	background-color: aqua;
-/*	background-image: url(edit.png) 2px 0 no-repeat;*/
+	float: left;
+	background: url(icons.png) -23px -34px no-repeat;
+}
+.edit_icon:hover {
+	background: url(icons.png) -63px -34px no-repeat;
 }
 .delete_icon {
-	background-color: yellow;
-/*	background-image: url(delete.gif) 2px 2px no-repeat;*/
+	float: right;
+	background: url(icons.png) -23px -73px no-repeat;
+}
+.delete_icon:hover {
+	background: url(icons.png) -63px -73px no-repeat;
 }
 .form_container #schedule_weeks {
 	width: 20px;
@@ -90,4 +96,16 @@
 	margin: 0px -15px 0 25px;
 	float: left;
 	padding-top: 2px;
+}
+.edit_close {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	background: url(icons.png) 0px -33px no-repeat;
+}
+.edit_close:hover {
+	background: url(icons.png) 0px -53px no-repeat;
 }
