@@ -318,7 +318,7 @@
 			flash_red.removeClass('shadow');
 			flash_red.slideUp(800);
 		});
-		if (def_day == '0') {
+		if ((def_day == '0') && ($.cookie('sunf')=="true")) {
 			if (def_week == 'Week 1') gogo2();
 			else if (def_week == 'Week 2') gogo1();
 		}
