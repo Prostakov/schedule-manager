@@ -1,9 +1,9 @@
 <pre id="def_week" class="hidden"><%= define_week(@schedule) if @schedule.weeks_counter %></pre>
 <pre id="def_day" class="hidden"><%= @day %></pre>
-<div class="flash_message" id="flash">
+<div class="flash_message shadow" id="flash">
 	<h1><%= weeks_count_flash_message(@schedule) %></h1>
 </div>
-<div class="flash_message" id="flash_red">
+<div class="flash_message shadow" id="flash_red">
 	<h1><%= weeks_count_red_flash_message(@schedule) if @schedule.user == current_user %></h1>
 </div>
 <% if current_user == @schedule.user %>
@@ -305,18 +305,17 @@
 		if (def_week == 'Week 1') gogo1();
 		if (def_week == 'Week 2') gogo2();
 		if (flash.find('h1').text() != '') {
-			flash.delay(1500).slideDown(800 ,function() {flash.addClass('shadow')});
+			flash.show();
 		};
 		flash.on('click', function(){
-			flash.removeClass('shadow');
-			flash.slideUp(800);
+			flash.hide();
 			if (flash_red.find('h1').text() != '') {
-				flash_red.delay(3000).slideDown(800 ,function() {flash.addClass('shadow')});
+				flash_red.delay(3000).slideDown(300);
 			};
 		});
 		flash_red.on('click', function(){
 			flash_red.removeClass('shadow');
-			flash_red.slideUp(800);
+			flash_red.slideUp(300);
 		});
 	//sunday feature
 		if ((def_day == '0') && ($.cookie('sunf')=="true")) {
