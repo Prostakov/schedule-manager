@@ -26,7 +26,7 @@
 		</div>
 		<div class="bottom_row_item">
 			<%= f.label :position, 'Lesson #' %>
-			<%= f.select :position, (1..5) %>
+			<%= f.select :position, (1..6) %>
 		</div>
 		<div class="bottom_row_item">
 			<%= f.label :day %>
@@ -170,6 +170,24 @@
 			SetIcons();
 		}
 	});
+	function ClearLowRows() {
+	  var tr_arr = $('table.schedule>*>tr').removeClass('hidden'),
+	      arr = [], l_arr, exit = false;
+	  arr.push(tr_arr.eq(-1));
+	  arr.push(tr_arr.eq(-2));
+	  arr.push(tr_arr.eq(-3));
+	  $.each(arr, function(index, value){
+	  	l_arr = value.find('table.cell>*>*>td');
+	  	$.each(l_arr, function(i, v){
+	  	  if ( !($(v).hasClass('hidden')) && ($(v).attr('data-id')!="")) {
+	  	    exit = true;
+	  	  	return false;
+	  	  }
+	  	});
+	  	if (exit) return false;
+	  	value.addClass('hidden');
+	  });
+	};
 	function gogo1(){
 		switch1.addClass('switch_clicked');
 		switch2.removeClass('switch_clicked');
@@ -182,6 +200,7 @@
 		$('table.schedule').removeClass('small_font');
 		first_column.addClass('whiteSmoke');
 		if (schedule_editing_clicked) SetIcons();
+		ClearLowRows();
 	};
 	function gogo2(){
 		switch1.removeClass('switch_clicked');
@@ -195,6 +214,7 @@
 		$('table.schedule').removeClass('small_font');
 		first_column.addClass('whiteSmoke');
 		if (schedule_editing_clicked) SetIcons();
+		ClearLowRows();
 	};
 	switch1.on('click', function(){
 		gogo1();
@@ -236,6 +256,7 @@
 			}
 		});
 		$('table.schedule').addClass('small_font');
+		ClearLowRows();
 	};
 	switch3.on('click', function(){
 		gogo();
