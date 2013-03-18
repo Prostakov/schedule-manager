@@ -122,9 +122,7 @@
 		$('#error_message>p').text(msg);
 		$('#error_message').fadeIn(200);
 	};
-	function RenderLessonEdit(id) {
-		console.log(id);
-	};
+<% if @user == current_user %>
 	function SetIcons() {
 		$('.edit_lessons').remove();
 		var cleft = $('#main_container').offset().left,
@@ -153,23 +151,7 @@
 		$('a.edit_icon').on('click',function(){ $('.edit_lessons').remove(); console.log('fsd') })
 		schedule_editing_clicked = true;
 	};
-	add_item.on('click', function(){
-		add_item_container.slideDown(200);
-	});
-	$('#close').on('click', function(){
-		add_item_container.slideUp(200);
-	})
-	schedule_editing.on('click', function(){
-		if (schedule_editing_clicked) {
-			$('.edit_lessons').remove();
-			settings_container.hide();
-			schedule_editing_clicked = false;
-		}
-		else { 
-			settings_container.hide();
-			SetIcons();
-		}
-	});
+<% end %>
 	function ClearLowRows() {
 	  var tr_arr = $('table.schedule>*>tr').removeClass('hidden'),
 	      arr = [], l_arr, exit = false;
@@ -188,6 +170,7 @@
 	  	value.addClass('hidden');
 	  });
 	};
+<% if @schedule.weeks %>
 	function gogo1(){
 		switch1.addClass('switch_clicked');
 		switch2.removeClass('switch_clicked');
@@ -263,7 +246,27 @@
 		if (schedule_editing_clicked) SetIcons();
 	});
 	gogo();
+<% end %>
+	ClearLowRows();
 
+<% if @user == current_user %>
+	add_item.on('click', function(){
+		add_item_container.slideDown(200);
+	});
+	$('#close').on('click', function(){
+		add_item_container.slideUp(200);
+	})
+	schedule_editing.on('click', function(){
+		if (schedule_editing_clicked) {
+			$('.edit_lessons').remove();
+			settings_container.hide();
+			schedule_editing_clicked = false;
+		}
+		else { 
+			settings_container.hide();
+			SetIcons();
+		}
+	});
 	//bind items create ajax
 	new_item.bind('ajax:success', function(evt, data, status, xhr) {
     	console.log("ajax:success");
@@ -306,10 +309,12 @@
 			name = $('#item_name');
 		name.removeClass('red');
 		weeks.removeClass('red');
+<% if @schedule.weeks %>
 		if (!$('#item_week1').is(':checked') && !$('#item_week2').is(':checked')){
 			weeks.addClass('red');
 			return false;
 		};
+<% end %>
 		if (name.val().length < 3) {
 			name.addClass('red');
 			return false;
@@ -318,31 +323,32 @@
 			$('#new_item input[type="submit"]').attr('disabled','disabled');
 		}
 	});
-	<% if @schedule.weeks_counter %>
-		var def_week = $('#def_week').text(),
-			def_day = $('#def_day').text(),
-			flash = $('#flash'),
-			flash_red = $('#flash_red');
-		if (def_week == 'Week 1') gogo1();
-		if (def_week == 'Week 2') gogo2();
-		if (flash.find('h1').text() != '') {
-			flash.show();
+<% end %>
+<% if @schedule.weeks_counter %>
+	var def_week = $('#def_week').text(),
+		def_day = $('#def_day').text(),
+		flash = $('#flash'),
+		flash_red = $('#flash_red');
+	if (def_week == 'Week 1') gogo1();
+	if (def_week == 'Week 2') gogo2();
+	if (flash.find('h1').text() != '') {
+		flash.show();
+	};
+	flash.on('click', function(){	
+		flash.hide();
+		if (flash_red.find('h1').text() != '') {
+			flash_red.delay(3000).slideDown(300);
 		};
-		flash.on('click', function(){
-			flash.hide();
-			if (flash_red.find('h1').text() != '') {
-				flash_red.delay(3000).slideDown(300);
-			};
-		});
-		flash_red.on('click', function(){
-			flash_red.removeClass('shadow');
-			flash_red.slideUp(300);
-		});
-	//sunday feature
-		if ((def_day == '0') && ($.cookie('sunf')=="true")) {
-			if (def_week == 'Week 1') gogo2();
-			else if (def_week == 'Week 2') gogo1();
-		}
-	//end
-	<% end %>
+	});
+	flash_red.on('click', function(){
+		flash_red.removeClass('shadow');
+		flash_red.slideUp(300);
+	});
+//sunday feature
+	if ((def_day == '0') && ($.cookie('sunf')=="true")) {
+		if (def_week == 'Week 1') gogo2();
+		else if (def_week == 'Week 2') gogo1();
+	}
+//end
+<% end %>
 </script>

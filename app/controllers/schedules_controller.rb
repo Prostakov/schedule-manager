@@ -55,6 +55,7 @@ class SchedulesController < ApplicationController
 		@items = sort_weeks @items
 		@day = Time.now.getlocal(@schedule.local_time).wday
 		@positions = ['I','II','III','IV','V','VI']
+		@user = @schedule.user
 	end
 
 	def schedules_count
