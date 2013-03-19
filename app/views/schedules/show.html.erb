@@ -43,6 +43,17 @@
 					<%= f.check_box :week2 %>
 				</div>
 			</div>
+		<% else %>
+			<div class="weeks_container">
+				<div class='weeks'>
+					<%= f.label :week1, 'Week 1:' %>
+					<%= f.check_box :week1, checked: 'checked' %>
+				</div>
+				<div class="weeks">
+					<%= f.label :week2, 'Week 2:' %>
+					<%= f.check_box :week2, checked: 'checked'  %>
+				</div>
+			</div>
 		<% end %>
 		<%= f.submit 'Create lesson', class: 'lesson_form_button' %>
 		<input type="button" id="close" value="Close" />
@@ -252,6 +263,7 @@
 <% if @user == current_user %>
 	add_item.on('click', function(){
 		add_item_container.slideDown(200);
+		settings_container.hide();
 	});
 	$('#close').on('click', function(){
 		add_item_container.slideUp(200);
