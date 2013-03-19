@@ -17,7 +17,7 @@ class Schedule < ActiveRecord::Base
   validates_format_of :lesson6, with: VALID_LESSON_REGEX, allow_blank: true
 
   def to_param
-    name.downcase
+    self.slug
   end
 
   private
