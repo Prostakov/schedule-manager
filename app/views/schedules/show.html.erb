@@ -44,7 +44,7 @@
 				</div>
 			</div>
 		<% else %>
-			<div class="weeks_container">
+			<div class="weeks_container hidden">
 				<div class='weeks'>
 					<%= f.label :week1, 'Week 1:' %>
 					<%= f.check_box :week1, checked: 'checked' %>
@@ -250,11 +250,11 @@
 			}
 		});
 		$('table.schedule').addClass('small_font');
+		if (schedule_editing_clicked) SetIcons();
 		ClearLowRows();
 	};
 	switch3.on('click', function(){
 		gogo();
-		if (schedule_editing_clicked) SetIcons();
 	});
 	gogo();
 <% end %>
@@ -299,15 +299,14 @@
     			tr.find('p').first().append(data.teacher);
     			tr.find('p.loc').append(data.location);
     		};
+    	<% if @schedule.weeks %>
     		gogo();
+    	<% end %>
+    		ClearLowRows();
     		$('#item_name').val('');
     		$('#item_teacher').val('');
     		$('#item_location').val('');
-    		$('#item_week1').prop('checked',false);
-    		$('#item_week2').prop('checked',false);
     		$('#new_item input[type="submit"]').removeAttr('disabled','disabled');
-			add_item.removeClass('switch_clicked');
-			add_item_container.addClass('hidden');
     	}
     	else {
     		if (data == 'Error') {
