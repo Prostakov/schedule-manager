@@ -11,45 +11,61 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130228230217) do
+ActiveRecord::Schema.define(:version => 20130319173552) do
+
+  create_table "groups", :force => true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.integer  "school_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "items", :force => true do |t|
-    t.string   "name"
-    t.string   "teacher"
-    t.string   "location"
-    t.integer  "position"
-    t.integer  "day"
-    t.integer  "schedule_id"
-    t.boolean  "week1",       :default => false
-    t.boolean  "week2",       :default => false
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.string    "name"
+    t.string    "teacher"
+    t.string    "location"
+    t.integer   "position"
+    t.integer   "day"
+    t.integer   "schedule_id"
+    t.boolean   "week1",       :default => false
+    t.boolean   "week2",       :default => false
+    t.timestamp "created_at",                     :null => false
+    t.timestamp "updated_at",                     :null => false
   end
 
   create_table "schedules", :force => true do |t|
+    t.string    "name"
+    t.integer   "user_id"
+    t.timestamp "created_at",                          :null => false
+    t.timestamp "updated_at",                          :null => false
+    t.boolean   "weeks",         :default => false
+    t.string    "slug"
+    t.boolean   "weeks_counter", :default => false
+    t.string    "local_time",    :default => "+00:00"
+    t.integer   "weeks_count"
+    t.string    "lesson1"
+    t.string    "lesson2"
+    t.string    "lesson3"
+    t.string    "lesson4"
+    t.string    "lesson5"
+    t.string    "lesson6"
+  end
+
+  create_table "schools", :force => true do |t|
     t.string   "name"
-    t.integer  "user_id"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
-    t.boolean  "weeks",         :default => false
     t.string   "slug"
-    t.boolean  "weeks_counter", :default => false
-    t.string   "local_time",    :default => "+00:00"
-    t.integer  "weeks_count"
-    t.string   "lesson1"
-    t.string   "lesson2"
-    t.string   "lesson3"
-    t.string   "lesson4"
-    t.string   "lesson5"
-    t.string   "lesson6"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
-    t.string   "name"
-    t.string   "password_digest"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.string   "remember_token"
+    t.string    "name"
+    t.string    "password_digest"
+    t.timestamp "created_at",      :null => false
+    t.timestamp "updated_at",      :null => false
+    t.string    "remember_token"
   end
 
 end
