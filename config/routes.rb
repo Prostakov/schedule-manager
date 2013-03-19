@@ -2,6 +2,8 @@ ScheduleManager::Application.routes.draw do
 
     root    to: 'app#home'
 
+    match ':school_slug(/:group_slug(/:schedule_slug))', to: 'schedules#show'
+
     resources :sessions, only: [:new,:create,:destroy]
     resources :users, only: [:new,:create,:edit,:update]
     resources :schedules, only: [:new,:create,:destroy,:index,:show,:update,:edit]

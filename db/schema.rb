@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130319173552) do
+ActiveRecord::Schema.define(:version => 20130319183440) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20130319173552) do
     t.string    "lesson4"
     t.string    "lesson5"
     t.string    "lesson6"
+    t.integer   "group_id"
   end
 
   create_table "schools", :force => true do |t|

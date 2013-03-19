@@ -1,6 +1,7 @@
 class Schedule < ActiveRecord::Base
   attr_accessible :name, :weeks, :weeks_counter, :local_time, :lesson1, :lesson2, :lesson3, :lesson4, :lesson5, :lesson6
   belongs_to :user
+  belongs_to :group
   has_many :items, dependent: :destroy
 
   before_save :create_slug
