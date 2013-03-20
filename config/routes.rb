@@ -1,6 +1,7 @@
 ScheduleManager::Application.routes.draw do
 
     root    to: 'app#home'    
+    match '/schedules/:id', to: 'schedules#show'
 
     resources :sessions, only: [:new,:create,:destroy]
     resources :users, only: [:new,:create,:edit,:update]
@@ -11,7 +12,6 @@ ScheduleManager::Application.routes.draw do
     end
     resources :items, only: [:show,:create,:edit,:destroy,:update]
 
-    match '/schedules/:id', to: 'schedules#show'
     match '/signout', to: 'sessions#destroy', via: :delete
     match '/c', to: 'schedules#schedules_count'
 
