@@ -1,6 +1,20 @@
 module SchedulesHelper
 	require 'date'
 
+	def weeks_counter? schedule
+		if schedule.weeks_counter || @schedule.group.school.weeks_counter
+			return true
+		end
+		return false
+	end
+
+	def owner_of_the_schedule? schedule
+		if schedule.user == current_user || schedule.group.school.user == current_user 
+			return true
+		end
+		return false
+	end
+
 	def sort_positions items
 		@result = [nil, [], [], [], [], [], []]
 		items.each do |item|
@@ -69,7 +83,7 @@ module SchedulesHelper
 
 
 	def define_week schedule
-		if schedule.weeks_count.nil?
+		if schedule.weeks_count.nil? && schedule.group.school.weeks_count.nil?
 			return ''
 		end
 		now = Time.now.getlocal(schedule.local_time).to_date

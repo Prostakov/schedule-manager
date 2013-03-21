@@ -5,7 +5,7 @@
 		<div id="switch3" class="switch"><p>All</p></div>
 	</div>
 <% end %>
-<% if current_user == @schedule.user %>
+<% if owner_of_the_schedule?(@schedule) %>
 	<script type="text/javascript">
 		var settings_nav = $('#settings_nav');
 		settings_nav.append('<li id="add_item">Add Lesson</li>');

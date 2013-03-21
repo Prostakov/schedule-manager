@@ -5,10 +5,11 @@ class Schedule < ActiveRecord::Base
   has_many :items, dependent: :destroy
 
   before_save :create_slug
+  before_save :slug_uniqueness_validation
 
   VALID_LESSON_REGEX = /\A\d{2}:\d{2}\s-\s\d{2}:\d{2}\z/
 
-  validates :name, presence: true, length: {minimum: 2, maximum: 6}, uniqueness: {case_sensitive: false}
+  validates :name, presence: true, length: {minimum: 2, maximum: 6}
   validates_format_of :lesson1, with: VALID_LESSON_REGEX, allow_blank: true
   validates_format_of :lesson2, with: VALID_LESSON_REGEX, allow_blank: true
   validates_format_of :lesson3, with: VALID_LESSON_REGEX, allow_blank: true
@@ -24,5 +25,10 @@ class Schedule < ActiveRecord::Base
 
   def create_slug
   	self.slug = self.name.parameterize
+  end
+
+  def slug_uniqueness_validation
+    Schedule.find_by_slug(self.slug)
+    true
   end
 end

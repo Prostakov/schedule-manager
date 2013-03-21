@@ -60,8 +60,8 @@ class SchedulesController < ApplicationController
 	  else
 	  	@school = School.find_by_slug(params[:school_id])
 	  	@user = @school.user
-	  	@group = Group.where(["school_id=?",@school.id])
-	  	@schedule = Schedule.where(["group_id=?",@group.id])
+	  	@group = Group.where("school_id=? AND slug=?",@school.id,params[:group_id]).first
+	  	@schedule = Schedule.where("group_id=? AND slug=?",@group.id,params[:id]).first
 	  	@day = Time.now.getlocal(@school.local_time).wday
 	  	if @school.weeks_counter
 		  now = Time.now.getlocal(@school.local_time).to_date

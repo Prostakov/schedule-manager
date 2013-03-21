@@ -13,6 +13,9 @@
 .list a:hover {
 	color: red;
 }
+h5 a {
+	font-size: 20px;
+}
 h6>b {
 	border-bottom: 2px dashed #9393FF;
 	color: #9393FF;
@@ -21,4 +24,24 @@ h6>b {
 h6>b:hover {
 	color: #FF9898;
 	border-color: #FF9898;
+}
+.path_info_container {
+	padding: 20px 0 20px 15px;
+}
+.path_info_container>* {
+	float: left;
+}
+.path_info_container>a {
+	color: blue;
+}
+.path_info_container>a:hover {
+	color: red;
+}
+.path_info_container>a, .path_info_container>p {
+	font-size: 15px;
+	margin: 0px 3px;
+	font-family: Verdana;
+}
+.path_info_container>p {
+	color: #694F4F;
 }

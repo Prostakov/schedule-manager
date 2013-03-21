@@ -1,7 +1,7 @@
-<h5><%= @group.name %></h5>
+<h5><%= link_to @school.name, @school %> > <%= @group.name %></h5>
 <div class="container">
   <div class="wrap">
-    <h4>Groups:</h4>
+    <h4>Schedules:</h4>
     <ul class="list">
       <% @group.schedules.each do |schedule| %>
         <li><%= link_to schedule.name, school_group_schedule_path(@school,@group,schedule) %></li>

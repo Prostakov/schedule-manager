@@ -1,12 +1,12 @@
-<pre id="def_week" class="hidden"><%= define_week(@schedule) if @schedule.weeks_counter %></pre>
+<pre id="def_week" class="hidden"><%= define_week(@schedule) if weeks_counter?(@schedule) %></pre>
 <pre id="def_day" class="hidden"><%= @day %></pre>
 <div class="flash_message shadow" id="flash">
 	<h1><%= weeks_count_flash_message(@schedule) %></h1>
 </div>
 <div class="flash_message shadow" id="flash_red">
-	<h1><%= weeks_count_red_flash_message(@schedule) if @schedule.user == current_user %></h1>
+	<h1><%= weeks_count_red_flash_message(@schedule) if owner_of_the_schedule?(@schedule) %></h1>
 </div>
-<% if current_user == @schedule.user %>
+<% if owner_of_the_schedule?(@schedule) %>
 <div id="add_item_container" class="hidden">
 	<div class="container">
 	<h1 class="red_h1">Add Lesson:</h1>
@@ -64,6 +64,15 @@
 </div>
 <% end %>
 <div class="container" id="main_container">
+<% unless @school.nil? %>
+  <div class="path_info_container">
+	<%= link_to @school.name, @school %>
+	<p>></p>
+	<%= link_to @group.name, school_group_path(@school,@group) %>
+	<p>></p>
+	<p><%= @schedule.name %></p>
+  </div>
+<% end %>
 <table class='schedule'>
 		<tr>
 			<th></th>
@@ -133,7 +142,7 @@
 		$('#error_message>p').text(msg);
 		$('#error_message').fadeIn(200);
 	};
-<% if @user == current_user %>
+<% if owner_of_the_schedule?(@schedule) %>
 	function SetIcons() {
 		$('.edit_lessons').remove();
 		var cleft = $('#main_container').offset().left,
@@ -260,7 +269,7 @@
 <% end %>
 	ClearLowRows();
 
-<% if @user == current_user %>
+<% if owner_of_the_schedule?(@schedule) %>
 	add_item.on('click', function(){
 		add_item_container.slideDown(200);
 		settings_container.hide();
@@ -335,7 +344,7 @@
 		}
 	});
 <% end %>
-<% if @schedule.weeks_counter %>
+<% if weeks_counter?(@schedule) %>
 	var def_week = $('#def_week').text(),
 		def_day = $('#def_day').text(),
 		flash = $('#flash'),
