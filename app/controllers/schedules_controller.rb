@@ -4,12 +4,6 @@ class SchedulesController < ApplicationController
 	before_filter :correct_user, only: [:update, :destroy, :edit]
 	before_filter :correct_user_create, only: :create
 
-	def index
-  	  @group = Group.find_by_slug(params[:group_id])
-  	  @school = @group.school
-  	  @user = @school.user
-	end
-
 	def update
 		if params[:counter]
 			if params[:counter] == 'start_counter'
