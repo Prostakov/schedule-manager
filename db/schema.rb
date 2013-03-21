@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130321134817) do
+ActiveRecord::Schema.define(:version => 20130321214032) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -62,6 +62,12 @@ ActiveRecord::Schema.define(:version => 20130321134817) do
     t.boolean  "weeks_counter", :default => false
     t.string   "local_time",    :default => "+00:00"
     t.integer  "weeks_count"
+    t.string   "lesson1"
+    t.string   "lesson2"
+    t.string   "lesson3"
+    t.string   "lesson4"
+    t.string   "lesson5"
+    t.string   "lesson6"
   end
 
   create_table "users", :force => true do |t|
