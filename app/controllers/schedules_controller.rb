@@ -43,25 +43,43 @@ class SchedulesController < ApplicationController
 	end 
 
 	def show
-		@schedule = Schedule.find_by_slug(params[:id])
-		if @schedule.weeks_counter
-			now = Time.now.getlocal(@schedule.local_time).to_date
-			week = now.strftime("%W").to_i
-			unless @schedule.weeks_count.nil?
-				if week - @schedule.weeks_count > 5 || week - @schedule.weeks_count < 0
-					@schedule.weeks_counter = false
-					@schedule.save
-				end
-			end
+	  if params[:school_id].nil?
+	    @schedule = Schedule.find_by_slug(params[:id])
+	    @user = @schedule.user
+	    @day = Time.now.getlocal(@schedule.local_time).wday
+	    if @schedule.weeks_counter
+		  now = Time.now.getlocal(@schedule.local_time).to_date
+		  week = now.strftime("%W").to_i
+		  unless @schedule.weeks_count.nil?
+		    if week - @schedule.weeks_count > 5 || week - @schedule.weeks_count < 0
+		      @schedule.weeks_counter = false
+		      @schedule.save
+		    end
+		  end
 		end
-		@item = @schedule.items.new
-		@items = @schedule.items
-		@items = sort_positions @items
-		@items = sort_days @items
-		@items = sort_weeks @items
-		@day = Time.now.getlocal(@schedule.local_time).wday
-		@positions = ['I','II','III','IV','V','VI']
-		@user = @schedule.user
+	  else
+	  	@school = School.find_by_slug(params[:school_id])
+	  	@user = @school.user
+	  	@group = Group.where(["school_id=?",@school.id])
+	  	@schedule = Schedule.where(["group_id=?",@group.id])
+	  	@day = Time.now.getlocal(@school.local_time).wday
+	  	if @school.weeks_counter
+		  now = Time.now.getlocal(@school.local_time).to_date
+		  week = now.strftime("%W").to_i
+		  unless @school.weeks_count.nil?
+		    if week - @school.weeks_count > 5 || week - @school.weeks_count < 0
+		      @school.weeks_counter = false
+		      @school.save
+		    end
+		  end
+		end
+      end
+	  @item = @schedule.items.new
+	  @items = @schedule.items
+	  @items = sort_positions @items
+	  @items = sort_days @items
+	  @items = sort_weeks @items
+	  @positions = ['I','II','III','IV','V','VI']
 	end
 
 	def schedules_count
