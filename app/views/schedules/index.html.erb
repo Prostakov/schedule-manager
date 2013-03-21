@@ -1,0 +1,17 @@
+<h5><%= @group.name %></h5>
+<div class="container">
+  <div class="wrap">
+    <h4>Groups:</h4>
+    <ul class="list">
+      <% @group.schedules.each do |schedule| %>
+        <li><%= link_to schedule.name, school_group_schedule_path(@school,@group,schedule) %></li>
+      <% end %>
+    <ul>
+  	<% if @group.schedules.count == 0 %>
+  	  <h6>There are no schedules in this group.
+  	  	<% if @user == current_user %>
+  	  	  You can <b id='add_schedule'>add</b> new schedule.</h6>
+  	  	<% end %>
+  	<% end %>
+  </div>
+</div>

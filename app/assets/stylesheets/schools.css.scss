@@ -13,3 +13,12 @@
 .list a:hover {
 	color: red;
 }
+h6>b {
+	border-bottom: 2px dashed #9393FF;
+	color: #9393FF;
+	cursor: pointer;
+}
+h6>b:hover {
+	color: #FF9898;
+	border-color: #FF9898;
+}
