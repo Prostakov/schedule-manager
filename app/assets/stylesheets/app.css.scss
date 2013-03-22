@@ -60,8 +60,15 @@ h6 {
 .user i {
 	color: #000;
 }
-.content_box {
-	width: 500px;
+.left_container {
+	width: 48%;
+	float: left;
+}
+.right_container {
+	width: 48%;
+	float: right;
+}
+.schedules_container {
 	margin-top: 40px;
 	background: #EEE;
 	box-sizing: border-box;
@@ -71,13 +78,19 @@ h6 {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
-}
-.schedules_container {
-	float: left;
-	width: 55%;
+	border: 1px solid #DBDBDB;
+	border-bottom: 0;
 }
 .schedules {
 	list-style: none;
+	overflow: hidden;
+}
+.schedules h1 {
+	font-size: 16px;
+	font-weight: initial;
+	padding: 10px 0;
+	text-shadow: #FFF 0 1px 1px;
+	color: #BDA5A5;
 }
 .schedules li>a {
 	padding: 5px 10px;
@@ -109,35 +122,50 @@ h6 {
 	font-size: 15px;
 }
 .schedule_new {
-	float: left;
-	width: 400px;
-	margin-left: 25px;
+	width: 100%;
 	background: #EEEEC1;
+	margin-top: -10px;
+	-webkit-border-bottom-right-radius: 10px;
+	-webkit-border-bottom-left-radius: 10px;
+	-moz-border-radius-bottomright: 10px;
+	-moz-border-radius-bottomleft: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 5px 30px 15px;
+	border: 1px solid #DADACD;
+	border-top: 1px solid #CECEA4;
+}
+.schedule_new form {
+	overflow: hidden;
 }
 .schedule_new input {
 	width: 100%;
 }
 .schedule_new input[type="text"] {
-	font-size: 18px;
+	font-size: 16px;
 	padding: 3px 5px;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
-	margin-bottom: 2px;
+	margin: 5px 0;
 }
 .schedule_new input[type="checkbox"] {
 	width: 20px;
 	height: 20px;
-	margin: 5px 0 0 8px;
+	margin: 13px 0 0 10px;
 }
 .schedule_new input[type="submit"] {
 	width: 125px;
 	height: 30px;
-	margin: 10px 100px 0 0;
+	margin: 5px 0 0 0;
+	float: right;
 }
 .schedule_new label {
-	font-size: 13px;
-	padding: 7px 0 0;
+	font-size: 14px;
+	padding: 15px 0 0;
 	display: block;
 	float: left;
 }

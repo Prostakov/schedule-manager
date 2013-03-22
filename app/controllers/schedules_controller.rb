@@ -1,6 +1,7 @@
 class SchedulesController < ApplicationController
 	require 'date'
 	include SchedulesHelper
+	include ApplicationHelper
 	before_filter :correct_user, only: [:update, :destroy, :edit]
 	before_filter :correct_user_create, only: :create
 
@@ -13,9 +14,9 @@ class SchedulesController < ApplicationController
 				elsif params[:current_week] == 'Week2'
 					@schedule.weeks_count = now.strftime("%W").to_i - 1
 				end					
-				@schedule.update_attributes(params[:schedule]) ? respond_schedule(@schedule) : respond_error(@schedule)
+				@schedule.update_attributes(params[:schedule]) ? respond_obj(@schedule) : respond_obj_error(@schedule)
 			elsif params[:counter] == 'stop_counter'
-				@schedule.update_attributes(params[:schedule]) ? respond_schedule(@schedule) : respond_error(@schedule)
+				@schedule.update_attributes(params[:schedule]) ? respond_obj(@schedule) : respond_obj_error(@schedule)
 			end
 		else
 			@schedule.update_attributes(params[:schedule])
@@ -25,7 +26,7 @@ class SchedulesController < ApplicationController
 
 	def create
 		@schedule = @user.schedules.new(params[:schedule]);
-		@schedule.save ? respond_schedule(@schedule) : respond_error(@schedule)
+		@schedule.save ? respond_obj(@schedule) : respond_obj_error(@schedule)
 	end 
 
 	def edit
@@ -97,17 +98,4 @@ class SchedulesController < ApplicationController
 		end
 	end
 
-	def respond_schedule schedule
-		respond_to do |format|
-			format.html { redirect_to schedule }
-			format.json { render json: schedule.to_json }
-		end
-	end
-
-	def respond_error schedule
-		respond_to do |format|
-			format.html { redirect_to schedule }
-			format.json { render json: 'Error'.to_json }
-		end		
-	end
 end

@@ -5,6 +5,8 @@ class AppController < ApplicationController
 			@user = current_user
 			@schedules = @user.schedules
 			@schedule = @user.schedules.new
+			@schools = @user.schools
+			@school = @user.schools.new
 		end
 	end
 end

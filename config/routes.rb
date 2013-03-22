@@ -5,8 +5,8 @@ ScheduleManager::Application.routes.draw do
     resources :items, only: [:show,:create,:edit,:destroy,:update]
     resources :sessions, only: [:new,:create,:destroy]
     resources :users, only: [:new,:create,:edit,:update]
-    resources :schools, path: '', only: [:edit,:create,:update,:destroy]
-    resources :schools, path: '', only: [:show] do
+    resources :schools, only: [:edit,:create,:update,:destroy]
+    resources :schools, path: '', only: [:show,:edit] do
         resources :groups, path: '', only: [:show,:edit,:create,:update,:destroy]
     end
     resources :schools, path: '', only: [:show] do

@@ -2,14 +2,14 @@ module SchedulesHelper
 	require 'date'
 
 	def weeks_counter? schedule
-		if schedule.weeks_counter || @schedule.group.school.weeks_counter
+		if schedule.weeks_counter || schedule.group && schedule.group.school.weeks_counter
 			return true
 		end
 		return false
 	end
 
 	def owner_of_the_schedule? schedule
-		if schedule.user == current_user || schedule.group.school.user == current_user 
+		if schedule.user == current_user || schedule.group && schedule.group.school.user == current_user 
 			return true
 		end
 		return false

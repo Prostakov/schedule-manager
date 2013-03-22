@@ -1,15 +1,15 @@
 <div class="container">
 <h1>Schedule-Manager - solution for universities or schools, where you can keep your schedule.</h1>
 <% unless signed_in? %>
-	<div class="sign_form">
-		<h2>Sign In</h2>
-		<%= form_for :session, url: sessions_path do |f| %>
-			<%= f.text_field :name, placeholder: 'Username' %>
-			<%= f.password_field :password, placeholder: 'Password' %>
-			<%= f.submit 'Sign In' %>
-			<%= link_to 'Sign Up', new_user_path %>
-		<% end %>
-	</div>
+  <div class="sign_form">
+    <h2>Sign In</h2>
+    <%= form_for :session, url: sessions_path do |f| %>
+      <%= f.text_field :name, placeholder: 'Username' %>
+      <%= f.password_field :password, placeholder: 'Password' %>
+      <%= f.submit 'Sign In' %>
+      <%= link_to 'Sign Up', new_user_path %>
+    <% end %>
+  </div>
 <% else %>
 	<div class="user_info">
 		<p class="user">Signed in as<i> <%= @user.name %></i></p>
@@ -17,46 +17,81 @@
 		<%= link_to 'Sign Out', signout_path, method: "delete" %>
 	</div>
 	<div class="content">
-		<div class="content_box schedules_container">
-			<ul class="schedules">
+	  <div class="left_container">
+		<div class="schedules_container">
+			<ul class="schedules" id="schedules">
 				<li class="top">My Schedules:</li>
 				<% @schedules.each do |schedule| %>
 					<% if schedule.name %>
 						<li>
-							<%= link_to schedule.name, schedule %>
+							<%= link_to schedule.name, schedule_path(schedule) %>
 							<%= link_to 'Edit', edit_schedule_path(schedule), class: 'schedule_control_links' %>
 							<%= link_to 'Delete', schedule, data: {confirm: 'Are you sure?'}, method: :delete, class: 'schedule_control_links' %>
 						</li>
 					<% end %>
 				<% end %>
+				<% if @schedules.count == 0 %>
+					<h1>There are no schedules so far</h1>
+				<% end %>
 			</ul>
 		</div>
-		<div class="content_box schedule_new">
-			<%= form_for @schedule, format: :json, remote: true do |f| %>
-				<p class="top">Create new schedule:</p>
-				<%= hidden_field_tag :user, @user.id %>
-				<%= f.label :name %>
-				<%= f.text_field :name %>
-				<%= f.label :weeks, 'Multiple weeks' %>
-				<%= f.check_box :weeks %>
-				<%= f.submit %>
-			<% end %>
+		<div class="schedule_new">
+	      <%= form_for @schedule, format: :json, remote: true do |f| %>
+		    <p class="top">Create new schedule:</p>
+		    <%= hidden_field_tag :user, @user.id %>
+		    <%= f.text_field :name, placeholder: 'Name' %>
+		    <%= f.label :weeks, 'Multiple weeks' %>
+		    <%= f.check_box :weeks %>
+		    <%= f.submit %>
+		  <% end %>
+	    </div>
+	  </div>
+	  <div class="right_container">
+		<div class="schedules_container">
+			<ul class="schedules" id="schools">
+				<li class="top">My Schools:</li>
+				<% @schools.each do |school| %>
+					<% if school.name %>
+						<li>
+							<%= link_to_school school.name, school %>
+							<%= link_to_school_edit 'Edit', school, class: 'schedule_control_links' %>
+							<%= link_to 'Delete', school, data: {confirm: 'Are you sure?'}, method: :delete, class: 'schedule_control_links' %>
+						</li>
+					<% end %>
+				<% end %>
+				<% if @schools.count == 0 %>
+					<h1>There are no schools so far</h1>
+				<% end %>
+			</ul>
 		</div>
+		<div class="schedule_new">
+	      <%= form_for @school, format: :json, remote: true do |f| %>
+		    <p class="top">Create new school:</p>
+		    <%= hidden_field_tag :user, @user.id %>
+		    <%= f.text_field :name, placeholder: 'Name' %>
+		    <%= f.text_field :slug, placeholder: 'Short name (used for webroutes)' %>
+		    <%= f.submit %>
+		  <% end %>
+	    </div>
+	  </div>
 	</div>
 	<script type="text/javascript">
-		var new_schedule = $('#new_schedule');
+		var new_schedule = $('#new_schedule'),
+			new_school = $('#new_school');
 		new_schedule.bind('ajax:success', function(evt, data, status, xhr) {
     		console.log("ajax:success");
     		console.log(data);
     		if (data != "Error") {
-    			$('ul.schedules').append('<li><a href="/schedules/'+data.name.toLowerCase()+'">'+data.name+'</a><a href="/schedules/'+data.name.toLowerCase()+'/edit" class="schedule_control_links">Edit</a><a href="/schedules/'+data.name.toLowerCase()+'" class="schedule_control_links" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a></li>');
-    			$('#new_schedule input[type="submit"]').removeAttr('disabled','disabled');
+    			$('#schedules').append('<li><a href="/schedules/'+data.name.toLowerCase()+'">'+data.name+'</a><a href="/schedules/'+data.name.toLowerCase()+'/edit" class="schedule_control_links">Edit</a><a href="/schedules/'+data.name.toLowerCase()+'" class="schedule_control_links" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a></li>');
     		}
+    		$('#new_schedule input[type="submit"]').removeAttr('disabled','disabled');
+    		$('#schedule_name').val('');
+    		$('#schedules h1').hide();
 		});
 		new_schedule.submit( function() {
 			var name = $('#schedule_name');
 			name.removeClass('red');
-			if ((name.val().length < 2) || (name.val().length > 6)) {
+			if ((name.val().length < 2) || (name.val().length > 10)) {
 				name.addClass('red');
 				return false;
 			}
@@ -64,6 +99,32 @@
 				$('#new_schedule input[type="submit"]').attr('disabled','disabled');
 				return true
 			}
+		});
+		new_school.bind('ajax:success', function(evt, data, status, xhr) {
+    		console.log("ajax:success");
+    		if (data != "Error") {
+    			$('#schools').append('<li><a href="/'+data.slug.toLowerCase()+'">'+data.name+'</a><a href="/'+data.slug.toLowerCase()+'/edit" class="schedule_control_links">Edit</a><a href="/schools/'+data.slug.toLowerCase()+'" class="schedule_control_links" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Delete</a></li>');
+    		}
+			$('#new_school input[type="submit"]').removeAttr('disabled','disabled');
+			$('#school_name').val('');
+			$('#school_slug').val('');
+			$('#schools h1').hide();
+		});
+		new_school.submit( function() {
+			var name = $('#school_name'),
+				slug = $('#school_slug');
+			name.removeClass('red');
+			slug.removeClass('red');
+			if ((name.val().length < 2) || (name.val().length > 30)) {
+				name.addClass('red');
+				return false;
+			}
+			if ((slug.val().length < 2) || (slug.val().length > 20)) {
+				slug.addClass('red');
+				return false;
+			}
+			$('#new_school input[type="submit"]').attr('disabled','disabled');
+			return true;
 		});
 	</script>
 <% end %>
