@@ -1,5 +1,9 @@
-<h5><%= link_to @school.name, @school %> > <%= @group.name %></h5>
 <div class="container">
+  <div class="path_info_container">
+    <%= link_to @school.name, @school %>
+    <p>></p>
+    <p><%= @group.name %></p>
+  </div>
   <div class="wrap">
     <h4>Schedules:</h4>
     <ul class="list">
