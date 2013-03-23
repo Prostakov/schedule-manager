@@ -18,7 +18,4 @@ module ApplicationHelper
     link_to name, '/'+school.slug, args
   end
 
-  def link_to_school_edit(name, school, args=nil)
-  	link_to name, '/'+school.slug+'/edit', args
-  end
 end

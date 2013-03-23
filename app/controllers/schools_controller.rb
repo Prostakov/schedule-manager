@@ -32,7 +32,7 @@ class SchoolsController < ApplicationController
   end
 
   def correct_user_create
-	@user = User.find(params[:user])
-	redirect_to root_path unless @user == current_user
+  	@user = User.find(params[:user])
+  	redirect_to root_path unless @user == current_user
   end
 end

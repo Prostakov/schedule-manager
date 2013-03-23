@@ -83,7 +83,7 @@ module SchedulesHelper
 
 
 	def define_week schedule
-		if schedule.weeks_count.nil? && schedule.group.school.weeks_count.nil?
+		if schedule.weeks_count.nil? && (schedule.group.nil? || schedule.group.school.weeks_count.nil?)
 			return ''
 		end
 		now = Time.now.getlocal(schedule.local_time).to_date

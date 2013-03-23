@@ -1,0 +1,10 @@
+#switcher_nav {
+	width: 98%;
+	height: 20px;
+	background: red;
+	margin: 20px auto;
+	list-style: none;
+}
+#switcher_nav>li {
+	float: left;
+}

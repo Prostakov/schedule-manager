@@ -86,16 +86,12 @@ class SchedulesController < ApplicationController
 	def correct_user
 		@schedule = Schedule.find_by_slug(params[:id])
 		@user = @schedule.user
-		unless @user == current_user
-			redirect_to root_path
-		end
+		redirect_to root_path unless @user == current_user
 	end
 
 	def correct_user_create
 		@user = User.find(params[:user])
-		unless @user == current_user
-			redirect_to root_path
-		end
+		redirect_to root_path unless @user == current_user
 	end
 
 end

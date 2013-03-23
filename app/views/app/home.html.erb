@@ -54,7 +54,7 @@
 					<% if school.name %>
 						<li>
 							<%= link_to_school school.name, school %>
-							<%= link_to_school_edit 'Edit', school, class: 'schedule_control_links' %>
+							<%= link_to 'Edit', edit_school_path(school), class: 'schedule_control_links' %>
 							<%= link_to 'Delete', school, data: {confirm: 'Are you sure?'}, method: :delete, class: 'schedule_control_links' %>
 						</li>
 					<% end %>
