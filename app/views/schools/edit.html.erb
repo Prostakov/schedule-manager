@@ -5,7 +5,19 @@
     <p>Edit</p>
   </div>
   <ul id="switcher_nav">
+  	<li class="switched"><p>Bobo</p></li>
+  	<li><p>Lolo</p></li>
+  	<li><p>Koko</p></li>
+  	<li><p>Gogo</p></li>
+  	<li><p>Jojo</p></li>
   </ul>
   <div class="switching_boxes">
   </div>
+  <script type="text/javascript">
+  	var li = $('#switcher_nav>li');
+  	li.on('click', function () {
+  	  li.removeClass('switched');
+  	  $(this).addClass('switched');
+  	})
+  </script>
 </div>

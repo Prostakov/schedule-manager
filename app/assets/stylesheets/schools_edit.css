@@ -1,10 +1,28 @@
 #switcher_nav {
-	width: 98%;
-	height: 20px;
-	background: red;
 	margin: 20px auto;
 	list-style: none;
 }
 #switcher_nav>li {
 	float: left;
+	background: #F8F8E7;
+	padding: 5px 20px;
+	font-size: 15px;
+	margin: 0 10px;
+	cursor: pointer;
+}
+#switcher_nav>li>p {
+	border-bottom: 1px dashed #000;
+}
+#switcher_nav>li:hover>p {
+	border-color: red;
+	color: red;
+}
+#switcher_nav>li.switched {
+	background: #F0EFB8;
+}
+#switcher_nav>li.switched>p {
+	border: 0;
+}
+#switcher_nav>li.switched:hover>p {
+	color: #000;
 }

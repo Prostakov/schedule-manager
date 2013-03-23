@@ -5,6 +5,7 @@ class SchoolsController < ApplicationController
 
   def show
   	@school = School.find_by_slug(params[:id])
+    @user = @school.user
   end
 
   def create

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="path_info_container">
     <p><%= @school.name %></p>
-    <%= link_to 'Edit', edit_school_path(@school), class: 'right' %>
+    <%= link_to('Edit',edit_school_path(@school),class: 'right') if @user == current_user %>
   </div>
   <div class="wrap">
     <h4>Groups:</h4>
