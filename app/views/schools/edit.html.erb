@@ -5,19 +5,73 @@
     <p>Edit</p>
   </div>
   <ul id="switcher_nav">
-  	<li class="switched"><p>Bobo</p></li>
-  	<li><p>Lolo</p></li>
-  	<li><p>Koko</p></li>
-  	<li><p>Gogo</p></li>
-  	<li><p>Jojo</p></li>
+    <li><div class="item"><p>General</p></div><div class="arrow"></div></li>
+  	<li><div class="item"><p>Lessons hours settings</p></div><div class="arrow"></div></li>
   </ul>
   <div class="switching_boxes">
+    <div>
+      <div class="form_container_wrapper">
+        <div class="form_container">
+          <h1>Edit School</h1>
+          <%= form_for @school do |f| %>
+            <%= f.label :name %>
+            <%= f.text_field :name %>
+            <%= f.label :slug, 'Slug: (used for webroutes)' %>
+            <%= f.text_field :slug %>
+            <%= f.submit 'Update school' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="lessons_container">
+        <h1 class="left">Set lessons hours</h1>
+        <p class="center">i.e. <b>10:20 - 12:05</b></p>
+        <%= form_for @school, html: {id: 'edit_lessons'} do |f| %>
+          <div class="form_element">
+            <%= f.label :lesson1 %>
+            <%= f.text_field :lesson1, class: 'schedule_lesson_input' %>
+          </div>
+          <div class="form_element">
+            <%= f.label :lesson2 %>
+            <%= f.text_field :lesson2, class: 'schedule_lesson_input' %>
+          </div>
+          <div class="form_element">
+            <%= f.label :lesson3 %>
+            <%= f.text_field :lesson3, class: 'schedule_lesson_input' %>
+          </div>
+          <div class="form_element">
+            <%= f.label :lesson4 %>
+            <%= f.text_field :lesson4, class: 'schedule_lesson_input' %>
+          </div>
+          <div class="form_element">
+            <%= f.label :lesson5 %>
+            <%= f.text_field :lesson5, class: 'schedule_lesson_input' %>
+          </div>
+          <div class="form_element">
+            <%= f.label :lesson6 %>
+            <%= f.text_field :lesson6, class: 'schedule_lesson_input' %>
+          </div>
+          <%= f.submit 'Update Hours'%>
+        <% end %>
+      </div>
+    </div>
+    <div>
+    </div>
+    <div>
+    </div>
   </div>
   <script type="text/javascript">
-  	var li = $('#switcher_nav>li');
+  	var li = $('#switcher_nav>li'),
+        boxes = $('.switching_boxes>div').hide();
+    li.first().addClass('switched');
+    boxes.first().show();
   	li.on('click', function () {
+      $this = $(this);
   	  li.removeClass('switched');
-  	  $(this).addClass('switched');
+  	  $this.addClass('switched');
+      boxes.hide();
+      boxes.eq($this.index()).show();
   	})
   </script>
 </div>
