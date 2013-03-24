@@ -83,6 +83,9 @@ module SchedulesHelper
 
 
 	def define_week schedule
+		unless schedule.respond_to?(:group)
+			return ''
+		end
 		if schedule.weeks_count.nil? && (schedule.group.nil? || schedule.group.school.weeks_count.nil?)
 			return ''
 		end

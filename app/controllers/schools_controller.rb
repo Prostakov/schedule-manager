@@ -14,6 +14,22 @@ class SchoolsController < ApplicationController
   end
 
   def update
+    if params[:counter]
+      if params[:counter] == 'start_counter'
+        now = Time.now.getlocal(params[:school][:local_time]).to_date
+        if params[:current_week] == 'Week1'
+          @school.weeks_count = now.strftime("%W").to_i
+        elsif params[:current_week] == 'Week2'
+          @school.weeks_count = now.strftime("%W").to_i - 1
+        end         
+        @school.update_attributes(params[:school]) ? respond_obj(@school) : respond_obj_error(@school)
+      elsif params[:counter] == 'stop_counter'
+        @school.update_attributes(params[:school]) ? respond_obj(@school) : respond_obj_error(@school)
+      end
+    else
+      @school.update_attributes(params[:school])
+      redirect_to root_path
+    end
   end
 
   def destroy

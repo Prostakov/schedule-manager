@@ -5,7 +5,6 @@ class Schedule < ActiveRecord::Base
   has_many :items, dependent: :destroy
 
   before_save :create_slug
-  before_save :slug_uniqueness_validation
 
   VALID_LESSON_REGEX = /\A\d{2}:\d{2}\s-\s\d{2}:\d{2}\z/
 
