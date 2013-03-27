@@ -9,10 +9,9 @@ module SchedulesHelper
 	end
 
 	def owner_of_the_schedule? schedule
-		if schedule.user == current_user || schedule.group && schedule.group.school.user == current_user 
-			return true
-		end
-		return false
+		return false if current_user.nil?
+		return true if belongs_to_school?(schedule) && schedule.group.school.user == current_user || schedule.user == current_user
+		false
 	end
 
 	def sort_positions items

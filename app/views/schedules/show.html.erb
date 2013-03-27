@@ -71,6 +71,7 @@
 	<%= link_to @group.name, school_group_path(@school,@group) %>
 	<p>></p>
 	<p><%= @schedule.name %></p>
+	<%= link_to('Edit', edit_school_group_schedule_path(@school,@group,@schedule), class: 'right') if owner_of_the_schedule?(@schedule) %>
   </div>
 <% end %>
 <table class='schedule'>
