@@ -1,10 +1,14 @@
 <div class="container">
   <div class="path_info_container">
-	<%= link_to_school @school.name, @school %>
-	<p>></p>
-	<%= link_to @group.name, school_group_path(@school,@group) %>
-	<p>></p>
-	<%= link_to @schedule.name, school_group_schedule_path(@school,@group,@schedule) %>
+    <% if belongs_to_school?(@schedule) %>
+  	  <%= link_to_school @school.name, @school %>
+  	  <p>></p>
+  	  <%= link_to @group.name, school_group_path(@school,@group) %>
+  	  <p>></p>
+  	  <%= link_to @schedule.name, school_group_schedule_path(@school,@group,@schedule) %>
+    <% else %>
+      <%= link_to @schedule.name, @schedule %>
+    <% end %>
     <p>></p>
     <p>Edit</p>
   </div>

@@ -42,22 +42,22 @@ class ItemsController < ApplicationController
 		redirect_to @schedule
 	end
 
-	private
+  private
 
-	def correct_user_create
-		@schedule = Schedule.find(params[:schedule])
-		@user = @schedule.user
-		unless  @user == current_user
-			redirect_to root_path
-		end
-	end
+  def correct_user_create
+    @schedule = Schedule.find(params[:schedule])
+    @user = belongs_to_school?(@schedule) ? @schedule.group.school.user : @schedule.user
+    unless  @user == current_user
+      redirect_to root_path
+    end
+  end
 
-	def correct_user
-		@item = Item.find(params[:id])
-		@schedule = @item.schedule
-		@user = @schedule.user
-		unless @user == current_user
-			redirect_to root_path
-		end
-	end
+  def correct_user
+    @item = Item.find(params[:id])
+    @schedule = @item.schedule
+    @user = belongs_to_school?(@schedule) ? @schedule.group.school.user : @schedule.user
+    unless @user == current_user
+      redirect_to root_path
+    end
+  end
 end

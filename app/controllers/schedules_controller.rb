@@ -20,7 +20,7 @@ class SchedulesController < ApplicationController
 			end
 		else
 			@schedule.update_attributes(params[:schedule])
-			redirect_to root_path
+			redirect_to belongs_to_school?(@schedule) ? school_group_schedule_path(@school,@group,@schedule) : @schedule
 		end
 	end
 
@@ -85,17 +85,23 @@ class SchedulesController < ApplicationController
 		render text: Schedule.count.to_s+"\n", status: 200, content_type: 'text/html'
 	end
 
-	private
+  private
 
-	def correct_user
-		@schedule = Schedule.find_by_slug(params[:id])
-		@user = belongs_to_school?(@schedule) ? @schedule.group.school.user : @schedule.user
-		redirect_to root_path unless @user == current_user
-	end
+  def correct_user
+    @schedule = Schedule.find_by_slug(params[:id])
+    if belongs_to_school?(@schedule) 
+      @group = @schedule.group
+      @school = @group.school
+      @user = @school.user
+    else
+      @user = @schedule.user
+    end
+    redirect_to root_path unless @user == current_user
+  end
 
-	def correct_user_create
-		@user = User.find(params[:user])
-		redirect_to root_path unless @user == current_user
-	end
+  def correct_user_create
+    @user = User.find(params[:user])
+    redirect_to root_path unless @user == current_user
+  end
 
 end
