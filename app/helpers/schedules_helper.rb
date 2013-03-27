@@ -91,7 +91,7 @@ module SchedulesHelper
 		end
 		now = Time.now.getlocal(schedule.local_time).to_date
 		current_week = now.strftime("%W").to_i
-		counter_week = schedule.weeks_count
+		counter_week = belongs_to_school?(schedule) ? schedule.group.school.weeks_count : schedule.weeks_count
 		current_week%2 == counter_week%2 ? 'Week 1' : 'Week 2'
 	end
 

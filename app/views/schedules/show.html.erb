@@ -86,7 +86,7 @@
 	<% (1..6).each do |k| %>
 		<tr>
 				<td class='first_column'>
-				<% @lesson = @schedule["lesson#{k}".to_sym] %>
+				<% @lesson = belongs_to_school?(@schedule) ? @school["lesson#{k}".to_sym] : @schedule["lesson#{k}".to_sym] %>
 				<%= @lesson.blank? ? @positions[k-1] : ( render partial: "shared/hours", locals: {lesson: @lesson} ) %>
 				</td>
 			<% (1..6).each do |l| %>

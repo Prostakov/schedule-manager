@@ -30,6 +30,10 @@ class SchedulesController < ApplicationController
 	end 
 
 	def edit
+	  if belongs_to_school?(@schedule)
+	  	@group = @schedule.group
+	  	@school = @group.school
+	  end
 	end
 
 	def destroy
@@ -85,7 +89,7 @@ class SchedulesController < ApplicationController
 
 	def correct_user
 		@schedule = Schedule.find_by_slug(params[:id])
-		@user = @schedule.user
+		@user = belongs_to_school?(@schedule) ? @schedule.group.school.user : @schedule.user
 		redirect_to root_path unless @user == current_user
 	end
 

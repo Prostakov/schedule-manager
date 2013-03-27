@@ -1,209 +1,245 @@
-<div class="form_container">
-	<h1>Edit Schedule</h1>
-	<%= form_for @schedule do |f| %>
-		<%= f.label :name %>
-		<%= f.text_field :name %>
-		<%= f.label :weeks, 'Weeks:', id: 'label_schedule_weeks' %>
-		<%= f.check_box :weeks %>
-		<%= f.submit 'Update schedule' %>
-	<% end %>
-</div>
 <div class="container">
-	<div class="lessons_container">
-		<h1 class="left">Set lessons hours</h1>
-		<p class="center">i.e. <b>10:20 - 12:05</b></p>
-		<%= form_for @schedule, html: {id: 'edit_lessons'} do |f| %>
-			<div class="form_element">
-				<%= f.label :lesson1 %>
-				<%= f.text_field :lesson1, class: 'schedule_lesson_input' %>
-			</div>
-			<div class="form_element">
-				<%= f.label :lesson2 %>
-				<%= f.text_field :lesson2, class: 'schedule_lesson_input' %>
-			</div>
-			<div class="form_element">
-				<%= f.label :lesson3 %>
-				<%= f.text_field :lesson3, class: 'schedule_lesson_input' %>
-			</div>
-			<div class="form_element">
-				<%= f.label :lesson4 %>
-				<%= f.text_field :lesson4, class: 'schedule_lesson_input' %>
-			</div>
-			<div class="form_element">
-				<%= f.label :lesson5 %>
-				<%= f.text_field :lesson5, class: 'schedule_lesson_input' %>
-			</div>
-			<div class="form_element">
-				<%= f.label :lesson6 %>
-				<%= f.text_field :lesson6, class: 'schedule_lesson_input' %>
-			</div>
-			<%= f.submit %>
-		<% end %>
-	</div>
-</div>
-<script type="text/javascript">
-	function detectRed(){
-		for (var k=1;k<7;k++){
-			val = $('#schedule_lesson'+k).val();
-			if ((val != '') && !(pattern.test(val))) $('#schedule_lesson'+k).addClass('red');
-		}
-	};
-	function removeRed(){
-		$('.schedule_lesson_input').removeClass('red');
-	};
-	$('.schedule_lesson_input').on('click', function(){ $(this).removeClass('red'); })
-	var edit_lessons = $('#edit_lessons'), val,
-		pattern = new RegExp("\\d{2}:\\d{2}\\s-\\s\\d{2}:\\d{2}");
-	edit_lessons.submit( function(){
-		removeRed();
-		for (var k=1;k<7;k++){
-			val = $('#schedule_lesson'+k).val();
-			if ((val != '') && !(pattern.test(val))) {
-				detectRed();
-				return false;
-			}
-		}
-	});
-</script>
-<% if @schedule.weeks %>
-	<div class="container">
-		<h1 class="left">Weeks Counter</h1>
-	</div>
-	<div class="weeks_timer">
-		<p>Week counter is an instrument for tracking your weeks. You just have to input what current week is and it will keep track whether current week is Week1, or Week2. Attention! This counter will be available only for 5-6 weeks. At the end of the 5-6 weeks period or at the end of calendar yeah it will automatically turn off.</p>
-		<div class="run_timer">
-			<input value="Start Counter" id="start_counter" class="green" type="submit">
-			<%= form_for @schedule, html: {id: 'edit_schedule_counter_2'}, remote: true, format: :json do |f| %>
-				<%= hidden_field_tag :counter, 'stop_counter' %>
-				<%= f.check_box :weeks_counter, id: 'schedule_weeks_counter_2', value: true %>
-				<%= f.submit 'Stop Counter', class: 'redd' %>
-			<% end %>
-		</div>
-		<div class="counter_content">
-			<div class="counter_content_form">
-				<%= form_for @schedule, html: {id: 'edit_schedule_counter_1'}, remote: true, format: :json do |f| %>
-					<%= hidden_field_tag :counter, 'start_counter' %>
-					<div class="form_element">
-						<h3>Choose what current week is:</h3>
-					</div>
-					<div class="form_element form_element_radio">
-						<%= radio_button_tag :current_week, 'Week1' %>
-						<%= label_tag :current_week_Week1, 'Week 1', class:'radio_label' %>
-					</div>
-					<div class="form_element form_element_radio">
-						<%= radio_button_tag :current_week, 'Week2' %>
-						<%= label_tag :current_week_Week2, 'Week 2', class:'radio_label' %>
-					</div>
-					<div class="form_element">
-						<h3>Choose the local time of the schedule:</h3>
-					</div>
-					<div class="form_element">
-						<%= f.select :local_time, options_for_select([['UTC-12','-12:00'],['UTC-11','-11:00'],['UTC-10','-10:00'],['UTC-9','-09:00'],['UTC-8','-08:00'],['UTC-7','-07:00'],['UTC-6','-06:00'],['UTC-5','-05:00'],['UTC-4','-04:00'],['UTC-3','-03:00'],['UTC-2','-02:00'],['UTC-1','-01:00'],['UTC+0','+00:00'],['UTC+1','+01:00'],['UTC+2','+02:00'],['UTC+3','+03:00'],['UTC+4','+04:00'],['UTC+5','+05:00'],['UTC+6','+06:00'],['UTC+7','+07:00'],['UTC+8','+08:00'],['UTC+9','+09:00'],['UTC+10','+10:00'],['UTC+11','+11:00'],['UTC+12','+12:00'],['UTC+13','+13:00'],['UTC+14','+14:00'],], ['UTC+0','+00:00']) %>
-					</div>
-					<%= f.check_box :weeks_counter, id: 'schedule_weeks_counter_1', class: 'hidden' %>
-					<div class="form_element">
-						<%= f.submit 'Start Counter', class: 'green'%>
-					</div>
-				<% end %>
-			</div>
-			<div class="counter_content_info">
-				<h1>Counter is running. The current week is <b><%= define_week(@schedule) %></b></h1>
-				<h2>UTC<p><%= @schedule.local_time %></p>. Your local time is <p>12:05</p></h2>
-			</div>
-		</div>
-	</div>
-	<script type="text/javascript">
-		function UpdateInfo(p) {
-			if (p=='run') $('.weeks_timer>p').text('Weeks counter is running. Please, make sure to update the weeks counter at the end of the 5-6 weeks period. The owner of the schedule takes all responsibilities for the weeks rendering in the schedule. The weeks counter will stop at the end of 5-6 weeks period.');
-			if (p=='info') $('.weeks_timer>p').text('Week counter is an instrument for tracking your weeks. You just have to input what current week is and it will keep track whether current week is Week1, or Week2. Attention! This counter will be available only for 5-6 weeks. At the end of the 5-6 weeks period or at the end of calendar yeah it will automatically turn off.');
-		};
-		var start = $('#start_counter'),
-			counter_content = $('.counter_content').hide(),
-			local_time = parseInt('<%= @schedule.local_time %>'.slice(0,3)),
-			counter_content_form = $('.counter_content_form'),
-			counter_content_info = $('.counter_content_info'),
-			time_container = counter_content_info.find('h2>p').last(),
-			form_element_radio = $('.form_element_radio'),
-			start_counter = $('#edit_schedule_counter_1'),
-			start_counter_submit = $('#edit_schedule_counter_1 input[type="submit"]'),
-			start_counter_check = $('#schedule_weeks_counter_1'),
-			stop_counter = $('#edit_schedule_counter_2'),
-			stop_counter_submit = $('#edit_schedule_counter_2 input[type="submit"]'),
-			stop_counter_check = $('#schedule_weeks_counter_2');
-		<% if @schedule.weeks_counter %>
-			counter_content_form.hide();
-			start_counter.hide();
-			stop_counter_check.removeAttr('checked','checked');
-			start.hide();
-			counter_content.show();
-			UpdateInfo('run');
-		<% else %>
-			counter_content_info.hide();
-			stop_counter.hide();
-			start_counter_check.attr('checked','checked');
-		<% end %>
-		console.log(local_time);
-		function checkTime(i){
-			if (i<10) i = '0'+i;
-			return i;
-		};
-		function StartTime(){
-			var today = new Date(),
-				h = today.getUTCHours()+local_time,
-				m = today.getMinutes(),
-				s = today.getSeconds();
-			h = checkTime(h%24);
-			m = checkTime(m);
-			s = checkTime(s);
-			time_container.text(h+':'+m+':'+s);
-			t=setTimeout(function(){StartTime()},500);
-		};
-		StartTime();
-		start.on('click', function() {
-    		start.hide();
-    		stop_counter.show();
-    		start_counter.show();
-    		counter_content_info.hide();
-    		counter_content_form.show();
-    		counter_content.slideDown(200);
-    		stop_counter_submit.attr('disabled','disabled');
-    	});
-    	stop_counter.bind('ajax:success', function(evt, data,status, xhr) {
-    		if (data!='Error') {
-    			console.log("ajax:success");
-    			stop_counter_submit.removeAttr('disabled','disabled');
-    			start.show();
-    			stop_counter.hide();
-    			counter_content.slideUp(200);
-    			UpdateInfo('info');
-    		}
-    	});
-    	stop_counter.submit( function(){
-    		stop_counter_submit.attr('disabled','disabled');
-    	});
-    	start_counter.bind('ajax:success', function(evt, data,status, xhr) {
-    		if (data!='Error') {
-    			console.log("ajax:success");
-    			counter_content_info.find('h2>p').first().text(data.local_time);
-    			if ($('#current_week_Week1').is(':checked')) counter_content_info.find('h1>b').text('Week 1');
-    			if ($('#current_week_Week2').is(':checked')) counter_content_info.find('h1>b').text('Week 2');
-    			start_counter_submit.removeAttr('disabled','disabled');
-    			counter_content_form.hide();
-    			counter_content_info.show();
-    			stop_counter_submit.removeAttr('disabled','disabled');
-    			local_time = parseInt(data.local_time.slice(0,3));
-    			UpdateInfo('run');
-    		}
-    	});
-    	start_counter.submit( function(){
-    		if (!($('#current_week_Week1').is(':checked')) && !($('#current_week_Week2').is(':checked'))) {
-    			form_element_radio.addClass('form_element_radio_red');
-    			return false;
-    		}
-    		start_counter_submit.attr('disabled','disabled');
-    	});
-    	form_element_radio.on('click', function(){
-    		form_element_radio.removeClass('form_element_radio_red');
-    	});
-	</script>
+  <div class="path_info_container">
+	<%= link_to_school @school.name, @school %>
+	<p>></p>
+	<%= link_to @group.name, school_group_path(@school,@group) %>
+	<p>></p>
+	<%= link_to @schedule.name, school_group_schedule_path(@school,@group,@schedule) %>
+    <p>></p>
+    <p>Edit</p>
+  </div>
+  <ul id="switcher_nav">
+    <li><div class="item"><p>General</p></div><div class="arrow"></div></li>
+<% unless belongs_to_school?(@schedule) %>
+    <li><div class="item"><p>Lessons hours settings</p></div><div class="arrow"></div></li>
+  	<li><div class="item"><p>Weeks counter settings</p></div><div class="arrow"></div></li>
 <% end %>
+  </ul>
+  <div class="switching_boxes">
+    <div>
+      <div class="form_container_wrapper">
+        <div class="form_container">
+          <h1>Edit School</h1>
+          <%= form_for @schedule do |f| %>
+            <%= f.label :name %>
+            <%= f.text_field :name %>
+			<%= f.label :weeks, 'Weeks:', id: 'label_schedule_weeks' %>
+			<%= f.check_box :weeks %>
+            <%= f.submit 'Update schedule' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+<% unless belongs_to_school?(@schedule) %>
+    <div>
+      <div class="lessons_container">
+        <h1 class="left">Set lessons hours</h1>
+        <p class="center">i.e. <b>10:20 - 12:05</b></p>
+        <%= form_for @schedule, html: {id: 'edit_lessons'} do |f| %>
+          <div class="form_element">
+            <%= f.label :lesson1 %>
+            <%= f.text_field :lesson1, class: 'schedule_lesson_input' %>
+          </div>
+          <div class="form_element">
+            <%= f.label :lesson2 %>
+            <%= f.text_field :lesson2, class: 'schedule_lesson_input' %>
+          </div>
+          <div class="form_element">
+            <%= f.label :lesson3 %>
+            <%= f.text_field :lesson3, class: 'schedule_lesson_input' %>
+          </div>
+          <div class="form_element">
+            <%= f.label :lesson4 %>
+            <%= f.text_field :lesson4, class: 'schedule_lesson_input' %>
+          </div>
+          <div class="form_element">
+            <%= f.label :lesson5 %>
+            <%= f.text_field :lesson5, class: 'schedule_lesson_input' %>
+          </div>
+          <div class="form_element">
+            <%= f.label :lesson6 %>
+            <%= f.text_field :lesson6, class: 'schedule_lesson_input' %>
+          </div>
+          <%= f.submit 'Update Hours'%>
+        <% end %>
+        <script type="text/javascript">
+          var edit_lessons = $('#edit_lessons'), val,
+            pattern = new RegExp("\\d{2}:\\d{2}\\s-\\s\\d{2}:\\d{2}");
+          function detectRed(){
+            for (var k=1;k<7;k++){
+              val = $('#schedule_lesson'+k).val();
+              if ((val != '') && !(pattern.test(val))) $('#schedule_lesson'+k).addClass('red');
+            }
+          };
+          function removeRed(){
+            $('.schedule_lesson_input').removeClass('red');
+          };
+          $('.schedule_lesson_input').on('click', function(){ $(this).removeClass('red'); });
+          edit_lessons.submit( function(){
+            removeRed();
+            for (var k=1;k<7;k++){
+              val = $('#schedule_lesson'+k).val();
+              if ((val != '') && !(pattern.test(val))) {
+                detectRed();
+                return false;
+              }
+            }
+          });
+        </script>
+      </div>
+    </div>
+    <div>
+      <div class="weeks_timer">
+        <p>Week counter is an instrument for tracking your weeks. You just have to input what current week is and it will keep track whether current week is Week1, or Week2. Attention! This counter will be available only for 5-6 weeks. At the end of the 5-6 weeks period or at the end of calendar yeah it will automatically turn off.</p>
+        <div class="run_timer">
+          <input value="Start Counter" id="start_counter" class="green" type="submit">
+          <%= form_for @schedule, html: {id: 'edit_schedule_counter_2'}, remote: true, format: :json do |f| %>
+            <%= hidden_field_tag :counter, 'stop_counter' %>
+            <%= f.check_box :weeks_counter, id: 'schedule_weeks_counter_2', value: true %>
+            <%= f.submit 'Stop Counter', class: 'redd' %>
+          <% end %>
+        </div>
+        <div class="counter_content">
+          <div class="counter_content_form">
+            <%= form_for @schedule, html: {id: 'edit_schedule_counter_1'}, remote: true, format: :json do |f| %>
+              <%= hidden_field_tag :counter, 'start_counter' %>
+              <div class="form_element">
+                <h3>Choose what current week is:</h3>
+              </div>
+              <div class="form_element form_element_radio">
+                <%= radio_button_tag :current_week, 'Week1' %>
+                <%= label_tag :current_week_Week1, 'Week 1', class:'radio_label' %>
+              </div>
+              <div class="form_element form_element_radio">
+                <%= radio_button_tag :current_week, 'Week2' %>
+                <%= label_tag :current_week_Week2, 'Week 2', class:'radio_label' %>
+              </div>
+              <div class="form_element">
+                <h3>Choose the local time of the schedule:</h3>
+              </div>
+              <div class="form_element">
+                <%= f.select :local_time, options_for_select([['UTC-12','-12:00'],['UTC-11','-11:00'],['UTC-10','-10:00'],['UTC-9','-09:00'],['UTC-8','-08:00'],['UTC-7','-07:00'],['UTC-6','-06:00'],['UTC-5','-05:00'],['UTC-4','-04:00'],['UTC-3','-03:00'],['UTC-2','-02:00'],['UTC-1','-01:00'],['UTC+0','+00:00'],['UTC+1','+01:00'],['UTC+2','+02:00'],['UTC+3','+03:00'],['UTC+4','+04:00'],['UTC+5','+05:00'],['UTC+6','+06:00'],['UTC+7','+07:00'],['UTC+8','+08:00'],['UTC+9','+09:00'],['UTC+10','+10:00'],['UTC+11','+11:00'],['UTC+12','+12:00'],['UTC+13','+13:00'],['UTC+14','+14:00'],], ['UTC+0','+00:00']) %>
+              </div>
+              <%= f.check_box :weeks_counter, id: 'schedule_weeks_counter_1', class: 'hidden' %>
+              <div class="form_element">
+                <%= f.submit 'Start Counter', class: 'green'%>
+              </div>
+            <% end %>
+          </div>
+          <div class="counter_content_info">
+            <h1>Counter is running. The current week is <b><%= define_week(@schedule) %></b></h1>
+            <h2>UTC<p><%= @schedule.local_time %></p>. Your local time is <p>12:05</p></h2>
+          </div>
+        </div>
+      </div>
+      <script type="text/javascript">
+        function UpdateInfo(p) {
+          if (p=='run') $('.weeks_timer>p').text('Weeks counter is running. Please, make sure to update the weeks counter at the end of the 5-6 weeks period. The owner of the schedule takes all responsibilities for the weeks rendering in the schedule. The weeks counter will stop at the end of 5-6 weeks period.');
+          if (p=='info') $('.weeks_timer>p').text('Week counter is an instrument for tracking your weeks. You just have to input what current week is and it will keep track whether current week is Week1, or Week2. Attention! This counter will be available only for 5-6 weeks. At the end of the 5-6 weeks period or at the end of calendar yeah it will automatically turn off.');
+        };
+        var start = $('#start_counter'),
+          counter_content = $('.counter_content').hide(),
+          local_time = parseInt('<%= @schedule.local_time %>'.slice(0,3)),
+          counter_content_form = $('.counter_content_form'),
+          counter_content_info = $('.counter_content_info'),
+          time_container = counter_content_info.find('h2>p').last(),
+          form_element_radio = $('.form_element_radio'),
+          start_counter = $('#edit_schedule_counter_1'),
+          start_counter_submit = $('#edit_schedule_counter_1 input[type="submit"]'),
+          start_counter_check = $('#schedule_weeks_counter_1'),
+          stop_counter = $('#edit_schedule_counter_2'),
+          stop_counter_submit = $('#edit_schedule_counter_2 input[type="submit"]'),
+          stop_counter_check = $('#schedule_weeks_counter_2');
+        <% if @schedule.weeks_counter %>
+          counter_content_form.hide();
+          start_counter.hide();
+          stop_counter_check.removeAttr('checked','checked');
+          start.hide();
+          counter_content.show();
+          UpdateInfo('run');
+        <% else %>
+          counter_content_info.hide();
+          stop_counter.hide();
+          start_counter_check.attr('checked','checked');
+        <% end %>
+        console.log(local_time);
+        function checkTime(i){
+          if (i<10) i = '0'+i;
+          return i;
+        };
+        function StartTime(){
+          var today = new Date(),
+            h = today.getUTCHours()+local_time,
+            m = today.getMinutes(),
+            s = today.getSeconds();
+          h = checkTime(h%24);
+          m = checkTime(m);
+          s = checkTime(s);
+          time_container.text(h+':'+m+':'+s);
+          t=setTimeout(function(){StartTime()},500);
+        };
+        StartTime();
+        start.on('click', function() {
+            start.hide();
+            stop_counter.show();
+            start_counter.show();
+            counter_content_info.hide();
+            counter_content_form.show();
+            counter_content.slideDown(200);
+            stop_counter_submit.attr('disabled','disabled');
+          });
+          stop_counter.bind('ajax:success', function(evt, data,status, xhr) {
+            if (data!='Error') {
+              console.log("ajax:success");
+              stop_counter_submit.removeAttr('disabled','disabled');
+              start.show();
+              stop_counter.hide();
+              counter_content.slideUp(200);
+              UpdateInfo('info');
+            }
+          });
+          stop_counter.submit( function(){
+            stop_counter_submit.attr('disabled','disabled');
+          });
+          start_counter.bind('ajax:success', function(evt, data,status, xhr) {
+            if (data!='Error') {
+              console.log("ajax:success");
+              counter_content_info.find('h2>p').first().text(data.local_time);
+              if ($('#current_week_Week1').is(':checked')) counter_content_info.find('h1>b').text('Week 1');
+              if ($('#current_week_Week2').is(':checked')) counter_content_info.find('h1>b').text('Week 2');
+              start_counter_submit.removeAttr('disabled','disabled');
+              counter_content_form.hide();
+              counter_content_info.show();
+              stop_counter_submit.removeAttr('disabled','disabled');
+              local_time = parseInt(data.local_time.slice(0,3));
+              UpdateInfo('run');
+            }
+          });
+          start_counter.submit( function(){
+            if (!($('#current_week_Week1').is(':checked')) && !($('#current_week_Week2').is(':checked'))) {
+              form_element_radio.addClass('form_element_radio_red');
+              return false;
+            }
+            start_counter_submit.attr('disabled','disabled');
+          });
+          form_element_radio.on('click', function(){
+            form_element_radio.removeClass('form_element_radio_red');
+          });
+      </script>
+    </div>
+<% end %>
+  </div>
+  <script type="text/javascript">
+  	var li = $('#switcher_nav>li'),
+        boxes = $('.switching_boxes>div').hide();
+    li.first().addClass('switched');
+    boxes.first().show();
+  	li.on('click', function () {
+      $this = $(this);
+  	  li.removeClass('switched');
+  	  $this.addClass('switched');
+      boxes.hide();
+      boxes.eq($this.index()).show();
+  	})
+  </script>
+</div>
