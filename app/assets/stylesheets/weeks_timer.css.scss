@@ -9,11 +9,7 @@
 }
 
 .weeks_timer {
-  margin: 10px auto;
-  width: 1000px;
-  margin-bottom: 30px;
-  background: url(circles.jpg);
-  border: 1px solid #333;
+  margin-top: 40px;
   padding: 20px 200px 20px 20px;
   @include box_sizing;
 }
@@ -47,8 +43,8 @@
   color: #374400;
 }
 .weeks_timer select {
-  background: -webkit-linear-gradient(top, #6e7c62 0%,#243a11 100%);
-  color: #6EBFAC;
+  background: #F3FFF0;
+  color: #612525;
 }
 .weeks_timer input:focus, .weeks_timer textarea:focus {
   background: #4EAA82;
@@ -60,11 +56,10 @@
 .weeks_timer label, .weeks_timer p {
   margin: 0 0 0 2px;
   font-size: 14px;
-  text-shadow: 0 1px -1px #9ED88D;
   color: #111;
 }
 .weeks_timer p {
-  color: #E4F8DA;
+  color: #2A610F;
 }
 
 /* form_element */
@@ -76,7 +71,7 @@
 }
 .form_element h3 {
   font-size: 17px;
-  color: #BCFCAC;
+  color: #263612;
   padding: 20px 0 15px;
 }
 .form_element input[type="radio"] {
@@ -104,17 +99,17 @@
 }
 .counter_content h1 {
   font-size: 22px;
-  color: #CAFFDF;
+  color: #B32525;
   padding-top: 40px;
 }
 .counter_content h2 {
   font-size: 20px;
-  color: #FFB6B6;
+  color: #966565;
   padding-top: 25px;
 }
 .counter_content h2>p {
   font-size: 20px;
-  color: #FFB6B6;
+  color: #614040;
   display: inline;
   text-shadow: 0 0 0;
 }
