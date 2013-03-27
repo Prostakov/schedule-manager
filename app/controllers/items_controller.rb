@@ -22,7 +22,7 @@ class ItemsController < ApplicationController
 
 	def update
 		if @item.update_attributes(params[:item])
-			redirect_to @schedule
+			redirect_to_schedule @schedule
 		else
 			render 'edit'
 		end
@@ -39,7 +39,7 @@ class ItemsController < ApplicationController
 
 	def destroy
 		@item.destroy
-		redirect_to @schedule
+		redirect_to_schedule @schedule
 	end
 
   private

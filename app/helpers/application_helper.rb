@@ -21,4 +21,8 @@ module ApplicationHelper
   def belongs_to_school? schedule
     return schedule.group.nil? ? false : true
   end
+
+  def redirect_to_schedule schedule
+    redirect_to belongs_to_school?(schedule) ? school_group_schedule_path(schedule.group.school, schedule.group, schedule) : schedule
+  end
 end

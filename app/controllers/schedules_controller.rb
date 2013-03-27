@@ -20,7 +20,7 @@ class SchedulesController < ApplicationController
 			end
 		else
 			@schedule.update_attributes(params[:schedule])
-			redirect_to belongs_to_school?(@schedule) ? school_group_schedule_path(@school,@group,@schedule) : @schedule
+			redirect_to_schedule @schedule
 		end
 	end
 
