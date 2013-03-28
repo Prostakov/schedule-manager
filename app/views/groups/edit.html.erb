@@ -6,6 +6,36 @@
     <p>></p>
     <p>Edit</p>
   </div>
+  <ul id="switcher_nav">
+  	<li><div class="item"><p>General</p></div><div class="arrow"></div></li>
+  </ul>
+  <div class="switching_boxes">
+    <div>
+      <div class="form_container_wrapper">
+        <div class="form_container">
+          <h1>Edit Group</h1>
+          <%= form_for @group, url: school_group_path(@school,@group) do |f| %>
+            <%= f.label :name %>
+            <%= f.text_field :name %>
+            <%= f.label :slug %>
+            <%= f.text_field :slug %>
+            <%= f.submit 'Update Group' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+  	var li = $('#switcher_nav>li'),
+        boxes = $('.switching_boxes>div').hide();
+    li.first().addClass('switched');
+    boxes.first().show();
+  	li.on('click', function () {
+      $this = $(this);
+  	  li.removeClass('switched');
+  	  $this.addClass('switched');
+      boxes.hide();
+      boxes.eq($this.index()).show();
+  	})
+  </script>
 </div>
-<h1><%= @school.name %></h1>
-<h1><%= @group.name %></h1>
