@@ -93,15 +93,16 @@ class SchedulesController < ApplicationController
   private
 
   def correct_user
-    @schedule = Schedule.find_by_slug(params[:id])
-    if belongs_to_school?(@schedule) 
-      @group = @schedule.group
-      @school = @group.school
-      @user = @school.user
-    else
-      @user = @schedule.user
-    end
-    redirect_to root_path unless @user == current_user
+  	if params[:group_id].nil?
+  	  @schedule = Schedule.where(group_id: nil, slug: params[:id]).first
+  	  @user = @schedule.user
+  	else
+  	  @school = School.find_by_slug(params[:school_id])
+  	  @group = Group.where('school_id = ? AND slug = ?', @school.id, params[:group_id]).first
+  	  @schedule = Schedule.where('group_id = ? AND slug = ?', @group.id, params[:id]).first
+  	  @user = @school.user
+  	end
+  	redirect_to root_path unless @user == current_user
   end
 
   def correct_user_create

@@ -24,12 +24,22 @@
       <div class="form_container_wrapper">
         <div class="form_container">
           <h1>Edit School</h1>
-          <%= form_for @schedule do |f| %>
-            <%= f.label :name %>
-            <%= f.text_field :name %>
-      			<%= f.label :weeks, 'Weeks:', id: 'label_schedule_weeks' %>
-      			<%= f.check_box :weeks %>
-            <%= f.submit 'Update Schedule' %>
+          <% if belongs_to_school?(@schedule) %>
+            <%= form_for @schedule, url: school_group_schedule_path(@school,@group,@schedule) do |f| %>
+              <%= f.label :name %>
+              <%= f.text_field :name %>
+              <%= f.label :weeks, 'Weeks:', id: 'label_schedule_weeks' %>
+              <%= f.check_box :weeks %>
+              <%= f.submit 'Update Schedule' %>
+            <% end %>
+          <% else %>
+            <%= form_for @schedule do |f| %>
+              <%= f.label :name %>
+              <%= f.text_field :name %>
+        			<%= f.label :weeks, 'Weeks:', id: 'label_schedule_weeks' %>
+      			  <%= f.check_box :weeks %>
+              <%= f.submit 'Update Schedule' %>
+            <% end %>
           <% end %>
         </div>
       </div>
