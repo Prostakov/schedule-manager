@@ -37,8 +37,13 @@ class SchedulesController < ApplicationController
 	end
 
 	def destroy
-		@schedule.destroy
-		redirect_to root_path
+		if @group.nil?
+			@schedule.destroy
+			redirect_to root_path
+		else
+			@schedule.destroy
+			redirect_to school_group_path(@school,@group)
+		end
 	end 
 
 	def show

@@ -8,7 +8,13 @@
     <h4>Schedules:</h4>
     <ul class="list">
       <% @group.schedules.each do |schedule| %>
-        <li><%= link_to schedule.name, school_group_schedule_path(@school,@group,schedule) %></li>
+        <li>
+          <%= link_to schedule.name, school_group_schedule_path(@school,@group,schedule) %>
+          <% if owner_of_the_group?(@group) %>
+            <%= link_to 'Delete', school_group_schedule_path(@school,@group,schedule), data: {confirm: 'Are you sure?'}, method: :delete, class: 'right' %>
+            <%= link_to 'Edit', edit_school_group_schedule_path(@school,@group,schedule), class: 'right' %>
+          <% end %>
+        </li>
       <% end %>
     <ul>
   	<% if @group.schedules.count == 0 %>

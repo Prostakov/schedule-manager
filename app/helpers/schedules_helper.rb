@@ -14,6 +14,12 @@ module SchedulesHelper
 		false
 	end
 
+	def owner_of_the_group? group
+		return false if current_user.nil?
+		return true if group.school.user == current_user
+		false
+	end
+
 	def sort_positions items
 		@result = [nil, [], [], [], [], [], []]
 		items.each do |item|

@@ -1,2 +1,11 @@
+<div class="container">
+  <div class="path_info_container">
+	<%= link_to_school @school.name, @school %>
+	<p>></p>
+	<%= link_to @group.name, school_group_path(@school,@group) %>
+    <p>></p>
+    <p>Edit</p>
+  </div>
+</div>
 <h1><%= @school.name %></h1>
 <h1><%= @group.name %></h1>
