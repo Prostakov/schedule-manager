@@ -25,8 +25,13 @@ class SchedulesController < ApplicationController
 	end
 
 	def create
-		@schedule = @user.schedules.new(params[:schedule]);
-		@schedule.save ? respond_obj(@schedule) : respond_obj_error(@schedule)
+		if @group.nil?
+			@schedule = @user.schedules.new(params[:schedule]);
+			@schedule.save ? respond_obj(@schedule) : respond_obj_error(@schedule)
+		else
+			@schedule = @group.schedules.create(params[:schedule])
+			redirect_to school_group_path(@group.school,@group)
+		end
 	end 
 
 	def edit
@@ -107,6 +112,7 @@ class SchedulesController < ApplicationController
 
   def correct_user_create
     @user = User.find(params[:user])
+    @group = Group.find(params[:group]) unless params[:group].nil?
     redirect_to root_path unless @user == current_user
   end
 

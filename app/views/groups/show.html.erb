@@ -8,18 +8,33 @@
     <h4>Schedules:</h4>
     <ul class="list">
       <% @group.schedules.each do |schedule| %>
-        <li>
-          <%= link_to schedule.name, school_group_schedule_path(@school,@group,schedule) %>
-          <% if owner_of_the_group?(@group) %>
-            <%= link_to 'Delete', school_group_schedule_path(@school,@group,schedule), data: {confirm: 'Are you sure?'}, method: :delete, class: 'right' %>
-            <%= link_to 'Edit', edit_school_group_schedule_path(@school,@group,schedule), class: 'right' %>
-          <% end %>
-        </li>
+        <% unless schedule.name.nil? %>
+          <li>
+            <%= link_to schedule.name, school_group_schedule_path(@school,@group,schedule) %>
+            <% if owner_of_the_group?(@group) %>
+              <%= link_to 'Delete', school_group_schedule_path(@school,@group,schedule), data: {confirm: 'Are you sure?'}, method: :delete, class: 'right' %>
+              <%= link_to 'Edit', edit_school_group_schedule_path(@school,@group,schedule), class: 'right' %>
+            <% end %>
+          </li>
+        <% end %>
       <% end %>
     <ul>
     <% if owner_of_the_group?(@group) %>
       <div class="new_school_group_wrapper">
+        <div class="arrow"></div>
         <div class="new_school_group">
+          <h1>Add Schedule:</h1>
+          <%= form_for @schedule do |f| %>
+            <%= hidden_field_tag :user, @user.id %>
+            <%= hidden_field_tag :group, @group.id %>
+            <div class="form_element">
+              <%= f.label :name, 'Name:' %>
+              <%= f.text_field :name %>
+            </div>
+            <div class="form_element">
+              <%= f.submit %>
+            </div>
+          <% end %>
         </div>
       </div>
     <% end %>

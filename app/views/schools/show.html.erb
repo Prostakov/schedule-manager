@@ -7,15 +7,15 @@
     <h4>Groups:</h4>
     <ul class="list">
       <% @groups.each do |group| %>
-        <li>
-          <% unless group.name.nil? %>
+        <% unless group.name.nil? %>
+          <li>
             <%= link_to group.name+' ('+group.schedules.count.to_s+')', school_group_path(@school,group) %>
             <% if @user == current_user %>
               <%= link_to 'Delete', school_group_path(@school,group), data: {confirm: 'Are you sure?'}, method: :delete, class: 'right' %>
               <%= link_to 'Edit', edit_school_group_path(@school,group), class: 'right' %>
             <% end %>
-          <% end %>
-        </li>
+          </li>
+        <% end %>
       <% end %>
     <ul>
     <% if @user == current_user %>

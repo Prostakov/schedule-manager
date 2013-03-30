@@ -4,6 +4,7 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find_by_slug(params[:id])
+    @schedule = @group.schedules.new
     @school = @group.school
     @user = @school.user
   end
