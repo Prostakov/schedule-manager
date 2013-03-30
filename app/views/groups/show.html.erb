@@ -32,6 +32,10 @@
               <%= f.text_field :name %>
             </div>
             <div class="form_element">
+              <%= f.label :weeks, 'Multiple weeks' %>
+              <%= f.check_box :weeks %>
+            </div>
+            <div class="form_element">
               <%= f.submit %>
             </div>
           <% end %>
