@@ -19,7 +19,13 @@
         <% end %>
       <% end %>
     <ul>
-    <% if owner_of_the_group?(@group) %>
+    <% if owner_of_the_group?(@group) %>  
+      <% if @group.schedules.count == 0 %>
+        <h6 id='no_schedules_message'>There are no schedules in this group.
+          <% if @user == current_user %>
+            You can <b id='add_schedule'>add</b> new schedule.</h6>
+          <% end %>      
+      <% end %>
       <div class="new_school_group_wrapper">
         <div class="arrow"></div>
         <div class="new_school_group">
@@ -41,12 +47,15 @@
           <% end %>
         </div>
       </div>
+      <% if @group.schedules.count == 0 %>
+        <script type="text/javascript">
+          $('.new_school_group_wrapper').hide();
+          $('#add_schedule').on('click', function() {
+            $('#no_schedules_message').hide();
+            $('.new_school_group_wrapper').fadeIn(500);
+          })
+        </script>
+      <% end %>
     <% end %>
-  	<% if @group.schedules.count == 0 %>
-  	  <h6>There are no schedules in this group.
-  	  	<% if @user == current_user %>
-  	  	  You can <b id='add_schedule'>add</b> new schedule.</h6>
-  	  	<% end %>
-  	<% end %>
   </div>
 </div>
