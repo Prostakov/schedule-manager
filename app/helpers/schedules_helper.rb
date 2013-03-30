@@ -101,12 +101,15 @@ module SchedulesHelper
 	end
 
 	def define_wrong_week schedule
-		if schedule.weeks_count.nil?
+		unless schedule.respond_to?(:group)
+			return ''
+		end
+		if schedule.weeks_count.nil? && (schedule.group.nil? || schedule.group.school.weeks_count.nil?)
 			return ''
 		end
 		now = Time.now.getlocal(schedule.local_time).to_date
 		current_week = now.strftime("%W").to_i
-		counter_week = schedule.weeks_count
+		counter_week = belongs_to_school?(schedule) ? schedule.group.school.weeks_count : schedule.weeks_count
 		current_week%2 == counter_week%2 ? 'Week 2' : 'Week 1'
 	end
 
