@@ -18,6 +18,10 @@ module ApplicationHelper
     link_to name, '/'+school.slug, args
   end
 
+  def school_show_path school
+    '/'+school.slug
+  end
+
   def belongs_to_school? schedule
     return schedule.group.nil? ? false : true
   end

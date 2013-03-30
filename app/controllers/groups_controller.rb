@@ -14,9 +14,13 @@ class GroupsController < ApplicationController
   end
 
   def create
+    @group = @school.groups.create(params[:group])
+    redirect_to school_show_path(@school)
   end
 
   def destroy
+    @group.destroy
+    redirect_to school_show_path(@school)
   end
 
   def edit
@@ -32,7 +36,8 @@ class GroupsController < ApplicationController
   end
 
   def correct_user_create
-  	@user = User.find(params[:user])
+  	@school = School.find(params[:school])
+    @user = @school.user
   	redirect_to root_path unless @user == current_user
   end
 

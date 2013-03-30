@@ -17,6 +17,12 @@
         </li>
       <% end %>
     <ul>
+    <% if owner_of_the_group?(@group) %>
+      <div class="new_school_group_wrapper">
+        <div class="new_school_group">
+        </div>
+      </div>
+    <% end %>
   	<% if @group.schedules.count == 0 %>
   	  <h6>There are no schedules in this group.
   	  	<% if @user == current_user %>
