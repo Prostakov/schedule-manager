@@ -22,8 +22,19 @@
 .new_school_group form {
 	margin-top: 20px;
 }
+.new_school_group .element_weeks {
+	overflow: hidden;
+}
+.new_school_group .element_weeks>* {
+	float: left;
+}
 .new_school_group .form_element label {
 	font-size: 13px;
+}
+.new_school_group .form_element input[type="checkbox"] {
+	width: 16px;
+	height: 16px;
+	margin: 1px 0 5px 8px;
 }
 .new_school_group .form_element input[type="text"] {
 	width: 100%;
