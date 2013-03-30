@@ -5,6 +5,8 @@ class Schedule < ActiveRecord::Base
   has_many :items, dependent: :destroy
 
   before_save :create_slug
+  before_save :single_belonging_validation
+  before_save :slug_uniqueness_validation
 
   VALID_LESSON_REGEX = /\A\d{2}:\d{2}\s-\s\d{2}:\d{2}\z/
 
@@ -26,7 +28,14 @@ class Schedule < ActiveRecord::Base
   	self.slug = self.name.parameterize
   end
 
+  def single_belonging_validation
+    return false if !self.user.nil? && !self.group.nil?
+    true
+  end
+
   def slug_uniqueness_validation
-    return false unless Schedule.find_by_slug(self.slug).nil?
+    return false if !self.user.nil? && !Schedule.where(group_id: nil, slug: self.slug).empty?
+    return false if !self.group.nil? && !Schedule.where(group_id: self.group.id, slug: self.slug).empty?
+    true
   end
 end
