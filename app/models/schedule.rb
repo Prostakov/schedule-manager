@@ -18,6 +18,8 @@ class Schedule < ActiveRecord::Base
   validates_format_of :lesson5, with: VALID_LESSON_REGEX, allow_blank: true
   validates_format_of :lesson6, with: VALID_LESSON_REGEX, allow_blank: true
 
+  default_scope order('name DESC')
+
   def to_param
     self.slug
   end
