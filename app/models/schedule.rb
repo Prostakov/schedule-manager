@@ -25,7 +25,7 @@ class Schedule < ActiveRecord::Base
   private
 
   def create_slug
-  	self.slug = self.name.parameterize
+  	self.slug = self.name.parameterize if self.slug.nil?
   end
 
   def single_belonging_validation
