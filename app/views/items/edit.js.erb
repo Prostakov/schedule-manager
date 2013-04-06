@@ -1,8 +1,8 @@
 var c = document.getElementById('edit_item_container');
 c.innerHTML = "<%= escape_javascript(render partial: "edit_form", locals: {item: @item}) %>";
 $(c).fadeIn(300);
-$(c).append('<div class="edit_close"></div>')
-$('div.edit_close').on('click',function() {
+$(c).append('<div class="edit_close"></div>');
+$('div.edit_close').click(function() {
   schedule_editing_clicked = false; 
   $('#edit_item_container').fadeOut(300);
 });
